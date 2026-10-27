@@ -57,8 +57,8 @@ export default function Navbar({
       <header
         className={`pointer-events-auto transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-[width,max-width,margin,border-radius,padding,box-shadow,transform] relative overflow-hidden ${
           isScrolled
-            ? 'w-[92%] sm:w-[88%] max-w-5xl mt-3 sm:mt-4 rounded-full py-2 sm:py-2.5 px-5 sm:px-7 bg-[#73A5CA]/95 backdrop-blur-2xl border-2 border-[#FFCB56] shadow-[0_16px_50px_rgba(115,165,202,0.45),0_0_25px_rgba(255,203,86,0.5),inset_0_1.5px_2px_rgba(255,255,255,0.85),inset_0_-1.5px_2px_rgba(255,147,62,0.35)] ring-1 ring-[#FFE9A9]/70'
-            : 'w-full max-w-full mt-0 rounded-none py-3.5 sm:py-4 px-6 lg:px-12 bg-[#73A5CA] border-b-2 border-[#FFCB56] shadow-[0_4px_25px_rgba(115,165,202,0.35),0_6px_22px_rgba(255,203,86,0.4),inset_0_-1.5px_2px_rgba(255,233,169,0.95)]'
+            ? 'w-[92%] sm:w-[88%] max-w-5xl mt-3 sm:mt-4 rounded-full py-2 sm:py-2.5 px-5 sm:px-7 bg-[#73A5CA]/75 backdrop-blur-2xl border-2 border-[#FFCB56] shadow-[0_16px_50px_rgba(115,165,202,0.45),0_0_25px_rgba(255,203,86,0.5),inset_0_1.5px_2px_rgba(255,255,255,0.85),inset_0_-1.5px_2px_rgba(255,147,62,0.35)] ring-1 ring-[#FFE9A9]/70'
+            : 'w-full max-w-full mt-0 rounded-none py-3.5 sm:py-4 px-6 lg:px-12 bg-[#73A5CA]/75 backdrop-blur-2xl border-b-2 border-[#FFCB56] shadow-[0_4px_25px_rgba(115,165,202,0.35),0_6px_22px_rgba(255,203,86,0.4),inset_0_-1.5px_2px_rgba(255,233,169,0.95)]'
         }`}
       >
         {/* Golden Glossy Specular Sheen Streaks & Gloss Wash */}

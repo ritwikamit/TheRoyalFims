@@ -14,7 +14,7 @@ interface FooterProps {
 
 export default function Footer({ onSelectTab, onOpenLegal }: FooterProps) {
   return (
-    <footer className="relative w-full overflow-hidden text-white bg-[#73A5CA] border-t-2 border-[#FFCB56] shadow-[0_-8px_30px_rgba(255,203,86,0.35),inset_0_1px_2px_rgba(255,255,255,0.75)]">
+    <footer className="relative w-full overflow-hidden text-white bg-[#73A5CA]/80 backdrop-blur-2xl border-t-2 border-[#FFCB56] shadow-[0_-8px_30px_rgba(255,203,86,0.35),inset_0_1px_2px_rgba(255,255,255,0.75)]">
       {/* Golden Glossy Specular Sheen Lines for Footer */}
       <div className="absolute top-0 inset-x-0 h-[2.5px] bg-gradient-to-r from-transparent via-[#FFE9A9] to-transparent shadow-[0_0_16px_#FFCB56] z-20 pointer-events-none" />
       <div className="absolute top-[2.5px] inset-x-8 sm:inset-x-24 h-[1px] bg-gradient-to-r from-transparent via-white/85 to-transparent z-20 pointer-events-none" />
@@ -22,7 +22,7 @@ export default function Footer({ onSelectTab, onOpenLegal }: FooterProps) {
       {/* WARM ROYAL GOLD & EMBER GLOW LAYER (PALETTE BLUE THEME) */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Soft Base Gradient */}
-        <div className="absolute bottom-0 left-0 right-0 h-96 bg-gradient-to-t from-[#5387A3] via-[#73A5CA]/80 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-96 bg-gradient-to-t from-[#5387A3]/70 via-[#73A5CA]/50 to-transparent" />
 
         {/* Pulsing Glowing Orbs */}
         <div className="absolute -bottom-24 left-1/4 w-[500px] h-[350px] bg-radial from-[#FFCB56]/30 via-[#FFE9A9]/15 to-transparent blur-3xl animate-slow-fire" />
@@ -36,7 +36,7 @@ export default function Footer({ onSelectTab, onOpenLegal }: FooterProps) {
       </div>
 
       {/* Luxury Glassmorphic Content Container */}
-      <div className="relative z-10 w-full bg-[#73A5CA]/95 backdrop-blur-md pt-16 pb-12">
+      <div className="relative z-10 w-full bg-[#73A5CA]/50 backdrop-blur-xl pt-16 pb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
           {/* Main Footer Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 sm:gap-12 mb-14 items-start">
