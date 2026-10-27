@@ -9,7 +9,7 @@ interface RoyalLogoProps {
   showSubtitle?: boolean;
   variant?: 'full' | 'stacked' | 'mark';
   isDark?: boolean;
-  theme?: 'light' | 'dark' | 'orange';
+  theme?: 'light' | 'dark' | 'orange' | 'blue';
 }
 
 export default function RoyalLogo({
@@ -65,7 +65,7 @@ export default function RoyalLogo({
         alt="The Royal Films Golden Emblem"
         width={dim.emblemWidth}
         height={dim.emblemHeight}
-        className="w-full h-full object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.25)]"
+        className="w-full h-full object-contain drop-shadow-[0_4px_16px_rgba(255,203,86,0.35)]"
         priority
       />
     </div>
@@ -81,14 +81,18 @@ export default function RoyalLogo({
   }
 
   const titleColor =
-    theme === 'orange'
+    theme === 'blue'
+      ? 'text-[#FFCB56] drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]'
+      : theme === 'orange'
       ? 'text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]'
       : isDark || theme === 'dark'
       ? 'text-[#FFCB56] drop-shadow-[0_1px_2px_rgba(0,0,0,0.4)]'
       : 'text-[#FF933E] drop-shadow-[0_1px_2px_rgba(255,147,62,0.2)]';
 
   const subColor =
-    theme === 'orange'
+    theme === 'blue'
+      ? 'text-[#FFE9A9] drop-shadow-sm'
+      : theme === 'orange'
       ? 'text-[#FFE9A9]'
       : isDark || theme === 'dark'
       ? 'text-[#FFE9A9]/85'

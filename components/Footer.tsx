@@ -14,25 +14,25 @@ interface FooterProps {
 
 export default function Footer({ onSelectTab, onOpenLegal }: FooterProps) {
   return (
-    <footer className="relative w-full overflow-hidden text-white bg-[#FF933E] border-t border-white/20">
-      {/* WARM ROYAL GOLD & EMBER GLOW LAYER (PALETTE ORANGE THEME) */}
+    <footer className="relative w-full overflow-hidden text-white bg-[#73A5CA] border-t border-white/20">
+      {/* WARM ROYAL GOLD & EMBER GLOW LAYER (PALETTE BLUE THEME) */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Soft Warm Base Gradient */}
-        <div className="absolute bottom-0 left-0 right-0 h-96 bg-gradient-to-t from-[#E87920] via-[#FF933E]/80 to-transparent" />
+        {/* Soft Base Gradient */}
+        <div className="absolute bottom-0 left-0 right-0 h-96 bg-gradient-to-t from-[#5387A3] via-[#73A5CA]/80 to-transparent" />
 
         {/* Pulsing Glowing Orbs */}
         <div className="absolute -bottom-24 left-1/4 w-[500px] h-[350px] bg-radial from-[#FFCB56]/30 via-[#FFE9A9]/15 to-transparent blur-3xl animate-slow-fire" />
         <div className="absolute -bottom-28 right-1/4 w-[480px] h-[340px] bg-radial from-[#FFE9A9]/25 via-white/10 to-transparent blur-3xl animate-slow-fire [animation-delay:3s]" />
 
-        {/* Floating Golden Sparks */}
-        <div className="absolute bottom-10 left-[20%] w-2 h-2 rounded-full bg-white shadow-[0_0_12px_white] animate-ember-1" />
+        {/* Floating Sparks */}
+        <div className="absolute bottom-10 left-[20%] w-2 h-2 rounded-full bg-[#FFCB56] shadow-[0_0_12px_#FFCB56] animate-ember-1" />
         <div className="absolute bottom-16 left-[45%] w-2 h-2 rounded-full bg-[#FFE9A9] shadow-[0_0_14px_#FFE9A9] animate-ember-2" />
-        <div className="absolute bottom-12 right-[30%] w-2 h-2 rounded-full bg-[#FFCB56] shadow-[0_0_10px_#FFCB56] animate-ember-3" />
-        <div className="absolute bottom-8 right-[15%] w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_8px_white] animate-ember-1 [animation-delay:2.5s]" />
+        <div className="absolute bottom-12 right-[30%] w-2 h-2 rounded-full bg-white shadow-[0_0_10px_white] animate-ember-3" />
+        <div className="absolute bottom-8 right-[15%] w-1.5 h-1.5 rounded-full bg-[#FFCB56] shadow-[0_0_8px_#FFCB56] animate-ember-1 [animation-delay:2.5s]" />
       </div>
 
       {/* Luxury Glassmorphic Content Container */}
-      <div className="relative z-10 w-full bg-[#FF933E]/95 backdrop-blur-md pt-16 pb-12">
+      <div className="relative z-10 w-full bg-[#73A5CA]/95 backdrop-blur-md pt-16 pb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
           {/* Main Footer Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 sm:gap-12 mb-14 items-start">
@@ -52,12 +52,12 @@ export default function Footer({ onSelectTab, onOpenLegal }: FooterProps) {
                       alt="The Royal Films Golden Emblem"
                       width={120}
                       height={120}
-                      className="w-full h-full object-contain drop-shadow-[0_4px_20px_rgba(0,0,0,0.25)]"
+                      className="w-full h-full object-contain drop-shadow-[0_4px_24px_rgba(255,203,86,0.45)]"
                     />
                   </div>
                   <div className="flex flex-col">
                     <span 
-                      className="text-3xl sm:text-4xl text-white leading-none drop-shadow-[0_2px_8px_rgba(0,0,0,0.25)]"
+                      className="text-3xl sm:text-4xl text-[#FFCB56] leading-none drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)]"
                       style={{ fontFamily: "'Alex Brush', 'Allura', 'Great Vibes', 'Apple Chancery', Georgia, serif" }}
                     >
                       The Royal Films
@@ -84,7 +84,7 @@ export default function Footer({ onSelectTab, onOpenLegal }: FooterProps) {
                 <span className="px-3 py-1 bg-white/15 border border-white/30 text-white text-[10px] uppercase tracking-[0.2em] font-semibold shadow-sm rounded-sm">
                   4K HDR Master Film
                 </span>
-                <span className="px-3 py-1 bg-white/20 border border-white/40 text-white text-[10px] uppercase tracking-[0.2em] font-bold rounded-sm">
+                <span className="px-3 py-1 bg-[#FF933E] text-white text-[10px] uppercase tracking-[0.2em] font-bold rounded-sm shadow-sm">
                   Dubai Certified
                 </span>
               </div>
@@ -92,10 +92,10 @@ export default function Footer({ onSelectTab, onOpenLegal }: FooterProps) {
 
             {/* Col 2: Navigation Links */}
             <div className="lg:col-span-2 flex flex-col gap-4">
-              <h4 className="text-xs font-bold uppercase tracking-[0.24em] text-white drop-shadow-sm">
+              <h4 className="text-xs font-bold uppercase tracking-[0.24em] text-[#FFE9A9] drop-shadow-sm">
                 Navigation
               </h4>
-              <nav className="flex flex-col gap-2.5 text-xs uppercase tracking-wider text-white/85">
+              <nav className="flex flex-col gap-2.5 text-xs uppercase tracking-wider text-white/90">
                 <Link
                   href="/"
                   onClick={() => onSelectTab('home')}
@@ -136,10 +136,10 @@ export default function Footer({ onSelectTab, onOpenLegal }: FooterProps) {
 
             {/* Col 3: Services Showcase */}
             <div className="lg:col-span-2 flex flex-col gap-4">
-              <h4 className="text-xs font-bold uppercase tracking-[0.24em] text-white drop-shadow-sm">
+              <h4 className="text-xs font-bold uppercase tracking-[0.24em] text-[#FFE9A9] drop-shadow-sm">
                 Specialties
               </h4>
-              <ul className="flex flex-col gap-2.5 text-xs uppercase tracking-wider text-white/85">
+              <ul className="flex flex-col gap-2.5 text-xs uppercase tracking-wider text-white/90">
                 <li>Royal Wedding Films</li>
                 <li>Editorial Bridal Stills</li>
                 <li>Haldi &amp; Sangeet Stories</li>
@@ -151,7 +151,7 @@ export default function Footer({ onSelectTab, onOpenLegal }: FooterProps) {
 
             {/* Col 4: Atelier Studio Direct Contact */}
             <div className="lg:col-span-3 flex flex-col gap-4">
-              <h4 className="text-xs font-bold uppercase tracking-[0.24em] text-white drop-shadow-sm">
+              <h4 className="text-xs font-bold uppercase tracking-[0.24em] text-[#FFE9A9] drop-shadow-sm">
                 Atelier Headquarters
               </h4>
               <div className="flex flex-col gap-3 text-xs text-white/95">
@@ -166,7 +166,7 @@ export default function Footer({ onSelectTab, onOpenLegal }: FooterProps) {
                     href="tel:+918210351286"
                     aria-label="Call Atelier Direct"
                     title="Call Atelier Direct"
-                    className="flex items-center gap-1.5 px-3 py-1.5 bg-white/20 hover:bg-white text-white hover:text-[#FF933E] border border-white/35 transition-all text-[11px] font-semibold uppercase tracking-wider rounded-md group shadow-sm"
+                    className="flex items-center gap-1.5 px-3 py-1.5 bg-white/20 hover:bg-[#FF933E] text-white hover:text-white border border-white/35 transition-all text-[11px] font-semibold uppercase tracking-wider rounded-md group shadow-sm"
                   >
                     <Phone className="w-3.5 h-3.5 group-hover:rotate-12 transition-transform" />
                     <span>Call Direct</span>
@@ -177,7 +177,7 @@ export default function Footer({ onSelectTab, onOpenLegal }: FooterProps) {
                     rel="noopener noreferrer"
                     aria-label="WhatsApp Concierge"
                     title="WhatsApp Concierge"
-                    className="flex items-center gap-1.5 px-3 py-1.5 bg-white/20 hover:bg-white text-white hover:text-[#25D366] border border-white/35 transition-all text-[11px] font-semibold uppercase tracking-wider rounded-md group shadow-sm"
+                    className="flex items-center gap-1.5 px-3 py-1.5 bg-white/20 hover:bg-[#25D366] text-white hover:text-white border border-white/35 transition-all text-[11px] font-semibold uppercase tracking-wider rounded-md group shadow-sm"
                   >
                     <MinimalWhatsAppIcon className="w-3.5 h-3.5" />
                     <span>WhatsApp</span>
@@ -208,13 +208,13 @@ export default function Footer({ onSelectTab, onOpenLegal }: FooterProps) {
           </div>
 
           {/* Bottom Bar: Copyright & Compliance */}
-          <div className="pt-8 border-t border-white/20 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/80">
+          <div className="pt-8 border-t border-white/20 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/85">
             <div className="flex items-center gap-3">
               <p>
                 &copy; {new Date().getFullYear()} The Royal Films Atelier. All rights reserved.
               </p>
               <span className="hidden sm:inline text-[#FFE9A9]">•</span>
-              <span className="hidden sm:inline font-cursive text-base text-[#FFE9A9]" style={{ fontFamily: "'Alex Brush', 'Allura', 'Great Vibes', 'Apple Chancery', Georgia, serif" }}>
+              <span className="hidden sm:inline font-cursive text-base text-[#FFCB56]" style={{ fontFamily: "'Alex Brush', 'Allura', 'Great Vibes', 'Apple Chancery', Georgia, serif" }}>
                 Filmed with Devotion
               </span>
             </div>

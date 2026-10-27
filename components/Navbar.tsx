@@ -55,8 +55,8 @@ export default function Navbar({
       <header
         className={`pointer-events-auto transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-[width,max-width,margin,border-radius,padding,box-shadow] ${
           isScrolled
-            ? 'w-full max-w-5xl mt-3 sm:mt-4 rounded-full py-2 sm:py-2.5 px-4 sm:px-7 bg-[#FF933E]/95 backdrop-blur-2xl border border-white/30 shadow-[0_16px_45px_rgba(255,147,62,0.4)] ring-1 ring-white/20'
-            : 'w-full max-w-7xl mt-0 rounded-none sm:rounded-b-2xl py-3.5 sm:py-4 px-4 sm:px-8 lg:px-12 bg-[#FF933E] border-b border-white/20 shadow-[0_4px_25px_rgba(255,147,62,0.25)]'
+            ? 'w-full max-w-5xl mt-3 sm:mt-4 rounded-full py-2 sm:py-2.5 px-4 sm:px-7 bg-[#73A5CA]/95 backdrop-blur-2xl border border-white/30 shadow-[0_16px_45px_rgba(115,165,202,0.45)] ring-1 ring-white/20'
+            : 'w-full max-w-7xl mt-0 rounded-none sm:rounded-b-2xl py-3.5 sm:py-4 px-4 sm:px-8 lg:px-12 bg-[#73A5CA] border-b border-white/25 shadow-[0_4px_25px_rgba(115,165,202,0.35)]'
         }`}
       >
         <div className="w-full flex items-center justify-between">
@@ -67,7 +67,7 @@ export default function Navbar({
             className="flex items-center text-left focus:outline-none group cursor-pointer shrink-0"
             aria-label="The Royal Films Home"
           >
-            <RoyalLogo size={isScrolled ? 'sm' : 'md'} theme="orange" />
+            <RoyalLogo size={isScrolled ? 'sm' : 'md'} theme="blue" />
           </Link>
 
           {/* Desktop Nav Zone */}
@@ -80,15 +80,15 @@ export default function Navbar({
                   onClick={() => handleNavClick(link.id, link.href)}
                   className={`text-xs uppercase tracking-[0.22em] font-semibold transition-all duration-300 cursor-pointer relative py-1 ${
                     isActive
-                      ? 'text-white font-bold drop-shadow-[0_1px_4px_rgba(0,0,0,0.2)]'
-                      : 'text-white/85 hover:text-[#FFE9A9]'
+                      ? 'text-[#FFE9A9] font-bold drop-shadow-[0_1px_4px_rgba(0,0,0,0.3)]'
+                      : 'text-white/90 hover:text-[#FFE9A9]'
                   }`}
                 >
                   {link.label}
                   {isActive && (
                     <motion.div
                       layoutId="navbar-indicator"
-                      className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-white rounded-full shadow-[0_0_8px_rgba(255,255,255,0.9)]"
+                      className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-[#FFCB56] rounded-full shadow-[0_0_8px_#FFCB56]"
                       transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                     />
                   )}
@@ -106,7 +106,7 @@ export default function Navbar({
               rel="noopener noreferrer"
               aria-label="WhatsApp Concierge"
               title="Chat on WhatsApp"
-              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/15 hover:bg-white text-white hover:text-[#25D366] border border-white/30 flex items-center justify-center transition-all duration-300 hover:scale-105 active:scale-95 shadow-xs group"
+              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#25D366] border border-white/35 flex items-center justify-center transition-all duration-300 hover:scale-105 active:scale-95 shadow-xs group"
             >
               <MinimalWhatsAppIcon className="w-4 h-4 transition-transform group-hover:scale-110" />
             </a>
@@ -114,13 +114,13 @@ export default function Navbar({
             {/* Check Dates CTA */}
             <button
               onClick={onOpenAvailability}
-              className={`flex items-center gap-2 bg-white hover:bg-[#FFE9A9] text-[#FF933E] hover:text-[#E87920] border border-white text-xs uppercase tracking-[0.2em] font-bold shadow-[0_4px_16px_rgba(0,0,0,0.15)] transition-all duration-300 cursor-pointer active:scale-95 group rounded-full ${
+              className={`flex items-center gap-2 bg-[#FF933E] hover:bg-[#ff8425] text-white border border-[#FFCB56] text-xs uppercase tracking-[0.2em] font-bold shadow-[0_4px_16px_rgba(255,147,62,0.4)] transition-all duration-300 cursor-pointer active:scale-95 group rounded-full ${
                 isScrolled
                   ? 'px-4 py-2 text-[11px]'
                   : 'px-5 py-2.5 text-xs'
               }`}
             >
-              <Calendar className="w-3.5 h-3.5 text-[#FF933E] group-hover:scale-110 transition-transform" />
+              <Calendar className="w-3.5 h-3.5 text-[#FFE9A9] group-hover:scale-110 transition-transform" />
               <span className="hidden md:inline">Check Dates</span>
               <span className="md:hidden">Dates</span>
             </button>
@@ -135,7 +135,7 @@ export default function Navbar({
               rel="noopener noreferrer"
               aria-label="WhatsApp Concierge"
               title="WhatsApp Concierge"
-              className="w-8 h-8 rounded-full bg-white/15 hover:bg-white text-white hover:text-[#25D366] border border-white/30 flex items-center justify-center transition-all active:scale-95 shadow-xs"
+              className="w-8 h-8 rounded-full bg-white/20 text-white border border-white/35 flex items-center justify-center transition-all active:scale-95 shadow-xs"
             >
               <MinimalWhatsAppIcon className="w-3.5 h-3.5" />
             </a>
@@ -158,7 +158,7 @@ export default function Navbar({
               animate={{ opacity: 1, height: 'auto', scale: 1 }}
               exit={{ opacity: 0, height: 0, scale: 0.98 }}
               transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-              className={`lg:hidden bg-[#FF933E]/98 border border-white/25 px-6 py-6 flex flex-col gap-4 shadow-2xl backdrop-blur-2xl text-white ${
+              className={`lg:hidden bg-[#73A5CA]/98 border border-white/25 px-6 py-6 flex flex-col gap-4 shadow-2xl backdrop-blur-2xl text-white ${
                 isScrolled ? 'rounded-3xl mt-2 mx-1' : 'rounded-b-2xl mt-2'
               }`}
             >
@@ -168,13 +168,13 @@ export default function Navbar({
                   onClick={() => handleNavClick(link.id, link.href)}
                   className={`text-left text-sm uppercase tracking-[0.2em] py-2.5 border-b border-white/15 cursor-pointer flex items-center justify-between ${
                     currentTab === link.id
-                      ? 'text-white font-bold'
-                      : 'text-white/85'
+                      ? 'text-[#FFE9A9] font-bold'
+                      : 'text-white/90'
                   }`}
                 >
                   <span>{link.label}</span>
                   {currentTab === link.id && (
-                    <span className="w-2 h-2 rounded-full bg-white shadow-[0_0_8px_white]" />
+                    <span className="w-2 h-2 rounded-full bg-[#FFCB56] shadow-[0_0_8px_#FFCB56]" />
                   )}
                 </button>
               ))}
@@ -196,7 +196,7 @@ export default function Navbar({
                   setMobileMenuOpen(false);
                   onOpenAvailability();
                 }}
-                className="mt-1 w-full py-3.5 bg-white text-[#FF933E] font-bold text-xs uppercase tracking-[0.2em] text-center shadow-lg cursor-pointer rounded-lg hover:bg-[#FFE9A9] transition-colors"
+                className="mt-1 w-full py-3.5 bg-[#FF933E] hover:bg-[#ff8425] text-white font-bold text-xs uppercase tracking-[0.2em] text-center shadow-lg cursor-pointer rounded-lg transition-colors border border-[#FFCB56]"
               >
                 Check Date Availability
               </button>
