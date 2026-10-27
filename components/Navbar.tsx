@@ -26,7 +26,9 @@ export default function Navbar({
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          setIsScrolled(window.scrollY > 30);
+          const y = window.scrollY;
+          // Smooth hysteresis: switch to cylinder at > 45px, return to rectangle at < 15px
+          setIsScrolled((prev) => (prev ? y > 15 : y > 45));
           ticking = false;
         });
         ticking = true;
@@ -51,23 +53,34 @@ export default function Navbar({
   };
 
   return (
-    <div className="fixed top-0 inset-x-0 z-50 flex justify-center pointer-events-none px-3 sm:px-6">
+    <div className="fixed top-0 inset-x-0 z-50 flex justify-center pointer-events-none w-full">
       <header
-        className={`pointer-events-auto transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-[width,max-width,margin,border-radius,padding,box-shadow] ${
+        className={`pointer-events-auto transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-[width,max-width,margin,border-radius,padding,box-shadow,transform] relative overflow-hidden ${
           isScrolled
-            ? 'w-full max-w-5xl mt-3 sm:mt-4 rounded-full py-2 sm:py-2.5 px-4 sm:px-7 bg-[#73A5CA]/95 backdrop-blur-2xl border border-white/30 shadow-[0_16px_45px_rgba(115,165,202,0.45)] ring-1 ring-white/20'
-            : 'w-full max-w-7xl mt-0 rounded-none sm:rounded-b-2xl py-3.5 sm:py-4 px-4 sm:px-8 lg:px-12 bg-[#73A5CA] border-b border-white/25 shadow-[0_4px_25px_rgba(115,165,202,0.35)]'
+            ? 'w-[92%] sm:w-[88%] max-w-5xl mt-3 sm:mt-4 rounded-full py-2 sm:py-2.5 px-5 sm:px-7 bg-[#73A5CA]/95 backdrop-blur-2xl border-2 border-[#FFCB56] shadow-[0_16px_50px_rgba(115,165,202,0.45),0_0_25px_rgba(255,203,86,0.5),inset_0_1.5px_2px_rgba(255,255,255,0.85),inset_0_-1.5px_2px_rgba(255,147,62,0.35)] ring-1 ring-[#FFE9A9]/70'
+            : 'w-full max-w-full mt-0 rounded-none py-3.5 sm:py-4 px-6 lg:px-12 bg-[#73A5CA] border-b-2 border-[#FFCB56] shadow-[0_4px_25px_rgba(115,165,202,0.35),0_6px_22px_rgba(255,203,86,0.4),inset_0_-1.5px_2px_rgba(255,233,169,0.95)]'
         }`}
       >
+        {/* Golden Glossy Specular Sheen Streaks & Gloss Wash */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white/12 via-transparent to-black/10 pointer-events-none" />
+        <div className="absolute top-0 inset-x-8 sm:inset-x-14 h-[1.5px] bg-gradient-to-r from-transparent via-white/90 to-transparent pointer-events-none" />
+        <div className="absolute bottom-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-[#FFE9A9] to-transparent shadow-[0_0_12px_#FFCB56] pointer-events-none" />
+
         <div className="w-full flex items-center justify-between">
-          {/* Brand Zone - Golden Laurel Emblem + Cursive Title */}
+          {/* Brand Zone - Smooth GPU Scaled Logo (No Layout Snap) */}
           <Link
             href="/"
             onClick={() => handleNavClick('home', '/')}
             className="flex items-center text-left focus:outline-none group cursor-pointer shrink-0"
             aria-label="The Royal Films Home"
           >
-            <RoyalLogo size={isScrolled ? 'sm' : 'md'} theme="blue" />
+            <div
+              className={`transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] origin-left will-change-transform ${
+                isScrolled ? 'scale-[0.88]' : 'scale-100'
+              }`}
+            >
+              <RoyalLogo size="md" theme="blue" />
+            </div>
           </Link>
 
           {/* Desktop Nav Zone */}
@@ -114,11 +127,7 @@ export default function Navbar({
             {/* Check Dates CTA */}
             <button
               onClick={onOpenAvailability}
-              className={`flex items-center gap-2 bg-[#FF933E] hover:bg-[#ff8425] text-white border border-[#FFCB56] text-xs uppercase tracking-[0.2em] font-bold shadow-[0_4px_16px_rgba(255,147,62,0.4)] transition-all duration-300 cursor-pointer active:scale-95 group rounded-full ${
-                isScrolled
-                  ? 'px-4 py-2 text-[11px]'
-                  : 'px-5 py-2.5 text-xs'
-              }`}
+              className="flex items-center gap-2 bg-[#FF933E] hover:bg-[#ff8425] text-white border border-[#FFCB56] text-xs uppercase tracking-[0.2em] font-bold shadow-[0_4px_16px_rgba(255,147,62,0.4)] transition-all duration-300 cursor-pointer active:scale-95 group rounded-full px-4 sm:px-5 py-2 sm:py-2.5"
             >
               <Calendar className="w-3.5 h-3.5 text-[#FFE9A9] group-hover:scale-110 transition-transform" />
               <span className="hidden md:inline">Check Dates</span>

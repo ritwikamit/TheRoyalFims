@@ -110,6 +110,26 @@
               border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* GOLDEN GLOSSY BORDER LUXURY TOKENS */
+.border-gold-glossy {
+  border-color: #FFCB56 !important;
+  box-shadow: 0 0 20px rgba(255, 203, 86, 0.45),
+              inset 0 1px 2px rgba(255, 255, 255, 0.75),
+              inset 0 -1px 2px rgba(255, 147, 62, 0.35) !important;
+}
+
+.border-gold-glossy-bottom {
+  border-bottom: 2px solid #FFCB56 !important;
+  box-shadow: 0 4px 22px rgba(255, 203, 86, 0.38),
+              0 1px 0 rgba(255, 233, 169, 0.85) !important;
+}
+
+.border-gold-glossy-top {
+  border-top: 2px solid #FFCB56 !important;
+  box-shadow: 0 -6px 28px rgba(255, 203, 86, 0.45),
+              0 -1px 0 rgba(255, 233, 169, 0.9) !important;
+}
+
 .font-headline {
   font-family: "Bodoni Moda", "Cinzel", Georgia, serif;
 }
@@ -245,4 +265,27 @@
 
 .animate-ember-3 {
   animation: emberFloat 8s 4s ease-in-out infinite;
+}
+
+/* Golden Glossy Border & Specular Glows */
+.border-gold-glossy {
+  border: 2px solid #FFCB56;
+  box-shadow: 
+    0 0 24px rgba(255, 203, 86, 0.45),
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.85),
+    inset 0 -1.5px 2px rgba(255, 147, 62, 0.35);
+}
+
+.border-gold-glossy-bottom {
+  border-bottom: 2px solid #FFCB56;
+  box-shadow: 
+    0 4px 22px rgba(255, 203, 86, 0.4),
+    inset 0 -1.5px 2px rgba(255, 233, 169, 0.95);
+}
+
+.border-gold-glossy-top {
+  border-top: 2px solid #FFCB56;
+  box-shadow: 
+    0 -6px 28px rgba(255, 203, 86, 0.4),
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.85);
 }

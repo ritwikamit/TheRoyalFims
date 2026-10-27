@@ -14,7 +14,11 @@ interface FooterProps {
 
 export default function Footer({ onSelectTab, onOpenLegal }: FooterProps) {
   return (
-    <footer className="relative w-full overflow-hidden text-white bg-[#73A5CA] border-t border-white/20">
+    <footer className="relative w-full overflow-hidden text-white bg-[#73A5CA] border-t-2 border-[#FFCB56] shadow-[0_-8px_30px_rgba(255,203,86,0.35),inset_0_1px_2px_rgba(255,255,255,0.75)]">
+      {/* Golden Glossy Specular Sheen Lines for Footer */}
+      <div className="absolute top-0 inset-x-0 h-[2.5px] bg-gradient-to-r from-transparent via-[#FFE9A9] to-transparent shadow-[0_0_16px_#FFCB56] z-20 pointer-events-none" />
+      <div className="absolute top-[2.5px] inset-x-8 sm:inset-x-24 h-[1px] bg-gradient-to-r from-transparent via-white/85 to-transparent z-20 pointer-events-none" />
+      <div className="absolute top-[3.5px] inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-[#FF933E]/60 to-transparent z-20 pointer-events-none" />
       {/* WARM ROYAL GOLD & EMBER GLOW LAYER (PALETTE BLUE THEME) */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Soft Base Gradient */}
