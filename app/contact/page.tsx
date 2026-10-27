@@ -16,7 +16,6 @@ import MinimalWhatsAppIcon from '@/components/MinimalWhatsAppIcon';
 export default function ContactPage() {
   const [isAvailabilityOpen, setIsAvailabilityOpen] = useState(false);
   const [isPortalOpen, setIsPortalOpen] = useState(false);
-  const [theme, setTheme] = useState<'dark' | 'light'>('light');
   const [legalModal, setLegalModal] = useState<{ isOpen: boolean; tab: LegalTabType }>({
     isOpen: false,
     tab: 'privacy',
@@ -33,31 +32,12 @@ export default function ContactPage() {
     details: '',
   });
 
+  // Permanently enforce 100% light theme
   useEffect(() => {
-    const savedTheme = localStorage.getItem('trf_theme') as 'dark' | 'light' | null;
-    const active = savedTheme || 'light';
-    setTheme(active);
-    if (active === 'dark') {
-      document.documentElement.classList.remove('light');
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      document.documentElement.classList.add('light');
-    }
+    document.documentElement.classList.remove('dark');
+    document.documentElement.classList.add('light');
+    document.documentElement.style.colorScheme = 'light';
   }, []);
-
-  const toggleTheme = () => {
-    const newTheme = theme === 'dark' ? 'light' : 'dark';
-    setTheme(newTheme);
-    localStorage.setItem('trf_theme', newTheme);
-    if (newTheme === 'dark') {
-      document.documentElement.classList.remove('light');
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      document.documentElement.classList.add('light');
-    }
-  };
 
   const handleTabChange = (tab: string) => {
     if (tab === 'home') {
@@ -91,9 +71,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className={`min-h-screen flex flex-col font-sans transition-colors duration-300 selection:bg-[#FFE9A9] selection:text-[#FF933E] ${
-      theme === 'dark' ? 'bg-[#120E0A] text-[#FAF3EC]' : 'bg-[#FAF4ED] text-[#1A130E]'
-    }`}>
+    <div className="min-h-screen flex flex-col font-sans transition-colors duration-300 selection:bg-[#FFE9A9] selection:text-[#FF933E] bg-[#FFFDF9] text-[#241912]">
       <Navbar 
         currentTab="contact"
         onSelectTab={handleTabChange}

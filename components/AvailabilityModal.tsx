@@ -1,7 +1,9 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { X, CheckCircle2, Phone } from 'lucide-react';
+import Image from 'next/image';
+import { X, CheckCircle2, Calendar, MapPin, User, Phone, Sparkles, Check, ArrowRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
 import MinimalWhatsAppIcon from './MinimalWhatsAppIcon';
 
 interface AvailabilityModalProps {
@@ -11,10 +13,16 @@ interface AvailabilityModalProps {
 }
 
 export default function AvailabilityModal({ isOpen, onClose }: AvailabilityModalProps) {
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
   const [date, setDate] = useState('');
-  const [city, setCity] = useState('Gaya');
+  const [city, setCity] = useState('');
   const [service, setService] = useState('both');
-  const [checkedState, setCheckedState] = useState<'idle' | 'checking' | 'available' | 'reserved'>('idle');
+  const [notes, setNotes] = useState('');
+  const [checkedState, setCheckedState] = useState<'idle' | 'checking' | 'available'>('idle');
+
+  // Today's date string for min date attribute
+  const todayStr = new Date().toISOString().split('T')[0];
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -30,161 +38,294 @@ export default function AvailabilityModal({ isOpen, onClose }: AvailabilityModal
     };
   }, [isOpen, onClose]);
 
-  if (!isOpen) return null;
+  const serviceLabels: Record<string, string> = {
+    both: 'Photo & Film (Full Royal Cinema)',
+    film: 'Cinematography Only (4K HDR)',
+    photo: 'Editorial Photography Only',
+    prewedding: 'Pre-Wedding Film & Teaser',
+  };
 
   const handleCheck = (e: React.FormEvent) => {
     e.preventDefault();
     setCheckedState('checking');
     setTimeout(() => {
       setCheckedState('available');
-    }, 450);
+    }, 400);
   };
 
+  const handleReset = () => {
+    setCheckedState('idle');
+  };
+
+  // Build WhatsApp concierge inquiry URL
+  const generateWhatsAppUrl = () => {
+    const message = `Hello The Royal Films! ✨%0A%0AI would like to inquire about wedding / event date availability:%0A%0A• *Client / Couple:* ${encodeURIComponent(name || 'Client')}%0A• *Date:* ${encodeURIComponent(date || 'Upcoming')}%0A• *Destination / Venue:* ${encodeURIComponent(city || 'Gaya / Destination')}%0A• *Coverage:* ${encodeURIComponent(serviceLabels[service] || 'Photo & Film')}${phone ? `%0A• *Phone:* ${encodeURIComponent(phone)}` : ''}${notes ? `%0A• *Notes:* ${encodeURIComponent(notes)}` : ''}%0A%0APlease let me know the availability and package details. Thank you!`;
+    return `https://wa.me/918210351286?text=${message}`;
+  };
+
+  if (!isOpen) return null;
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md">
-      <div
-        className="relative w-full max-w-lg bg-[#FAF4ED] dark:bg-[#16110D] text-[#241912] border border-[#E8DCCF] dark:border-[#FFCB56]/30 rounded-2xl p-6 sm:p-8 shadow-2xl flex flex-col gap-6"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <button
+    <AnimatePresence>
+      <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+        {/* Backdrop - Click outside to close */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
           onClick={onClose}
-          className="absolute top-4 right-4 text-[#594233] hover:text-[#1A130E] dark:hover:text-white p-2 cursor-pointer"
-          aria-label="Close"
+          className="fixed inset-0 bg-black/60 backdrop-blur-md cursor-pointer"
+          aria-hidden="true"
+        />
+
+        {/* Modal Card */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.94, y: 16 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.94, y: 16 }}
+          transition={{ type: 'spring', damping: 26, stiffness: 320 }}
+          className="relative w-full max-w-lg max-h-[92vh] overflow-y-auto bg-[#FFFDF9] text-[#241912] border-2 border-[#FFCB56] rounded-2xl p-6 sm:p-8 shadow-[0_24px_70px_rgba(36,25,18,0.25),0_0_30px_rgba(255,203,86,0.35)] flex flex-col gap-6 z-10 my-auto"
+          onClick={(e) => e.stopPropagation()}
         >
-          <X className="w-5 h-5" />
-        </button>
+          {/* Top Golden Glossy Sheen Line */}
+          <div className="absolute top-0 inset-x-0 h-[2.5px] bg-gradient-to-r from-transparent via-[#FFE9A9] to-transparent shadow-[0_0_12px_#FFCB56] pointer-events-none" />
 
-        <div className="flex flex-col gap-1.5">
-          <span className="text-[11px] text-[#FF933E] dark:text-[#FFCB56] uppercase tracking-[0.25em] font-semibold">
-            Live Studio Calendar
-          </span>
-          <h3 className="font-headline text-2xl sm:text-3xl text-[#241912]">
-            Check Wedding Date Availability
-          </h3>
-          <p className="text-xs sm:text-sm text-[#594233] font-light leading-relaxed">
-            We limit commissions to ensure unhurried presence and archival grade color-grading for every celebration.
-          </p>
-        </div>
+          {/* Close Button */}
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 text-[#594233] hover:text-[#FF933E] p-2 rounded-full hover:bg-[#FAF3E6] transition-colors cursor-pointer"
+            aria-label="Close"
+          >
+            <X className="w-5 h-5" />
+          </button>
 
-        {checkedState === 'available' ? (
-          <div className="flex flex-col gap-5 bg-white  p-5 rounded-xl border border-[#FF933E]/30 shadow-md">
-            <div className="flex items-start gap-3">
-              <CheckCircle2 className="w-6 h-6 text-[#FF933E] dark:text-[#FFCB56] shrink-0 mt-0.5" />
-              <div className="flex flex-col">
-                <span className="text-sm font-semibold text-[#241912]">
-                  Date Is Currently Open for Booking
-                </span>
-                <span className="text-xs text-[#594233] mt-0.5">
-                  Our premier cinema &amp; stills crew is available for {city} on {date || 'your requested dates'}.
-                </span>
-              </div>
+          {/* Studio Header */}
+          <div className="flex items-start gap-3.5 pr-8">
+            <div className="relative w-12 h-12 shrink-0">
+              <Image
+                src="/assets/golden-royal-films-emblem.png"
+                alt="The Royal Films"
+                width={48}
+                height={48}
+                className="w-full h-full object-contain drop-shadow-[0_2px_10px_rgba(255,203,86,0.5)]"
+              />
             </div>
-
-            <div className="flex flex-col gap-2 pt-2 border-t border-[#FFCB56]/30 text-xs">
-              <div className="flex justify-between text-[#594233]">
-                <span>Crew Configuration:</span>
-                <span className="text-[#241912] font-semibold">4–6 Visual Artists</span>
-              </div>
-              <div className="flex justify-between text-[#594233]">
-                <span>Drone Aerial:</span>
-                <span className="text-[#FF933E] dark:text-[#FFCB56] font-semibold">Included Subject to Permissions</span>
-              </div>
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-3 pt-2">
-              <a
-                href={`https://wa.me/918210351286?text=Hello%20The%20Royal%20Films%2C%20I%20would%20like%20to%20reserve%20coverage%20for%20my%20wedding%20on%20${encodeURIComponent(
-                  date || 'upcoming dates'
-                )}%20in%20${encodeURIComponent(city)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1 py-3 bg-[#FF933E] hover:bg-[#ff8425] text-white text-xs font-semibold uppercase tracking-[0.18em] text-center flex items-center justify-center gap-2 shadow-lg transition-colors rounded-none"
+            <div className="flex flex-col">
+              <span
+                className="text-2xl sm:text-3xl text-[#FF933E] leading-tight"
+                style={{ fontFamily: "'Alex Brush', 'Allura', 'Great Vibes', 'Apple Chancery', Georgia, serif" }}
               >
-                <MinimalWhatsAppIcon className="w-4 h-4" />
-                <span>Confirm on WhatsApp</span>
-              </a>
-
-              <a
-                href="tel:+918210351286"
-                className="px-4 py-3 bg-white hover:bg-[#FAF4ED] text-[#FF933E] text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 border border-[#FFCB56]/50 transition-colors"
-              >
-                <Phone className="w-3.5 h-3.5 text-[#FF933E]" />
-                <span>Call Studio</span>
-              </a>
+                The Royal Films
+              </span>
+              <span className="text-[10px] text-[#73A5CA] font-bold uppercase tracking-[0.24em] mt-0.5">
+                Live Studio Date Availability
+              </span>
             </div>
-
-            <button
-              onClick={() => setCheckedState('idle')}
-              className="text-[11px] text-[#7C685B] dark:text-[#A49182] hover:underline text-center cursor-pointer"
-            >
-              Check another date
-            </button>
           </div>
-        ) : (
-          <form onSubmit={handleCheck} className="flex flex-col gap-4">
-            <div className="flex flex-col gap-1.5">
-              <label className="text-xs uppercase tracking-wider text-[#FF933E] dark:text-[#FFCB56] font-semibold">
-                Event Date
-              </label>
-              <input
-                type="date"
-                required
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg bg-white  border border-[#FFCB56]/30 text-sm text-[#241912] focus:outline-none focus:border-[#FF933E]"
-              />
-            </div>
 
-            <div className="flex flex-col gap-1.5">
-              <label className="text-xs uppercase tracking-wider text-[#FF933E] dark:text-[#FFCB56] font-semibold">
-                Event Destination / Venue
-              </label>
-              <input
-                type="text"
-                required
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
-                placeholder="e.g. Gaya, Bodh Gaya, Patna, Dubai"
-                className="w-full px-4 py-3 rounded-lg bg-white  border border-[#FFCB56]/30 text-sm text-[#241912] placeholder:text-[#7C685B]/60 focus:outline-none focus:border-[#FF933E]"
-              />
-            </div>
+          {checkedState === 'available' ? (
+            /* Result State: Available & Ready for Concierge Booking */
+            <div className="flex flex-col gap-5 bg-[#FAF3E6] p-5 sm:p-6 rounded-xl border border-[#FFCB56] shadow-sm">
+              <div className="flex items-start gap-3.5">
+                <div className="w-10 h-10 rounded-full bg-[#FF933E]/15 border border-[#FF933E] flex items-center justify-center shrink-0 mt-0.5">
+                  <CheckCircle2 className="w-6 h-6 text-[#FF933E]" />
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-base font-bold text-[#241912]">
+                    Date Is Currently Available
+                  </span>
+                  <span className="text-xs text-[#594233] mt-0.5 leading-relaxed">
+                    Our master cinema &amp; editorial photography crew is open for commissioning in{' '}
+                    <strong className="text-[#241912]">{city || 'your chosen location'}</strong> on{' '}
+                    <strong className="text-[#241912]">{date || 'your requested date'}</strong>.
+                  </span>
+                </div>
+              </div>
 
-            <div className="flex flex-col gap-1.5">
-              <label className="text-xs uppercase tracking-wider text-[#FF933E] dark:text-[#FFCB56] font-semibold">
-                Coverage Requirement
-              </label>
-              <div className="grid grid-cols-3 gap-2">
-                {[
-                  { id: 'both', label: 'Photo & Film' },
-                  { id: 'photo', label: 'Photo Only' },
-                  { id: 'film', label: 'Film Only' },
-                ].map((item) => (
+              {/* Inquiry Summary Pill Box */}
+              <div className="flex flex-col gap-2 p-3.5 bg-white rounded-lg border border-[#FFE9A9] text-xs">
+                <div className="flex justify-between items-center text-[#594233]">
+                  <span>Couple / Client:</span>
+                  <span className="text-[#241912] font-semibold">{name || 'Private Client'}</span>
+                </div>
+                <div className="flex justify-between items-center text-[#594233]">
+                  <span>Event Date:</span>
+                  <span className="text-[#FF933E] font-semibold">{date || 'Not specified'}</span>
+                </div>
+                <div className="flex justify-between items-center text-[#594233]">
+                  <span>Location:</span>
+                  <span className="text-[#241912] font-semibold">{city || 'Gaya / Destination'}</span>
+                </div>
+                <div className="flex justify-between items-center text-[#594233]">
+                  <span>Coverage Scope:</span>
+                  <span className="text-[#73A5CA] font-bold">{serviceLabels[service]}</span>
+                </div>
+              </div>
+
+              {/* Action Buttons: WhatsApp Concierge (Minimal Icon) & Call */}
+              <div className="flex flex-col gap-2.5 pt-1">
+                <a
+                  href={generateWhatsAppUrl()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-3.5 bg-[#FF933E] hover:bg-[#ff8425] text-white text-xs font-bold uppercase tracking-[0.2em] rounded-xl flex items-center justify-center gap-2.5 shadow-[0_4px_18px_rgba(255,147,62,0.4)] transition-transform active:scale-98 group cursor-pointer"
+                >
+                  <MinimalWhatsAppIcon className="w-4 h-4 transition-transform group-hover:scale-110" />
+                  <span>Connect on WhatsApp Concierge</span>
+                  <ArrowRight className="w-4 h-4 text-[#FFE9A9] transition-transform group-hover:translate-x-1" />
+                </a>
+
+                <div className="flex items-center justify-between text-xs text-[#594233] pt-1">
                   <button
-                    key={item.id}
                     type="button"
-                    onClick={() => setService(item.id)}
-                    className={`py-2.5 px-3 rounded text-xs font-semibold border transition-all ${
-                      service === item.id
-                        ? 'bg-[#FFE9A9] dark:bg-[#251C15] border-[#FF933E] text-[#FF933E] dark:text-[#FFCB56]'
-                        : 'bg-white dark:bg-black/30 border-[#FFCB56]/30 text-[#594233]'
-                    }`}
+                    onClick={handleReset}
+                    className="text-[#73A5CA] hover:text-[#FF933E] hover:underline font-semibold cursor-pointer"
                   >
-                    {item.label}
+                    ← Check another date
                   </button>
-                ))}
+                  <a
+                    href="tel:+918210351286"
+                    className="flex items-center gap-1.5 text-[#594233] hover:text-[#FF933E] font-medium"
+                    title="Call studio directly"
+                  >
+                    <Phone className="w-3.5 h-3.5 text-[#FF933E]" />
+                    <span>Call Studio Directly</span>
+                  </a>
+                </div>
               </div>
             </div>
+          ) : (
+            /* Inquiry & Availability Form */
+            <form onSubmit={handleCheck} className="flex flex-col gap-4">
+              {/* Couple / Client Name */}
+              <div className="flex flex-col gap-1.5">
+                <label className="text-xs uppercase tracking-wider text-[#FF933E] font-bold flex items-center gap-1.5">
+                  <User className="w-3.5 h-3.5 text-[#FFCB56]" />
+                  <span>Your Name / Couple Names *</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="e.g. Aditi & Rohan"
+                  className="w-full px-4 py-2.5 rounded-lg bg-white border border-[#E8DCCF] text-sm text-[#241912] placeholder:text-[#594233]/45 focus:outline-none focus:border-[#FF933E] focus:ring-1 focus:ring-[#FF933E] transition-all"
+                />
+              </div>
 
-            <button
-              type="submit"
-              disabled={checkedState === 'checking'}
-              className="mt-2 w-full py-3.5 bg-[#FF933E] hover:bg-[#FFCB56] text-white text-xs uppercase tracking-[0.2em] font-semibold transition-all shadow-[0_0_20px_rgba(212,103,67,0.45)] cursor-pointer"
-            >
-              {checkedState === 'checking' ? 'Querying Calendar...' : 'Check Availability'}
-            </button>
-          </form>
-        )}
+              {/* Contact Number */}
+              <div className="flex flex-col gap-1.5">
+                <label className="text-xs uppercase tracking-wider text-[#FF933E] font-bold flex items-center gap-1.5">
+                  <Phone className="w-3.5 h-3.5 text-[#FFCB56]" />
+                  <span>WhatsApp / Contact Number *</span>
+                </label>
+                <input
+                  type="tel"
+                  required
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  placeholder="e.g. +91 98765 43210"
+                  className="w-full px-4 py-2.5 rounded-lg bg-white border border-[#E8DCCF] text-sm text-[#241912] placeholder:text-[#594233]/45 focus:outline-none focus:border-[#FF933E] focus:ring-1 focus:ring-[#FF933E] transition-all"
+                />
+              </div>
+
+              {/* Two Column: Date & Venue */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                {/* Event Date */}
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-xs uppercase tracking-wider text-[#FF933E] font-bold flex items-center gap-1.5">
+                    <Calendar className="w-3.5 h-3.5 text-[#FFCB56]" />
+                    <span>Wedding Date *</span>
+                  </label>
+                  <input
+                    type="date"
+                    required
+                    min={todayStr}
+                    value={date}
+                    onChange={(e) => setDate(e.target.value)}
+                    className="w-full px-4 py-2.5 rounded-lg bg-white border border-[#E8DCCF] text-sm text-[#241912] focus:outline-none focus:border-[#FF933E] focus:ring-1 focus:ring-[#FF933E] transition-all [color-scheme:light]"
+                  />
+                </div>
+
+                {/* Destination / Venue */}
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-xs uppercase tracking-wider text-[#FF933E] font-bold flex items-center gap-1.5">
+                    <MapPin className="w-3.5 h-3.5 text-[#FFCB56]" />
+                    <span>Destination / City *</span>
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                    placeholder="e.g. Gaya, Patna, Dubai"
+                    className="w-full px-4 py-2.5 rounded-lg bg-white border border-[#E8DCCF] text-sm text-[#241912] placeholder:text-[#594233]/45 focus:outline-none focus:border-[#FF933E] focus:ring-1 focus:ring-[#FF933E] transition-all"
+                  />
+                </div>
+              </div>
+
+              {/* Coverage Requirement Pills */}
+              <div className="flex flex-col gap-1.5">
+                <label className="text-xs uppercase tracking-wider text-[#FF933E] font-bold flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-[#FFCB56]" />
+                  <span>Coverage Requirement</span>
+                </label>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                  {[
+                    { id: 'both', label: 'Photo & Film' },
+                    { id: 'film', label: 'Film Only' },
+                    { id: 'photo', label: 'Photo Only' },
+                    { id: 'prewedding', label: 'Pre-Wedding' },
+                  ].map((item) => (
+                    <button
+                      key={item.id}
+                      type="button"
+                      onClick={() => setService(item.id)}
+                      className={`py-2 px-2 rounded-lg text-xs font-semibold border transition-all cursor-pointer text-center ${
+                        service === item.id
+                          ? 'bg-[#FFE9A9] border-[#FF933E] text-[#FF933E] shadow-sm'
+                          : 'bg-white border-[#E8DCCF] text-[#594233] hover:border-[#FFCB56]'
+                      }`}
+                    >
+                      {item.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Notes / Special Wishes */}
+              <div className="flex flex-col gap-1.5">
+                <label className="text-xs uppercase tracking-wider text-[#594233] font-semibold">
+                  Additional Details / Ceremonies (Optional)
+                </label>
+                <textarea
+                  rows={2}
+                  value={notes}
+                  onChange={(e) => setNotes(e.target.value)}
+                  placeholder="e.g. 2-day wedding with Sangeet and Haldi at Bodh Gaya resort"
+                  className="w-full px-4 py-2 rounded-lg bg-white border border-[#E8DCCF] text-xs text-[#241912] placeholder:text-[#594233]/45 focus:outline-none focus:border-[#FF933E] focus:ring-1 focus:ring-[#FF933E] resize-none transition-all"
+                />
+              </div>
+
+              {/* Submit CTA */}
+              <button
+                type="submit"
+                disabled={checkedState === 'checking'}
+                className="mt-2 w-full py-3.5 bg-[#FF933E] hover:bg-[#ff8425] text-white text-xs uppercase tracking-[0.2em] font-bold rounded-xl shadow-[0_4px_18px_rgba(255,147,62,0.4)] transition-all active:scale-98 cursor-pointer flex items-center justify-center gap-2"
+              >
+                {checkedState === 'checking' ? (
+                  <span>Checking Live Studio Schedule...</span>
+                ) : (
+                  <>
+                    <span>Check Date Availability</span>
+                    <ArrowRight className="w-4 h-4 text-[#FFE9A9]" />
+                  </>
+                )}
+              </button>
+            </form>
+          )}
+        </motion.div>
       </div>
-    </div>
+    </AnimatePresence>
   );
 }
