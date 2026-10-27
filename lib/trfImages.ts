@@ -270,3 +270,113 @@ export const INSTAGRAM_POSTS: InstagramFeedItem[] = [
     aspectRatio: '16/9',
   },
 ];
+
+export interface InstagramReelItem {
+  id: string;
+  title: string;
+  subtitle: string;
+  orientation: 'portrait' | 'landscape';
+  video: string;
+  poster: string;
+  url: string;
+  badge?: string;
+  isAward?: boolean;
+}
+
+export const SIGNATURE_AWARD_REEL: InstagramReelItem = {
+  id: 'DZR24gsJqOo',
+  title: 'Founder Neeraj Singh Felicitation',
+  subtitle: 'Royal Films Founder Neeraj Singh Honored with Excellence Award in Wedding Cinematography',
+  orientation: 'portrait',
+  video: '/assets/reels/DZR24gsJqOo.mp4',
+  poster: '/assets/reels/DZR24gsJqOo.jpg',
+  url: 'https://www.instagram.com/reel/DZR24gsJqOo/?utm_source=ig_web_copy_link',
+  badge: "Founder's Award Ceremony",
+  isAward: true,
+};
+
+export const LANDSCAPE_REELS: InstagramReelItem[] = [
+  {
+    id: 'DeZdbBbps-5',
+    title: 'Heritage Palatial Pre-Wedding Cinema',
+    subtitle: 'Grand fort vistas, sunset glow & aristocratic elegance',
+    orientation: 'landscape',
+    video: '/assets/reels/DeZdbBbps-5.mp4',
+    poster: '/assets/reels/DeZdbBbps-5.jpg',
+    url: 'https://www.instagram.com/reel/DeZdbBbps-5/?utm_source=ig_web_copy_link',
+    badge: '16:9 Cinema Reel',
+  },
+  {
+    id: 'DYUk0fbpr85',
+    title: 'Sacred Pheras & Palace Vows',
+    subtitle: 'Vows around the holy fire in traditional royal splendor',
+    orientation: 'landscape',
+    video: '/assets/reels/DYUk0fbpr85.mp4',
+    poster: '/assets/reels/DYUk0fbpr85.jpg',
+    url: 'https://www.instagram.com/reel/DYUk0fbpr85/?utm_source=ig_web_copy_link',
+    badge: '16:9 Cinema Reel',
+  },
+  {
+    id: 'DPZStNviVX6',
+    title: 'Golden Sunset Desert & Dunes Teaser',
+    subtitle: 'Dubai Arabian desert romance filmed in anamorphic 4K',
+    orientation: 'landscape',
+    video: '/assets/reels/DPZStNviVX6.mp4',
+    poster: '/assets/reels/DPZStNviVX6.jpg',
+    url: 'https://www.instagram.com/reel/DPZStNviVX6/?utm_source=ig_web_copy_link',
+    badge: '16:9 Cinema Reel',
+  },
+  {
+    id: 'CvP4m6uOq5Q',
+    title: 'Sacred Mandap Ceremony Teaser',
+    subtitle: 'Emotional kanyadaan, heartfelt vows & Vedic chants',
+    orientation: 'landscape',
+    video: '/assets/reels/CvP4m6uOq5Q.mp4',
+    poster: '/assets/reels/CvP4m6uOq5Q.jpg',
+    url: 'https://www.instagram.com/reel/CvP4m6uOq5Q/?utm_source=ig_web_copy_link',
+    badge: '16:9 Cinema Reel',
+  },
+];
+
+export const PORTRAIT_REELS: InstagramReelItem[] = [
+  {
+    id: 'C07IAkESvdw',
+    title: 'Editorial Bridal Portraiture',
+    subtitle: 'Heirloom jewelry, intricate zari & timeless bridal grace',
+    orientation: 'portrait',
+    video: '/assets/reels/C07IAkESvdw.mp4',
+    poster: '/assets/reels/C07IAkESvdw.jpg',
+    url: 'https://www.instagram.com/reel/C07IAkESvdw/?utm_source=ig_web_copy_link',
+    badge: '9:16 Portrait Reel',
+  },
+  {
+    id: 'CuwcEd5MdpD',
+    title: 'Grand Baraat & Royal Groom Entry',
+    subtitle: 'Vintage rolls, joyous dhol beats & celebration frenzy',
+    orientation: 'portrait',
+    video: '/assets/reels/CuwcEd5MdpD.mp4',
+    poster: '/assets/reels/CuwcEd5MdpD.jpg',
+    url: 'https://www.instagram.com/reel/CuwcEd5MdpD/?utm_source=ig_web_copy_link',
+    badge: '9:16 Portrait Reel',
+  },
+  {
+    id: 'CtHlanrMYUm',
+    title: 'Haldi Euphoria & Color Symphony',
+    subtitle: 'Marigold showers, laughter & pure familial devotion',
+    orientation: 'portrait',
+    video: '/assets/reels/CtHlanrMYUm.mp4',
+    poster: '/assets/reels/CtHlanrMYUm.jpg',
+    url: 'https://www.instagram.com/reel/CtHlanrMYUm/?utm_source=ig_web_copy_link',
+    badge: '9:16 Portrait Reel',
+  },
+  {
+    id: 'C1MiMOhLuNm',
+    title: 'Regal Couple Portraiture Reel',
+    subtitle: 'Intimate whispers, natural warmth & editorial finesse',
+    orientation: 'portrait',
+    video: '/assets/reels/C1MiMOhLuNm.mp4',
+    poster: '/assets/reels/C1MiMOhLuNm.jpg',
+    url: 'https://www.instagram.com/reel/C1MiMOhLuNm/?utm_source=ig_web_copy_link',
+    badge: '9:16 Portrait Reel',
+  },
+];

@@ -34,12 +34,117 @@ import {
   INSTAGRAM_PROFILE_URL,
   INSTAGRAM_HANDLE,
   INSTAGRAM_FOLLOWER_COUNT,
+  SIGNATURE_AWARD_REEL,
+  LANDSCAPE_REELS,
+  PORTRAIT_REELS,
+  InstagramReelItem,
 } from '@/lib/trfImages';
 
 interface HomeScreenProps {
   onSelectTab: (tab: string) => void;
   onOpenPortfolioItem: (item: PortfolioItemData) => void;
   onOpenAvailability: () => void;
+}
+
+interface MinimalReelBoxProps {
+  reel: InstagramReelItem;
+  className?: string;
+  aspectClass?: string;
+}
+
+function MinimalReelBox({ reel, className = '', aspectClass }: MinimalReelBoxProps) {
+  const videoRef = React.useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const handleMouseEnter = () => {
+    if (videoRef.current) {
+      const playPromise = videoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => setIsPlaying(true)).catch(() => {});
+      }
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+      setIsPlaying(false);
+    }
+  };
+
+  const defaultAspect = reel.orientation === 'landscape' ? 'aspect-[16/10] sm:aspect-video' : 'aspect-[9/16]';
+
+  return (
+    <a
+      href={reel.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      className={`group relative block rounded-2xl overflow-hidden bg-black border border-[#FFCB56]/35 shadow-md hover:shadow-2xl hover:border-[#FF933E] transition-all duration-500 ease-out hover:scale-[1.03] sm:hover:scale-105 cursor-pointer select-none ${aspectClass || defaultAspect} ${className}`}
+    >
+      {/* Video Element (Plays while hovered) */}
+      <video
+        ref={videoRef}
+        src={reel.video}
+        poster={reel.poster}
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+      />
+
+      {/* Atmospheric Vignette Gradient */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-black/30 group-hover:via-transparent transition-all pointer-events-none" />
+
+      {/* Top Minimal Header Badge */}
+      <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none z-10">
+        <span className="px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-[10px] uppercase tracking-wider font-semibold text-[#FFE9A9] flex items-center gap-1.5 shadow-sm">
+          {reel.isAward ? (
+            <>
+              <Award className="w-3.5 h-3.5 text-[#FFCB56]" />
+              <span>Founder Award</span>
+            </>
+          ) : (
+            <>
+              <Film className="w-3 h-3 text-[#FF933E]" />
+              <span>{reel.badge || 'Reel'}</span>
+            </>
+          )}
+        </span>
+        <div className="w-7 h-7 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center text-white/90 group-hover:text-[#FFCB56] transition-colors border border-white/15">
+          <Instagram className="w-3.5 h-3.5" />
+        </div>
+      </div>
+
+      {/* Center Subtle Play Watermark (Smoothly fades out on hover-play) */}
+      <div
+        className={`absolute inset-0 flex items-center justify-center pointer-events-none transition-opacity duration-300 ${
+          isPlaying ? 'opacity-0' : 'opacity-80 group-hover:opacity-100'
+        }`}
+      >
+        <div className="w-12 h-12 rounded-full bg-black/50 backdrop-blur-md border border-[#FFCB56]/60 flex items-center justify-center text-white shadow-[0_0_20px_rgba(255,147,62,0.4)] group-hover:scale-110 transition-transform">
+          <Play className="w-5 h-5 ml-0.5 text-[#FFE9A9] fill-[#FFE9A9]" />
+        </div>
+      </div>
+
+      {/* Bottom Minimal Info Overlay */}
+      <div className="absolute bottom-3 left-3 right-3 flex flex-col gap-1 pointer-events-none z-10 text-white">
+        <h4 className="text-xs sm:text-sm font-semibold tracking-wide text-[#FFFDF9] line-clamp-1 drop-shadow-md">
+          {reel.title}
+        </h4>
+        <p className="text-[10px] sm:text-[11px] text-[#FFE9A9]/80 line-clamp-1 font-light drop-shadow">
+          {reel.subtitle}
+        </p>
+        <div className="pt-0.5 flex items-center gap-1 text-[10px] uppercase tracking-wider text-[#FF933E] font-bold group-hover:text-[#FFCB56] transition-colors">
+          <span>Watch on Instagram</span>
+          <ExternalLink className="w-3 h-3" />
+        </div>
+      </div>
+    </a>
+  );
 }
 
 export default function HomeScreen({
@@ -50,9 +155,6 @@ export default function HomeScreen({
   const [activeFilter, setActiveFilter] = useState('all');
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
-  // Instagram Reel Video Player state
-  const [isReelPlaying, setIsReelPlaying] = useState(true);
-  const [isReelMuted, setIsReelMuted] = useState(true);
 
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formData, setFormData] = useState({
@@ -245,31 +347,38 @@ export default function HomeScreen({
 
         {/* Floating Highlights & Headlines Directly Over The Video */}
         <div className="relative z-20 max-w-5xl mx-auto px-5 sm:px-8 text-center flex flex-col items-center justify-center gap-6 pt-16">
-          {/* Cursive Brand Tagline */}
+          {/* Cursive Brand Tagline (Stars Removed as requested) */}
           <motion.div
             initial={{ opacity: 0, y: 25, filter: 'blur(8px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             transition={{ duration: 0.9, delay: 0.1 }}
-            className="flex items-center gap-3 px-5 py-2 rounded-full bg-white/15 backdrop-blur-md border border-[#FFCB56]/60 shadow-[0_4px_20px_rgba(255,147,62,0.3)]"
+            className="flex items-center justify-center px-6 py-2 rounded-full bg-white/15 backdrop-blur-md border border-[#FFCB56]/60 shadow-[0_4px_20px_rgba(255,147,62,0.3)]"
           >
-            <Sparkles className="w-4 h-4 text-[#FFCB56]" />
             <span
               className="text-2xl sm:text-3xl text-[#FFE9A9] drop-shadow-md"
               style={{ fontFamily: "'Alex Brush', 'Allura', 'Great Vibes', 'Pinyon Script', 'Apple Chancery', Georgia, serif" }}
             >
               The Royal Films Atelier
             </span>
-            <Sparkles className="w-4 h-4 text-[#FFCB56]" />
           </motion.div>
 
-          {/* Main Royal Title */}
+          {/* Main Royal Title with Distinctive Editorial Cinema Font */}
           <motion.h1
             initial={{ opacity: 0, y: 30, filter: 'blur(10px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             transition={{ duration: 1, delay: 0.25 }}
-            className="font-headline text-4xl sm:text-6xl md:text-7xl font-light text-white tracking-tight leading-[1.08] drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)]"
+            className="text-4xl sm:text-6xl md:text-7xl font-light text-white tracking-tight leading-[1.08] drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)]"
           >
-            Timeless Cinema for <br className="hidden sm:inline" />
+            <span
+              className="font-serif italic font-normal tracking-wide text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.85)]"
+              style={{ fontFamily: "'Playfair Display', 'Cormorant Garamond', 'Bodoni Moda', Georgia, serif" }}
+            >
+              Timeless Cinema
+            </span>{' '}
+            <span className="font-headline font-light uppercase tracking-[0.25em] text-sm sm:text-base text-[#FFE9A9]/80 align-middle inline-block mx-1">
+              for
+            </span>
+            <br className="hidden sm:inline" />
             <span
               className="font-normal text-[#FFCB56] italic drop-shadow-[0_2px_14px_rgba(255,203,86,0.6)]"
               style={{ fontFamily: "'Alex Brush', 'Allura', 'Great Vibes', 'Pinyon Script', 'Apple Chancery', Georgia, serif" }}
@@ -672,103 +781,181 @@ export default function HomeScreen({
             </div>
           </div>
 
-          {/* Interactive Instagram Content Showcase: Live Reel Player + 6 Feed Cards */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            {/* Left: Reel Video Player Mockup in Mobile Frame */}
-            <div className="lg:col-span-4 flex flex-col items-center">
-              <div className="relative w-full max-w-[320px] aspect-[9/16] rounded-3xl overflow-hidden shadow-2xl border-4 border-[#FFCB56] bg-black group">
-                <video
-                  autoPlay
-                  loop
-                  muted={isReelMuted}
-                  playsInline
-                  className="w-full h-full object-cover"
-                >
-                  <source src="/assets/hero-reel.mp4" type="video/mp4" />
-                </video>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/30 pointer-events-none" />
+          {/* =========================================================================
+              FEATURE SPOTLIGHT: FOUNDER NEERAJ SINGH AWARD REEL
+              Portrait orientation with minimal hover-to-play card & prestige panel
+              ========================================================================= */}
+          <div className="p-6 sm:p-10 bg-[#FFF8EE] rounded-3xl border border-[#FFCB56]/50 shadow-lg relative overflow-hidden">
+            {/* Subtle background glow */}
+            <div className="absolute top-0 right-0 w-80 h-80 bg-radial from-[#FFCB56]/20 to-transparent blur-3xl pointer-events-none" />
 
-                {/* Top Instagram Header */}
-                <div className="absolute top-4 left-4 right-4 flex items-center justify-between text-white text-xs z-10">
-                  <div className="flex items-center gap-2">
-                    <span className="font-semibold">{INSTAGRAM_HANDLE}</span>
-                    <span className="text-[10px] text-white/70">• Reel</span>
-                  </div>
-                  <button
-                    onClick={() => setIsReelMuted(!isReelMuted)}
-                    className="p-1.5 rounded-full bg-black/50 text-white hover:bg-black/80 transition-colors cursor-pointer"
-                    aria-label="Toggle mute"
-                  >
-                    {isReelMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
-                  </button>
+            <div className="flex flex-col md:flex-row items-center gap-8 lg:gap-14">
+              {/* Left: Minimal Hover-to-Play Award Reel Card */}
+              <div className="w-full max-w-[280px] sm:max-w-[320px] shrink-0">
+                <MinimalReelBox
+                  reel={SIGNATURE_AWARD_REEL}
+                  aspectClass="aspect-[9/16]"
+                  className="ring-4 ring-[#FFCB56]/40 shadow-2xl"
+                />
+              </div>
+
+              {/* Right: Prestige Acclaim Card for Founder Neeraj Singh */}
+              <div className="flex flex-col gap-4 text-[#241912] flex-1 text-left">
+                <div className="flex items-center gap-2">
+                  <span className="px-3.5 py-1 rounded-full bg-[#FF933E]/15 border border-[#FF933E]/50 text-[#FF933E] text-[10px] sm:text-xs font-bold uppercase tracking-[0.24em] flex items-center gap-1.5 shadow-sm">
+                    <Award className="w-4 h-4 text-[#FF933E]" />
+                    <span>Founder Felicitation &amp; Award</span>
+                  </span>
                 </div>
 
-                {/* Bottom Caption Overlay */}
-                <div className="absolute bottom-4 left-4 right-4 flex flex-col gap-2 text-white z-10">
-                  <p className="text-xs line-clamp-2 leading-relaxed drop-shadow">
-                    Sacred Pheras &amp; Royal Mandap magic in Gaya. Filmed on Sony Cinema cameras in 4K HDR. ✨🔥
-                  </p>
-                  <div className="flex items-center justify-between pt-1">
-                    <span className="text-[10px] text-[#FFCB56] font-semibold tracking-wider">
-                      ♫ Original Royal Audio
-                    </span>
-                    <a
-                      href={INSTAGRAM_PROFILE_URL}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-3 py-1 bg-white text-[#241912] rounded-full text-[10px] font-bold uppercase tracking-wider hover:bg-[#FFE9A9] transition-colors"
-                    >
-                      Watch on IG
-                    </a>
-                  </div>
+                <div className="flex flex-col">
+                  <h3 className="font-headline text-2xl sm:text-4xl font-bold text-[#241912] leading-tight">
+                    Neeraj Singh Honored for Cinematic Excellence
+                  </h3>
+                  <span
+                    className="text-xl sm:text-2xl text-[#FF933E] mt-1 drop-shadow-sm"
+                    style={{ fontFamily: "'Alex Brush', 'Allura', 'Great Vibes', 'Pinyon Script', Georgia, serif" }}
+                  >
+                    Founder &amp; Principal Cinematographer • The Royal Films
+                  </span>
+                </div>
+
+                <p className="text-sm sm:text-base text-[#594233] leading-relaxed font-light">
+                  Founder Neeraj Singh receiving the prestigious recognition for elevating wedding cinematography across Bihar and premier destination horizons. Trained with an AAFT cinema foundation, Neeraj leads our atelier with a signature cinematic eye—capturing authentic soul, sacred Vedic rituals, and royal grandeur on 4K Sony Cinema rigs.
+                </p>
+
+                {/* Accolades Pills */}
+                <div className="flex flex-wrap items-center gap-2.5 pt-1 text-xs">
+                  <span className="px-3 py-1.5 rounded-full bg-white border border-[#FFCB56] text-[#241912] font-semibold text-[11px] shadow-sm">
+                    🏆 National Film Felicitation
+                  </span>
+                  <span className="px-3 py-1.5 rounded-full bg-white border border-[#FFCB56] text-[#241912] font-semibold text-[11px] shadow-sm">
+                    🎓 AAFT Film Direction Alumnus
+                  </span>
+                  <span className="px-3 py-1.5 rounded-full bg-white border border-[#FFCB56] text-[#241912] font-semibold text-[11px] shadow-sm">
+                    🇦🇪 Dubai Destination Certified
+                  </span>
+                </div>
+
+                {/* Action Link */}
+                <div className="pt-2">
+                  <a
+                    href={SIGNATURE_AWARD_REEL.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2.5 px-6 py-3 bg-[#FF933E] hover:bg-[#ff8425] text-white font-semibold text-xs uppercase tracking-[0.2em] rounded-full shadow-[0_4px_16px_rgba(255,147,62,0.35)] transition-all hover:scale-105 active:scale-95"
+                  >
+                    <Instagram className="w-4 h-4" />
+                    <span>Watch Award Reel on Instagram</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
                 </div>
               </div>
             </div>
+          </div>
 
-            {/* Right: 6 Feed Cards Grid */}
-            <div className="lg:col-span-8 grid grid-cols-2 sm:grid-cols-3 gap-4">
+          {/* =========================================================================
+              LANDSCAPE CINEMA REELS (4 Widescreen 16:9 Minimal Boxes)
+              Plays on hover, slightly enlarges on hover
+              ========================================================================= */}
+          <div className="flex flex-col gap-6 pt-4">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-[#FFCB56]/30 pb-4">
+              <div className="flex flex-col gap-1">
+                <span className="text-xs uppercase tracking-[0.25em] font-semibold text-[#FF933E]">
+                  Widescreen 16:9 Showcase
+                </span>
+                <h3 className="font-headline text-2xl sm:text-3xl font-bold text-[#241912]">
+                  Landscape Cinema Reels
+                </h3>
+              </div>
+              <span
+                className="text-lg sm:text-xl text-[#FF933E]"
+                style={{ fontFamily: "'Alex Brush', 'Allura', 'Great Vibes', 'Pinyon Script', Georgia, serif" }}
+              >
+                Widescreen Grandeur &amp; Regal Vows
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              {LANDSCAPE_REELS.map((reel) => (
+                <MinimalReelBox key={reel.id} reel={reel} aspectClass="aspect-[16/10]" />
+              ))}
+            </div>
+          </div>
+
+          {/* =========================================================================
+              PORTRAIT REELS (4 Vertical 9:16 Minimal Boxes)
+              Plays on hover, slightly enlarges on hover
+              ========================================================================= */}
+          <div className="flex flex-col gap-6 pt-4">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-[#FFCB56]/30 pb-4">
+              <div className="flex flex-col gap-1">
+                <span className="text-xs uppercase tracking-[0.25em] font-semibold text-[#FF933E]">
+                  Vertical 9:16 Cinema
+                </span>
+                <h3 className="font-headline text-2xl sm:text-3xl font-bold text-[#241912]">
+                  Portrait Stories &amp; Stills
+                </h3>
+              </div>
+              <span
+                className="text-lg sm:text-xl text-[#FF933E]"
+                style={{ fontFamily: "'Alex Brush', 'Allura', 'Great Vibes', 'Pinyon Script', Georgia, serif" }}
+              >
+                Intimate Rituals &amp; Bridal Elegance
+              </span>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+              {PORTRAIT_REELS.map((reel) => (
+                <MinimalReelBox key={reel.id} reel={reel} aspectClass="aspect-[9/16]" />
+              ))}
+            </div>
+          </div>
+
+          {/* =========================================================================
+              INSTAGRAM PHOTO FEED (6 Authentic TRF Visuals)
+              ========================================================================= */}
+          <div className="flex flex-col gap-6 pt-6">
+            <div className="flex items-center justify-between border-b border-[#FFCB56]/30 pb-3">
+              <h4 className="text-xs uppercase tracking-[0.25em] font-bold text-[#594233]">
+                Latest Visual Stills from Feed
+              </h4>
+              <a
+                href={INSTAGRAM_PROFILE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs font-bold text-[#FF933E] hover:text-[#ff8425] flex items-center gap-1 uppercase tracking-wider"
+              >
+                <span>View All on {INSTAGRAM_HANDLE}</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
               {INSTAGRAM_POSTS.map((post) => (
                 <a
                   key={post.id}
                   href={INSTAGRAM_PROFILE_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative rounded-xl overflow-hidden aspect-square shadow-sm hover:shadow-xl transition-all duration-300 bg-stone-900 border border-[#FFCB56]/30"
+                  className="group relative rounded-xl overflow-hidden aspect-square shadow-sm hover:shadow-xl transition-all duration-300 bg-stone-900 border border-[#FFCB56]/30 hover:scale-105"
                 >
                   <Image
                     src={post.image}
                     alt={post.caption}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    sizes="(max-width: 768px) 50vw, 25vw"
+                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    sizes="(max-width: 768px) 50vw, 16vw"
                   />
-                  {/* Hover Overlay with Likes & Comments */}
-                  <div className="absolute inset-0 bg-black/65 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-3 text-white p-4 text-center">
-                    <div className="flex items-center gap-4 text-sm font-semibold">
-                      <span className="flex items-center gap-1 text-[#FFCB56]">
-                        <Heart className="w-4 h-4 fill-[#FFCB56]" />
-                        {post.likes}
-                      </span>
-                      <span className="flex items-center gap-1 text-white">
-                        <MessageCircle className="w-4 h-4" />
-                        {post.comments}
-                      </span>
-                    </div>
-                    <p className="text-[11px] line-clamp-2 text-white/90 font-light">
-                      {post.caption}
-                    </p>
-                    <span className="text-[10px] uppercase tracking-wider text-[#FF933E] font-bold">
-                      View on Instagram →
+                  {/* Hover Overlay with Likes */}
+                  <div className="absolute inset-0 bg-black/65 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2 text-white p-2 text-center pointer-events-none">
+                    <span className="flex items-center gap-1 text-[#FFCB56] text-xs font-semibold">
+                      <Heart className="w-3.5 h-3.5 fill-[#FFCB56]" />
+                      {post.likes}
                     </span>
-                  </div>
-
-                  {/* Post Type Icon */}
-                  <div className="absolute top-2 right-2 p-1 rounded bg-black/60 text-white">
-                    {post.type === 'reel' ? (
-                      <Film className="w-3.5 h-3.5 text-[#FFCB56]" />
-                    ) : (
-                      <Camera className="w-3.5 h-3.5 text-white" />
-                    )}
+                    <span className="text-[9px] uppercase tracking-wider text-[#FFE9A9]">
+                      View Post ↗
+                    </span>
                   </div>
                 </a>
               ))}

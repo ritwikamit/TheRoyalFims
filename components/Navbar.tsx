@@ -33,7 +33,7 @@ export default function Navbar({
   };
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-[#FFFDF9]/95 backdrop-blur-2xl border-b border-[#FFCB56]/30 shadow-[0_4px_25px_rgba(90,60,20,0.06)] transition-all duration-300">
+    <header className="fixed top-0 left-0 w-full z-50 bg-[#140F0B]/95 backdrop-blur-2xl border-b border-[#FFCB56]/25 shadow-[0_4px_30px_rgba(0,0,0,0.5)] transition-all duration-300">
       <div className="h-20 w-full px-4 sm:px-6 lg:px-12 flex items-center justify-between">
         {/* Brand Zone - Golden Emblem Logo */}
         <Link
@@ -42,7 +42,7 @@ export default function Navbar({
           className="flex items-center text-left focus:outline-none group cursor-pointer"
           aria-label="The Royal Films Home"
         >
-          <RoyalLogo size="md" />
+          <RoyalLogo size="md" isDark={true} />
         </Link>
 
         {/* Desktop Nav Zone */}
@@ -56,14 +56,14 @@ export default function Navbar({
                 className={`text-xs uppercase tracking-[0.22em] font-medium transition-all duration-300 cursor-pointer relative py-1 ${
                   isActive
                     ? 'text-[#FF933E] font-bold'
-                    : 'text-[#594233] hover:text-[#241912]'
+                    : 'text-[#FFE9A9]/80 hover:text-[#FFCB56]'
                 }`}
               >
                 {link.label}
                 {isActive && (
                   <motion.div
                     layoutId="navbar-indicator"
-                    className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#FF933E]"
+                    className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#FF933E] shadow-[0_0_8px_#FF933E]"
                     transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                   />
                 )}
@@ -72,11 +72,11 @@ export default function Navbar({
           })}
         </nav>
 
-        {/* CTA Zone - Pure Light Mode, Theme toggle completely removed */}
+        {/* CTA Zone */}
         <div className="hidden md:flex items-center gap-4">
           <button
             onClick={onOpenAvailability}
-            className="flex items-center gap-2 px-5 py-2.5 bg-[#FF933E] hover:bg-[#ff8425] text-white rounded-none border border-[#FFCB56] text-xs uppercase tracking-[0.2em] font-semibold shadow-[0_4px_16px_rgba(255,147,62,0.35)] transition-all duration-300 cursor-pointer active:scale-95 group"
+            className="flex items-center gap-2 px-5 py-2.5 bg-[#FF933E] hover:bg-[#ff8425] text-white rounded-none border border-[#FFCB56] text-xs uppercase tracking-[0.2em] font-semibold shadow-[0_0_20px_rgba(255,147,62,0.4)] transition-all duration-300 cursor-pointer active:scale-95 group"
           >
             <Calendar className="w-3.5 h-3.5 text-[#FFE9A9] group-hover:scale-110 transition-transform" />
             <span>Check Dates</span>
@@ -87,10 +87,10 @@ export default function Navbar({
         <div className="flex md:hidden items-center gap-2">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 text-[#241912] hover:text-[#FF933E] transition-colors cursor-pointer"
+            className="p-2 text-[#FFE9A9] hover:text-[#FF933E] transition-colors cursor-pointer"
             aria-label="Toggle navigation menu"
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6 text-[#FFE9A9]" />}
           </button>
         </div>
       </div>
@@ -102,21 +102,21 @@ export default function Navbar({
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-[#FFFDF9]/98 border-b border-[#FFCB56]/30 px-6 py-6 flex flex-col gap-5 shadow-2xl backdrop-blur-2xl"
+            className="md:hidden bg-[#140F0B]/98 border-b border-[#FFCB56]/30 px-6 py-6 flex flex-col gap-5 shadow-2xl backdrop-blur-2xl"
           >
             {navLinks.map((link) => (
               <button
                 key={link.id}
                 onClick={() => handleNavClick(link.id, link.href)}
-                className={`text-left text-sm uppercase tracking-[0.2em] py-2 border-b border-[#FFE9A9]/60 cursor-pointer flex items-center justify-between ${
+                className={`text-left text-sm uppercase tracking-[0.2em] py-2 border-b border-white/10 cursor-pointer flex items-center justify-between ${
                   currentTab === link.id
                     ? 'text-[#FF933E] font-bold'
-                    : 'text-[#594233]'
+                    : 'text-[#FFE9A9]/80'
                 }`}
               >
                 <span>{link.label}</span>
                 {currentTab === link.id && (
-                  <span className="w-2 h-2 rounded-full bg-[#FF933E]" />
+                  <span className="w-2 h-2 rounded-full bg-[#FF933E] shadow-[0_0_6px_#FF933E]" />
                 )}
               </button>
             ))}
@@ -126,7 +126,7 @@ export default function Navbar({
                 setMobileMenuOpen(false);
                 onOpenAvailability();
               }}
-              className="mt-2 w-full py-3.5 bg-[#FF933E] text-white font-semibold text-xs uppercase tracking-[0.2em] text-center border border-[#FFCB56] shadow-[0_4px_16px_rgba(255,147,62,0.3)] cursor-pointer"
+              className="mt-2 w-full py-3.5 bg-[#FF933E] text-white font-semibold text-xs uppercase tracking-[0.2em] text-center border border-[#FFCB56] shadow-[0_0_20px_rgba(255,147,62,0.4)] cursor-pointer"
             >
               Check Date Availability
             </button>

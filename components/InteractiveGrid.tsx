@@ -170,7 +170,7 @@ export default function InteractiveGrid({
     <div className={`absolute inset-0 pointer-events-none overflow-hidden select-none ${className}`}>
       <canvas
         ref={canvasRef}
-        className="w-full h-full block opacity-95 transition-opacity duration-300"
+        className="w-full h-full block opacity-85 blur-[2.5px] transition-all duration-300"
       />
     </div>
   );
