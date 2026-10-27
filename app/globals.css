@@ -1,0 +1,270 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Great+Vibes&family=Manrope:wght@300;400;500;600;700&family=Parisienne&family=Pinyon+Script&display=swap');
+
+@theme {
+  --color-surface: #131313;
+  --color-surface-dim: #131313;
+  --color-surface-bright: #3a3939;
+  --color-surface-container-lowest: #0e0e0e;
+  --color-surface-container-low: #1c1b1b;
+  --color-surface-container: #201f1f;
+  --color-surface-container-high: #2a2a2a;
+  --color-surface-container-highest: #353534;
+  --color-surface-elevated: #1a1a1a;
+  --color-surface-muted: #262626;
+  --color-surface-variant: #353534;
+  --color-on-surface: #e5e2e1;
+  --color-on-surface-variant: #e8bcb5;
+  --color-inverse-surface: #e5e2e1;
+  --color-inverse-on-surface: #313030;
+  --color-outline: #af8781;
+  --color-outline-variant: #5e3f3a;
+  --color-surface-tint: #ffb4a8;
+  --color-primary: #ffb4a8;
+  --color-on-primary: #690000;
+  --color-primary-container: #d60000;
+  --color-on-primary-container: #ffe5e1;
+  --color-inverse-primary: #c00000;
+  --color-secondary: #e8c17a;
+  --color-on-secondary: #412d00;
+  --color-secondary-container: #5d4205;
+  --color-on-secondary-container: #d6b06b;
+  --color-crimson-glow: #ff3333;
+  --color-crimson-deep: #850000;
+  --color-obsidian-base: #000000;
+  --color-gold-light: #fef9f1;
+  --color-gold-dim: #ce8508;
+  --color-background: #131313;
+  --color-on-background: #e5e2e1;
+
+  --spacing-space-xs: 0.25rem;
+  --spacing-space-sm: 0.5rem;
+  --spacing-space-md: 1rem;
+  --spacing-space-lg: 1.5rem;
+  --spacing-space-xl: 2.5rem;
+  --spacing-margin: 4rem;
+  --spacing-margin-mobile: 1.25rem;
+  --spacing-gutter: 1.5rem;
+  --spacing-gutter-mobile: 1rem;
+
+  --font-headline: "Bodoni Moda", Georgia, serif;
+  --font-body: "Manrope", system-ui, -apple-system, sans-serif;
+  --font-cursive: "Pinyon Script", cursive, Georgia, serif;
+  --font-cursive-romantic: "Great Vibes", cursive, Georgia, serif;
+  --font-cursive-editorial: "Parisienne", cursive, Georgia, serif;
+  --font-cursive-calligraphy: "Alex Brush", cursive, Georgia, serif;
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+  }
+
+  *::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    color-scheme: dark;
+    background-color: #0c0c0c;
+    color: #e5e2e1;
+    font-family: "Manrope", system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* BESPOKE LUXURY LIGHT THEME */
+  html.light {
+    color-scheme: light;
+    background-color: #FAF7F2;
+    color: #1A1918;
+  }
+
+  html.light body {
+    background-color: #FAF7F2;
+    color: #1A1918;
+  }
+
+  body {
+    overflow-x: hidden;
+    background-color: inherit;
+    color: inherit;
+  }
+}
+
+.font-headline {
+  font-family: "Bodoni Moda", Georgia, serif;
+}
+
+.font-manrope {
+  font-family: "Manrope", system-ui, -apple-system, sans-serif;
+}
+
+/* DIFFERENT CURSIVE FONTS FOR DISTINCT SPECIAL CONTENTS */
+.font-cursive {
+  font-family: "Pinyon Script", cursive, Georgia, serif;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.font-cursive-romantic {
+  font-family: "Great Vibes", cursive, Georgia, serif;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+}
+
+.font-cursive-editorial {
+  font-family: "Parisienne", cursive, Georgia, serif;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.font-cursive-calligraphy {
+  font-family: "Alex Brush", cursive, Georgia, serif;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+}
+
+/* Glassmorphism Luxury Utilities */
+.glass-panel {
+  background: rgba(22, 22, 22, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.light .glass-panel,
+html.light .glass-panel {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(160, 140, 115, 0.22);
+  box-shadow: 0 12px 36px -8px rgba(110, 85, 45, 0.09);
+}
+
+.glass-panel-subtle {
+  background: rgba(18, 18, 18, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(232, 193, 122, 0.15);
+}
+
+.light .glass-panel-subtle,
+html.light .glass-panel-subtle {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(179, 136, 66, 0.25);
+  box-shadow: 0 8px 24px -6px rgba(110, 85, 45, 0.06);
+}
+
+.glass-panel-gold {
+  background: rgba(30, 24, 18, 0.65);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(232, 193, 122, 0.28);
+}
+
+.light .glass-panel-gold,
+html.light .glass-panel-gold {
+  background: rgba(254, 250, 242, 0.95);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(179, 136, 66, 0.38);
+  box-shadow: 0 16px 40px -10px rgba(179, 136, 66, 0.15);
+}
+
+/* Carved & Engraved Chiseled Text Shadows */
+.text-carved {
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.16), 0 -1px 2px rgba(0, 0, 0, 0.95), 1px 0 2px rgba(0, 0, 0, 0.8);
+}
+
+.light .text-carved,
+html.light .text-carved {
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.95), 0 -1px 2px rgba(130, 110, 80, 0.35);
+}
+
+.carved-logo {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.95)) drop-shadow(0 -1px 1px rgba(255, 255, 255, 0.22));
+}
+
+.light .carved-logo,
+html.light .carved-logo {
+  filter: drop-shadow(0 2px 4px rgba(130, 110, 80, 0.2));
+}
+
+/* ANIMATED MOVING LINE BORDER ANIMATION */
+@keyframes borderSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-border-spin {
+  animation: borderSpin 7s linear infinite;
+}
+
+.group:hover .animate-border-spin {
+  animation-duration: 3.5s;
+}
+
+/* Ambient Glowing Fire and Embers */
+@keyframes intenseFireGlow {
+  0% {
+    transform: scale(1) translateY(0) rotate(0deg);
+    opacity: 0.45;
+  }
+  30% {
+    transform: scale(1.22) translateY(-18px) rotate(2deg);
+    opacity: 0.85;
+  }
+  65% {
+    transform: scale(0.96) translateY(-8px) rotate(-1.5deg);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(1) translateY(0) rotate(0deg);
+    opacity: 0.45;
+  }
+}
+
+@keyframes emberFloat {
+  0% {
+    transform: translateY(0) translateX(0) scale(0.8);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.85;
+  }
+  80% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-90px) translateX(25px) scale(1.1);
+    opacity: 0;
+  }
+}
+
+.animate-slow-fire {
+  animation: intenseFireGlow 10s ease-in-out infinite;
+}
+
+.animate-ember-1 {
+  animation: emberFloat 7s ease-in-out infinite;
+}
+
+.animate-ember-2 {
+  animation: emberFloat 9s 2s ease-in-out infinite;
+}
+
+.animate-ember-3 {
+  animation: emberFloat 8s 4s ease-in-out infinite;
+}

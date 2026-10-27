@@ -1,0 +1,6 @@
+{
+  "name": "The Royal Films - Gaya & Destination Weddings",
+  "description": "Bespoke cinematic wedding films and editorial photography across Gaya, Bihar, and international horizons including Dubai.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
