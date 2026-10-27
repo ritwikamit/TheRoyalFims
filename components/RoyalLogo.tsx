@@ -9,6 +9,7 @@ interface RoyalLogoProps {
   showSubtitle?: boolean;
   variant?: 'full' | 'stacked' | 'mark';
   isDark?: boolean;
+  theme?: 'light' | 'dark' | 'orange';
 }
 
 export default function RoyalLogo({
@@ -17,6 +18,7 @@ export default function RoyalLogo({
   showSubtitle = true,
   variant = 'full',
   isDark = false,
+  theme = 'light',
 }: RoyalLogoProps) {
   // Dimension tokens tailored for luxury brand scaling
   const dimensions = {
@@ -63,7 +65,7 @@ export default function RoyalLogo({
         alt="The Royal Films Golden Emblem"
         width={dim.emblemWidth}
         height={dim.emblemHeight}
-        className="w-full h-full object-contain drop-shadow-[0_4px_12px_rgba(255,147,62,0.3)]"
+        className="w-full h-full object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.25)]"
         priority
       />
     </div>
@@ -78,6 +80,20 @@ export default function RoyalLogo({
     );
   }
 
+  const titleColor =
+    theme === 'orange'
+      ? 'text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]'
+      : isDark || theme === 'dark'
+      ? 'text-[#FFCB56] drop-shadow-[0_1px_2px_rgba(0,0,0,0.4)]'
+      : 'text-[#FF933E] drop-shadow-[0_1px_2px_rgba(255,147,62,0.2)]';
+
+  const subColor =
+    theme === 'orange'
+      ? 'text-[#FFE9A9]'
+      : isDark || theme === 'dark'
+      ? 'text-[#FFE9A9]/85'
+      : 'text-[#594233]';
+
   // Variant: Stacked (Emblem on top, text centered below - Great for Footer & Modals)
   if (variant === 'stacked') {
     return (
@@ -85,14 +101,14 @@ export default function RoyalLogo({
         {EmblemImage}
         <div className="flex flex-col items-center">
           <span
-            className={`font-cursive-emblem ${dim.titleSize} leading-none ${isDark ? 'text-[#FFCB56]' : 'text-[#FF933E]'} drop-shadow-[0_1px_2px_rgba(255,147,62,0.2)]`}
+            className={`font-cursive-emblem ${dim.titleSize} leading-none ${titleColor}`}
             style={{ fontFamily: "'Alex Brush', 'Allura', 'Great Vibes', 'Apple Chancery', Georgia, serif" }}
           >
             The Royal Films
           </span>
           {showSubtitle && (
             <span
-              className={`font-headline uppercase tracking-[0.3em] font-semibold ${isDark ? 'text-[#FFE9A9]/80' : 'text-[#594233]'} mt-1.5 ${dim.subSize}`}
+              className={`font-headline uppercase tracking-[0.3em] font-semibold ${subColor} mt-1.5 ${dim.subSize}`}
             >
               Cinematography &amp; Photography • Atelier
             </span>
@@ -108,14 +124,14 @@ export default function RoyalLogo({
       {EmblemImage}
       <div className="flex flex-col leading-tight">
         <span
-          className={`font-cursive-emblem ${dim.titleSize} ${isDark ? 'text-[#FFCB56]' : 'text-[#FF933E]'} leading-none drop-shadow-[0_1px_2px_rgba(255,147,62,0.15)]`}
+          className={`font-cursive-emblem ${dim.titleSize} ${titleColor} leading-none`}
           style={{ fontFamily: "'Alex Brush', 'Allura', 'Great Vibes', 'Apple Chancery', Georgia, serif" }}
         >
           The Royal Films
         </span>
         {showSubtitle && (
           <span
-            className={`font-headline uppercase tracking-[0.28em] font-semibold ${isDark ? 'text-[#FFE9A9]/80' : 'text-[#594233]'} mt-1 ${dim.subSize}`}
+            className={`font-headline uppercase tracking-[0.28em] font-semibold ${subColor} mt-1 ${dim.subSize}`}
           >
             Bespoke Cinema • Gaya &amp; Dubai
           </span>

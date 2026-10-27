@@ -3,8 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Phone, Mail, MapPin, Shield, FileText, Cookie, Instagram, Youtube, Award, MessageCircle } from 'lucide-react';
-import RoyalLogo from '@/components/RoyalLogo';
+import { Phone, Mail, MapPin, Shield, FileText, Cookie, Instagram } from 'lucide-react';
 import { INSTAGRAM_PROFILE_URL, INSTAGRAM_HANDLE } from '@/lib/trfImages';
 
 interface FooterProps {
@@ -14,25 +13,25 @@ interface FooterProps {
 
 export default function Footer({ onSelectTab, onOpenLegal }: FooterProps) {
   return (
-    <footer className="relative w-full overflow-hidden text-[#FFFDF9] bg-[#120E0A] border-t border-[#FFCB56]/25">
-      {/* WARM ROYAL GOLD & EMBER GLOW LAYER (DARK THEME) */}
+    <footer className="relative w-full overflow-hidden text-white bg-[#FF933E] border-t border-white/20">
+      {/* WARM ROYAL GOLD & EMBER GLOW LAYER (PALETTE ORANGE THEME) */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Soft Warm Base */}
-        <div className="absolute bottom-0 left-0 right-0 h-96 bg-gradient-to-t from-black via-[#140F0B]/80 to-transparent" />
+        {/* Soft Warm Base Gradient */}
+        <div className="absolute bottom-0 left-0 right-0 h-96 bg-gradient-to-t from-[#E87920] via-[#FF933E]/80 to-transparent" />
 
         {/* Pulsing Glowing Orbs */}
-        <div className="absolute -bottom-24 left-1/4 w-[500px] h-[350px] bg-radial from-[#FF933E]/20 via-[#FFCB56]/10 to-transparent blur-3xl animate-slow-fire" />
-        <div className="absolute -bottom-28 right-1/4 w-[480px] h-[340px] bg-radial from-[#FFCB56]/15 via-[#73A5CA]/10 to-transparent blur-3xl animate-slow-fire [animation-delay:3s]" />
+        <div className="absolute -bottom-24 left-1/4 w-[500px] h-[350px] bg-radial from-[#FFCB56]/30 via-[#FFE9A9]/15 to-transparent blur-3xl animate-slow-fire" />
+        <div className="absolute -bottom-28 right-1/4 w-[480px] h-[340px] bg-radial from-[#FFE9A9]/25 via-white/10 to-transparent blur-3xl animate-slow-fire [animation-delay:3s]" />
 
         {/* Floating Golden Sparks */}
-        <div className="absolute bottom-10 left-[20%] w-2 h-2 rounded-full bg-[#FF933E] shadow-[0_0_12px_#FF933E] animate-ember-1" />
-        <div className="absolute bottom-16 left-[45%] w-2 h-2 rounded-full bg-[#FFCB56] shadow-[0_0_14px_#FFCB56] animate-ember-2" />
-        <div className="absolute bottom-12 right-[30%] w-2 h-2 rounded-full bg-[#73A5CA] shadow-[0_0_10px_#73A5CA] animate-ember-3" />
-        <div className="absolute bottom-8 right-[15%] w-1.5 h-1.5 rounded-full bg-[#FF933E] shadow-[0_0_8px_#FF933E] animate-ember-1 [animation-delay:2.5s]" />
+        <div className="absolute bottom-10 left-[20%] w-2 h-2 rounded-full bg-white shadow-[0_0_12px_white] animate-ember-1" />
+        <div className="absolute bottom-16 left-[45%] w-2 h-2 rounded-full bg-[#FFE9A9] shadow-[0_0_14px_#FFE9A9] animate-ember-2" />
+        <div className="absolute bottom-12 right-[30%] w-2 h-2 rounded-full bg-[#FFCB56] shadow-[0_0_10px_#FFCB56] animate-ember-3" />
+        <div className="absolute bottom-8 right-[15%] w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_8px_white] animate-ember-1 [animation-delay:2.5s]" />
       </div>
 
-      {/* Dark Luxury Glassmorphic Content Container */}
-      <div className="relative z-10 w-full bg-[#140F0B]/95 backdrop-blur-2xl pt-16 pb-12">
+      {/* Luxury Glassmorphic Content Container */}
+      <div className="relative z-10 w-full bg-[#FF933E]/95 backdrop-blur-md pt-16 pb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
           {/* Main Footer Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 sm:gap-12 mb-14 items-start">
@@ -52,20 +51,20 @@ export default function Footer({ onSelectTab, onOpenLegal }: FooterProps) {
                       alt="The Royal Films Golden Emblem"
                       width={120}
                       height={120}
-                      className="w-full h-full object-contain drop-shadow-[0_4px_20px_rgba(255,203,86,0.4)]"
+                      className="w-full h-full object-contain drop-shadow-[0_4px_20px_rgba(0,0,0,0.25)]"
                     />
                   </div>
                   <div className="flex flex-col">
                     <span 
-                      className="text-3xl sm:text-4xl text-[#FFCB56] leading-none drop-shadow-sm"
+                      className="text-3xl sm:text-4xl text-white leading-none drop-shadow-[0_2px_8px_rgba(0,0,0,0.25)]"
                       style={{ fontFamily: "'Alex Brush', 'Allura', 'Great Vibes', 'Apple Chancery', Georgia, serif" }}
                     >
                       The Royal Films
                     </span>
-                    <span className="font-headline uppercase tracking-[0.28em] font-semibold text-[#FFE9A9]/80 text-[10px] sm:text-xs mt-1.5">
+                    <span className="font-headline uppercase tracking-[0.28em] font-semibold text-[#FFE9A9] text-[10px] sm:text-xs mt-1.5 drop-shadow-sm">
                       Bespoke Wedding Cinematography &amp; Photography
                     </span>
-                    <span className="text-[10px] tracking-wider text-[#73A5CA] font-bold mt-1">
+                    <span className="text-[10px] tracking-wider text-white font-bold mt-1">
                       Gaya • Patna • Bodh Gaya • Dubai
                     </span>
                   </div>
@@ -73,18 +72,18 @@ export default function Footer({ onSelectTab, onOpenLegal }: FooterProps) {
               </Link>
 
               {/* Atelier Text */}
-              <p className="text-sm leading-relaxed text-[#D8CBC0] max-w-md font-light">
+              <p className="text-sm leading-relaxed text-white/95 max-w-md font-light">
                 Crafting heirloom cinematic wedding films and editorial photography. Documenting sacred rituals, heartfelt vows, and authentic family affection across Gaya, Patna, Bodh Gaya, and international destination horizons including Dubai.
               </p>
 
               <div className="flex flex-wrap items-center gap-2 pt-1">
-                <span className="px-3 py-1 bg-white/5 border border-[#FFCB56]/40 text-[#FFE9A9] text-[10px] uppercase tracking-[0.2em] font-semibold shadow-sm">
+                <span className="px-3 py-1 bg-white/15 border border-white/30 text-white text-[10px] uppercase tracking-[0.2em] font-semibold shadow-sm rounded-sm">
                   AAFT Trained Cinema
                 </span>
-                <span className="px-3 py-1 bg-white/5 border border-[#FFCB56]/40 text-[#FFE9A9] text-[10px] uppercase tracking-[0.2em] font-semibold shadow-sm">
+                <span className="px-3 py-1 bg-white/15 border border-white/30 text-white text-[10px] uppercase tracking-[0.2em] font-semibold shadow-sm rounded-sm">
                   4K HDR Master Film
                 </span>
-                <span className="px-3 py-1 bg-[#73A5CA]/20 border border-[#73A5CA]/60 text-[#A8D3F5] text-[10px] uppercase tracking-[0.2em] font-bold">
+                <span className="px-3 py-1 bg-white/20 border border-white/40 text-white text-[10px] uppercase tracking-[0.2em] font-bold rounded-sm">
                   Dubai Certified
                 </span>
               </div>
@@ -92,42 +91,42 @@ export default function Footer({ onSelectTab, onOpenLegal }: FooterProps) {
 
             {/* Col 2: Navigation Links */}
             <div className="lg:col-span-2 flex flex-col gap-4">
-              <h4 className="text-xs font-semibold uppercase tracking-[0.24em] text-[#FFCB56]">
+              <h4 className="text-xs font-bold uppercase tracking-[0.24em] text-white drop-shadow-sm">
                 Navigation
               </h4>
-              <nav className="flex flex-col gap-2.5 text-xs uppercase tracking-wider text-[#C4B5A5]">
+              <nav className="flex flex-col gap-2.5 text-xs uppercase tracking-wider text-white/85">
                 <Link
                   href="/"
                   onClick={() => onSelectTab('home')}
-                  className="text-left hover:text-[#FFCB56] transition-colors cursor-pointer"
+                  className="text-left hover:text-[#FFE9A9] transition-colors cursor-pointer"
                 >
                   Home Atelier
                 </Link>
                 <Link
                   href="/portfolio"
                   onClick={() => onSelectTab('portfolio')}
-                  className="text-left hover:text-[#FFCB56] transition-colors cursor-pointer"
+                  className="text-left hover:text-[#FFE9A9] transition-colors cursor-pointer"
                 >
                   Cinema &amp; Stills
                 </Link>
                 <Link
                   href="/services"
                   onClick={() => onSelectTab('services')}
-                  className="text-left hover:text-[#FFCB56] transition-colors cursor-pointer"
+                  className="text-left hover:text-[#FFE9A9] transition-colors cursor-pointer"
                 >
                   Offerings &amp; Pricing
                 </Link>
                 <Link
                   href="/dubai"
                   onClick={() => onSelectTab('dubai-destination')}
-                  className="text-left hover:text-[#FFCB56] transition-colors cursor-pointer"
+                  className="text-left hover:text-[#FFE9A9] transition-colors cursor-pointer"
                 >
                   Dubai Destination
                 </Link>
                 <Link
                   href="/contact"
                   onClick={() => onSelectTab('contact')}
-                  className="text-left hover:text-[#FFCB56] transition-colors cursor-pointer"
+                  className="text-left hover:text-[#FFE9A9] transition-colors cursor-pointer"
                 >
                   Contact &amp; Dates
                 </Link>
@@ -136,10 +135,10 @@ export default function Footer({ onSelectTab, onOpenLegal }: FooterProps) {
 
             {/* Col 3: Services Showcase */}
             <div className="lg:col-span-2 flex flex-col gap-4">
-              <h4 className="text-xs font-semibold uppercase tracking-[0.24em] text-[#FFCB56]">
+              <h4 className="text-xs font-bold uppercase tracking-[0.24em] text-white drop-shadow-sm">
                 Specialties
               </h4>
-              <ul className="flex flex-col gap-2.5 text-xs uppercase tracking-wider text-[#C4B5A5]">
+              <ul className="flex flex-col gap-2.5 text-xs uppercase tracking-wider text-white/85">
                 <li>Royal Wedding Films</li>
                 <li>Editorial Bridal Stills</li>
                 <li>Haldi &amp; Sangeet Stories</li>
@@ -151,12 +150,12 @@ export default function Footer({ onSelectTab, onOpenLegal }: FooterProps) {
 
             {/* Col 4: Atelier Studio Direct Contact */}
             <div className="lg:col-span-3 flex flex-col gap-4">
-              <h4 className="text-xs font-semibold uppercase tracking-[0.24em] text-[#FFCB56]">
+              <h4 className="text-xs font-bold uppercase tracking-[0.24em] text-white drop-shadow-sm">
                 Atelier Headquarters
               </h4>
-              <div className="flex flex-col gap-3 text-xs text-[#D8CBC0]">
+              <div className="flex flex-col gap-3 text-xs text-white/95">
                 <div className="flex items-start gap-2.5">
-                  <MapPin className="w-4 h-4 text-[#FF933E] shrink-0 mt-0.5" />
+                  <MapPin className="w-4 h-4 text-[#FFE9A9] shrink-0 mt-0.5" />
                   <span>
                     Chhotki Nawada, Delha, Gaya, Bihar 823002
                   </span>
@@ -166,9 +165,9 @@ export default function Footer({ onSelectTab, onOpenLegal }: FooterProps) {
                     href="tel:+918210351286"
                     aria-label="Call Atelier Direct"
                     title="Call Atelier Direct"
-                    className="flex items-center gap-1.5 px-3 py-1.5 bg-white/10 hover:bg-[#FF933E] text-[#FFE9A9] hover:text-white border border-[#FFCB56]/60 transition-all text-[11px] font-semibold uppercase tracking-wider rounded-md group"
+                    className="flex items-center gap-1.5 px-3 py-1.5 bg-white/20 hover:bg-white text-white hover:text-[#FF933E] border border-white/35 transition-all text-[11px] font-semibold uppercase tracking-wider rounded-md group shadow-sm"
                   >
-                    <Phone className="w-3.5 h-3.5 text-[#FF933E] group-hover:text-white" />
+                    <Phone className="w-3.5 h-3.5 group-hover:rotate-12 transition-transform" />
                     <span>Call Direct</span>
                   </a>
                   <a
@@ -177,17 +176,19 @@ export default function Footer({ onSelectTab, onOpenLegal }: FooterProps) {
                     rel="noopener noreferrer"
                     aria-label="WhatsApp Concierge"
                     title="WhatsApp Concierge"
-                    className="flex items-center gap-1.5 px-3 py-1.5 bg-[#25D366]/20 hover:bg-[#25D366] text-[#25D366] hover:text-white border border-[#25D366]/60 transition-all text-[11px] font-semibold uppercase tracking-wider rounded-md group"
+                    className="flex items-center gap-1.5 px-3 py-1.5 bg-white/20 hover:bg-white text-white hover:text-[#25D366] border border-white/35 transition-all text-[11px] font-semibold uppercase tracking-wider rounded-md group shadow-sm"
                   >
-                    <MessageCircle className="w-3.5 h-3.5" />
+                    <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                      <path d="M17.472 14.382c-.301-.15-1.782-.879-2.057-.98-.276-.1-.476-.15-.676.15-.2.301-.776.98-.952 1.18-.175.2-.351.226-.652.075-.301-.15-1.271-.469-2.42-1.494-.895-.798-1.5-1.784-1.676-2.085-.175-.301-.019-.464.132-.614.135-.135.301-.351.451-.526.15-.176.2-.301.301-.502.101-.2.05-.376-.025-.526-.075-.15-.676-1.63-.927-2.232-.244-.588-.493-.508-.676-.517l-.577-.01c-.2 0-.526.075-.802.376-.276.3-1.053 1.028-1.053 2.508 0 1.48 1.078 2.91 1.229 3.111.15.201 2.122 3.24 5.14 4.544.718.31 1.278.496 1.716.635.722.23 1.38.197 1.9.12.579-.087 1.782-.728 2.032-1.431.25-.703.25-1.305.175-1.431-.075-.126-.275-.201-.576-.351zM12.04 2C6.54 2 2.08 6.46 2.08 11.96c0 1.93.55 3.73 1.5 5.26L2 22l4.92-1.54c1.47.85 3.17 1.34 4.98 1.34 5.5 0 9.96-4.46 9.96-9.96 0-5.5-4.46-9.96-9.96z" />
+                    </svg>
                     <span>WhatsApp</span>
                   </a>
                 </div>
                 <div className="flex items-center gap-2.5">
-                  <Mail className="w-4 h-4 text-[#FF933E] shrink-0" />
+                  <Mail className="w-4 h-4 text-[#FFE9A9] shrink-0" />
                   <a
                     href="mailto:contact@theroyalfilms.com"
-                    className="hover:text-[#FFCB56] transition-colors tracking-wide"
+                    className="hover:text-[#FFE9A9] transition-colors tracking-wide"
                   >
                     contact@theroyalfilms.com
                   </a>
@@ -197,9 +198,9 @@ export default function Footer({ onSelectTab, onOpenLegal }: FooterProps) {
                     href={INSTAGRAM_PROFILE_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-3 py-1.5 bg-white/10 border border-[#FFCB56] text-[#FFE9A9] hover:bg-[#FFCB56]/20 text-xs font-semibold tracking-wider transition-all"
+                    className="flex items-center gap-2 px-3 py-1.5 bg-white/20 hover:bg-white text-white hover:text-[#E4405F] border border-white/35 text-xs font-semibold tracking-wider transition-all rounded-md shadow-sm"
                   >
-                    <Instagram className="w-4 h-4 text-[#FFCB56]" />
+                    <Instagram className="w-4 h-4" />
                     <span>{INSTAGRAM_HANDLE}</span>
                   </a>
                 </div>
@@ -208,13 +209,13 @@ export default function Footer({ onSelectTab, onOpenLegal }: FooterProps) {
           </div>
 
           {/* Bottom Bar: Copyright & Compliance */}
-          <div className="pt-8 border-t border-[#FFCB56]/20 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#A89888]">
+          <div className="pt-8 border-t border-white/20 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/80">
             <div className="flex items-center gap-3">
               <p>
                 &copy; {new Date().getFullYear()} The Royal Films Atelier. All rights reserved.
               </p>
-              <span className="hidden sm:inline text-[#FFCB56]">•</span>
-              <span className="hidden sm:inline font-cursive text-sm text-[#FFCB56]" style={{ fontFamily: "'Alex Brush', 'Allura', 'Great Vibes', 'Apple Chancery', Georgia, serif" }}>
+              <span className="hidden sm:inline text-[#FFE9A9]">•</span>
+              <span className="hidden sm:inline font-cursive text-base text-[#FFE9A9]" style={{ fontFamily: "'Alex Brush', 'Allura', 'Great Vibes', 'Apple Chancery', Georgia, serif" }}>
                 Filmed with Devotion
               </span>
             </div>
@@ -222,25 +223,25 @@ export default function Footer({ onSelectTab, onOpenLegal }: FooterProps) {
             <div className="flex flex-wrap items-center gap-4 text-[11px] uppercase tracking-wider">
               <button
                 onClick={() => onOpenLegal('privacy')}
-                className="hover:text-[#FFCB56] transition-colors cursor-pointer flex items-center gap-1"
+                className="hover:text-white transition-colors cursor-pointer flex items-center gap-1 text-white/85"
               >
-                <Shield className="w-3 h-3 text-[#FF933E]" />
+                <Shield className="w-3 h-3 text-[#FFE9A9]" />
                 Privacy
               </button>
               <span>•</span>
               <button
                 onClick={() => onOpenLegal('terms')}
-                className="hover:text-[#FFCB56] transition-colors cursor-pointer flex items-center gap-1"
+                className="hover:text-white transition-colors cursor-pointer flex items-center gap-1 text-white/85"
               >
-                <FileText className="w-3 h-3 text-[#FF933E]" />
+                <FileText className="w-3 h-3 text-[#FFE9A9]" />
                 Terms
               </button>
               <span>•</span>
               <button
                 onClick={() => onOpenLegal('cookies')}
-                className="hover:text-[#FFCB56] transition-colors cursor-pointer flex items-center gap-1"
+                className="hover:text-white transition-colors cursor-pointer flex items-center gap-1 text-white/85"
               >
-                <Cookie className="w-3 h-3 text-[#FF933E]" />
+                <Cookie className="w-3 h-3 text-[#FFE9A9]" />
                 Cookies
               </button>
             </div>
@@ -250,3 +251,4 @@ export default function Footer({ onSelectTab, onOpenLegal }: FooterProps) {
     </footer>
   );
 }
+
