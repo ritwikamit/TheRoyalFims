@@ -11,6 +11,7 @@ import LegalModal, { LegalTabType } from '@/components/LegalModal';
 import CookieBanner from '@/components/CookieBanner';
 import MobileBottomNav from '@/components/MobileBottomNav';
 import InteractiveGrid from '@/components/InteractiveGrid';
+import MinimalWhatsAppIcon from '@/components/MinimalWhatsAppIcon';
 
 export default function ContactPage() {
   const [isAvailabilityOpen, setIsAvailabilityOpen] = useState(false);
@@ -171,12 +172,12 @@ export default function ContactPage() {
 
               {/* WhatsApp Quick Action */}
               <a
-                href="https://wa.me/917004375740"
+                href="https://wa.me/918210351286?text=Hello%20The%20Royal%20Films%2C%20I%20would%20like%20to%20inquire%20about%20wedding%20dates."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-3.5 bg-[#FF933E] hover:bg-[#FFCB56] text-white text-xs uppercase tracking-wider font-semibold rounded flex items-center justify-center gap-2 transition-colors shadow-md mt-2"
+                className="w-full py-3.5 bg-[#FF933E] hover:bg-[#ff8425] text-white text-xs uppercase tracking-wider font-semibold rounded-lg flex items-center justify-center gap-2 transition-colors shadow-md mt-2"
               >
-                <MessageSquare className="w-4 h-4" />
+                <MinimalWhatsAppIcon className="w-4 h-4" />
                 <span>Chat on WhatsApp Directly</span>
               </a>
             </div>

@@ -27,6 +27,7 @@ import {
 import { motion } from 'motion/react';
 import { PortfolioItemData } from './PortfolioModal';
 import InteractiveGrid from './InteractiveGrid';
+import MinimalWhatsAppIcon from './MinimalWhatsAppIcon';
 import {
   TRF_LANDSCAPE,
   TRF_PORTRAIT,
@@ -1296,7 +1297,7 @@ export default function HomeScreen({
                 rel="noopener noreferrer"
                 className="px-5 py-2.5 bg-[#25D366] hover:bg-[#20ba59] text-white text-xs uppercase tracking-[0.2em] font-semibold rounded-none border border-[#25D366] shadow-[0_4px_16px_rgba(37,211,102,0.35)] flex items-center gap-2 transition-all hover:scale-105 active:scale-95 cursor-pointer"
               >
-                <MessageCircle className="w-4 h-4" />
+                <MinimalWhatsAppIcon className="w-4 h-4" />
                 <span>WhatsApp Appointment</span>
               </a>
             </div>
@@ -1394,7 +1395,7 @@ export default function HomeScreen({
                     className="py-3 px-3 bg-[#25D366] hover:bg-[#20ba59] text-white text-xs font-semibold uppercase tracking-wider rounded-xl shadow-md flex items-center justify-center gap-1.5 transition-all hover:scale-105 active:scale-95 cursor-pointer"
                     aria-label="WhatsApp Concierge"
                   >
-                    <MessageCircle className="w-3.5 h-3.5" />
+                    <MinimalWhatsAppIcon className="w-3.5 h-3.5" />
                     <span>WhatsApp</span>
                   </a>
                 </div>
@@ -1451,7 +1452,7 @@ export default function HomeScreen({
                     className="flex items-center gap-2 px-3.5 py-2 bg-[#25D366]/15 border border-[#25D366]/50 text-[#25D366] hover:bg-[#25D366] hover:text-white transition-all rounded-lg text-xs font-semibold uppercase tracking-wider shadow-xs cursor-pointer group"
                     aria-label="WhatsApp Concierge"
                   >
-                    <MessageCircle className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" />
+                    <MinimalWhatsAppIcon className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" />
                     <span>WhatsApp</span>
                   </a>
                 </div>

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Menu, X, Calendar } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import RoyalLogo from '@/components/RoyalLogo';
+import MinimalWhatsAppIcon from '@/components/MinimalWhatsAppIcon';
 
 interface NavbarProps {
   currentTab: string;
@@ -105,11 +106,9 @@ export default function Navbar({
               rel="noopener noreferrer"
               aria-label="WhatsApp Concierge"
               title="Chat on WhatsApp"
-              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#25D366] border border-white/35 flex items-center justify-center transition-all duration-300 hover:scale-105 active:scale-95 shadow-sm group"
+              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/15 hover:bg-white text-white hover:text-[#25D366] border border-white/30 flex items-center justify-center transition-all duration-300 hover:scale-105 active:scale-95 shadow-xs group"
             >
-              <svg className="w-4 h-4 fill-current transition-transform group-hover:scale-110" viewBox="0 0 24 24">
-                <path d="M17.472 14.382c-.301-.15-1.782-.879-2.057-.98-.276-.1-.476-.15-.676.15-.2.301-.776.98-.952 1.18-.175.2-.351.226-.652.075-.301-.15-1.271-.469-2.42-1.494-.895-.798-1.5-1.784-1.676-2.085-.175-.301-.019-.464.132-.614.135-.135.301-.351.451-.526.15-.176.2-.301.301-.502.101-.2.05-.376-.025-.526-.075-.15-.676-1.63-.927-2.232-.244-.588-.493-.508-.676-.517l-.577-.01c-.2 0-.526.075-.802.376-.276.3-1.053 1.028-1.053 2.508 0 1.48 1.078 2.91 1.229 3.111.15.201 2.122 3.24 5.14 4.544.718.31 1.278.496 1.716.635.722.23 1.38.197 1.9.12.579-.087 1.782-.728 2.032-1.431.25-.703.25-1.305.175-1.431-.075-.126-.275-.201-.576-.351zM12.04 2C6.54 2 2.08 6.46 2.08 11.96c0 1.93.55 3.73 1.5 5.26L2 22l4.92-1.54c1.47.85 3.17 1.34 4.98 1.34 5.5 0 9.96-4.46 9.96-9.96 0-5.5-4.46-9.96-9.96z" />
-              </svg>
+              <MinimalWhatsAppIcon className="w-4 h-4 transition-transform group-hover:scale-110" />
             </a>
 
             {/* Check Dates CTA */}
@@ -136,11 +135,9 @@ export default function Navbar({
               rel="noopener noreferrer"
               aria-label="WhatsApp Concierge"
               title="WhatsApp Concierge"
-              className="w-8 h-8 rounded-full bg-white/20 text-white border border-white/35 flex items-center justify-center transition-all active:scale-95 shadow-sm"
+              className="w-8 h-8 rounded-full bg-white/15 hover:bg-white text-white hover:text-[#25D366] border border-white/30 flex items-center justify-center transition-all active:scale-95 shadow-xs"
             >
-              <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
-                <path d="M17.472 14.382c-.301-.15-1.782-.879-2.057-.98-.276-.1-.476-.15-.676.15-.2.301-.776.98-.952 1.18-.175.2-.351.226-.652.075-.301-.15-1.271-.469-2.42-1.494-.895-.798-1.5-1.784-1.676-2.085-.175-.301-.019-.464.132-.614.135-.135.301-.351.451-.526.15-.176.2-.301.301-.502.101-.2.05-.376-.025-.526-.075-.15-.676-1.63-.927-2.232-.244-.588-.493-.508-.676-.517l-.577-.01c-.2 0-.526.075-.802.376-.276.3-1.053 1.028-1.053 2.508 0 1.48 1.078 2.91 1.229 3.111.15.201 2.122 3.24 5.14 4.544.718.31 1.278.496 1.716.635.722.23 1.38.197 1.9.12.579-.087 1.782-.728 2.032-1.431.25-.703.25-1.305.175-1.431-.075-.126-.275-.201-.576-.351zM12.04 2C6.54 2 2.08 6.46 2.08 11.96c0 1.93.55 3.73 1.5 5.26L2 22l4.92-1.54c1.47.85 3.17 1.34 4.98 1.34 5.5 0 9.96-4.46 9.96-9.96 0-5.5-4.46-9.96-9.96-9.96z" />
-              </svg>
+              <MinimalWhatsAppIcon className="w-3.5 h-3.5" />
             </a>
 
             <button
@@ -189,9 +186,7 @@ export default function Navbar({
                   rel="noopener noreferrer"
                   className="w-full py-3 bg-white/20 hover:bg-white text-white hover:text-[#25D366] border border-white/35 text-xs uppercase tracking-wider font-semibold rounded-lg flex items-center justify-center gap-2 transition-colors shadow-sm"
                 >
-                  <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                    <path d="M17.472 14.382c-.301-.15-1.782-.879-2.057-.98-.276-.1-.476-.15-.676.15-.2.301-.776.98-.952 1.18-.175.2-.351.226-.652.075-.301-.15-1.271-.469-2.42-1.494-.895-.798-1.5-1.784-1.676-2.085-.175-.301-.019-.464.132-.614.135-.135.301-.351.451-.526.15-.176.2-.301.301-.502.101-.2.05-.376-.025-.526-.075-.15-.676-1.63-.927-2.232-.244-.588-.493-.508-.676-.517l-.577-.01c-.2 0-.526.075-.802.376-.276.3-1.053 1.028-1.053 2.508 0 1.48 1.078 2.91 1.229 3.111.15.201 2.122 3.24 5.14 4.544.718.31 1.278.496 1.716.635.722.23 1.38.197 1.9.12.579-.087 1.782-.728 2.032-1.431.25-.703.25-1.305.175-1.431-.075-.126-.275-.201-.576-.351zM12.04 2C6.54 2 2.08 6.46 2.08 11.96c0 1.93.55 3.73 1.5 5.26L2 22l4.92-1.54c1.47.85 3.17 1.34 4.98 1.34 5.5 0 9.96-4.46 9.96-9.96 0-5.5-4.46-9.96-9.96z" />
-                  </svg>
+                  <MinimalWhatsAppIcon className="w-4 h-4" />
                   <span>Chat on WhatsApp</span>
                 </a>
               </div>

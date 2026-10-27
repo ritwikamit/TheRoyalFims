@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { X, CheckCircle2, Phone, MessageSquare } from 'lucide-react';
+import { X, CheckCircle2, Phone } from 'lucide-react';
+import MinimalWhatsAppIcon from './MinimalWhatsAppIcon';
 
 interface AvailabilityModalProps {
   isOpen: boolean;
@@ -92,22 +93,22 @@ export default function AvailabilityModal({ isOpen, onClose }: AvailabilityModal
 
             <div className="flex flex-col sm:flex-row gap-3 pt-2">
               <a
-                href={`https://wa.me/917004375740?text=Hello%20The%20Royal%20Films%2C%20I%20would%20like%20to%20reserve%20coverage%20for%20my%20wedding%20on%20${encodeURIComponent(
+                href={`https://wa.me/918210351286?text=Hello%20The%20Royal%20Films%2C%20I%20would%20like%20to%20reserve%20coverage%20for%20my%20wedding%20on%20${encodeURIComponent(
                   date || 'upcoming dates'
                 )}%20in%20${encodeURIComponent(city)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 py-3 bg-[#FF933E] hover:bg-[#FFCB56] text-white text-xs font-semibold uppercase tracking-[0.18em] text-center flex items-center justify-center gap-2 shadow-lg transition-colors"
+                className="flex-1 py-3 bg-[#FF933E] hover:bg-[#ff8425] text-white text-xs font-semibold uppercase tracking-[0.18em] text-center flex items-center justify-center gap-2 shadow-lg transition-colors rounded-none"
               >
-                <MessageSquare className="w-4 h-4" />
+                <MinimalWhatsAppIcon className="w-4 h-4" />
                 <span>Confirm on WhatsApp</span>
               </a>
 
               <a
-                href="tel:+917004375740"
-                className="px-4 py-3 bg-white  hover:bg-[#FAF4ED] text-[#FF933E] dark:text-[#FFCB56] text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 border border-[#FFCB56]/30 transition-colors"
+                href="tel:+918210351286"
+                className="px-4 py-3 bg-white hover:bg-[#FAF4ED] text-[#FF933E] text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 border border-[#FFCB56]/50 transition-colors"
               >
-                <Phone className="w-3.5 h-3.5 text-[#FF933E] dark:text-[#FFCB56]" />
+                <Phone className="w-3.5 h-3.5 text-[#FF933E]" />
                 <span>Call Studio</span>
               </a>
             </div>

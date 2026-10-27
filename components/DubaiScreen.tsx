@@ -22,6 +22,7 @@ import {
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import InteractiveGrid from './InteractiveGrid';
+import MinimalWhatsAppIcon from './MinimalWhatsAppIcon';
 
 interface DubaiScreenProps {
   onOpenAvailability: () => void;
@@ -119,12 +120,12 @@ export default function DubaiScreen({ onOpenAvailability, onNavigateTab }: Dubai
               Plan Your Dubai Shoot
             </a>
             <a 
-              href="https://wa.me/917004375740" 
+              href="https://wa.me/918210351286?text=Hello%20The%20Royal%20Films%2C%20I%20would%20like%20to%20inquire%20about%20Dubai%20wedding%20coverage." 
               target="_blank" 
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3.5 bg-black/60 backdrop-blur-xl hover:bg-black/80 text-[#FFE9A9] hover:text-white text-xs uppercase tracking-[0.18em] font-semibold transition-all duration-300 border border-[#FFCB56]/30"
+              className="inline-flex items-center gap-2 px-6 py-3.5 bg-black/60 backdrop-blur-xl hover:bg-black/80 text-[#FFE9A9] hover:text-white text-xs uppercase tracking-[0.18em] font-semibold transition-all duration-300 border border-[#FFCB56]/30 rounded-none shadow-sm"
             >
-              <MessageCircle className="w-4 h-4 text-[#FFCB56]" />
+              <MinimalWhatsAppIcon className="w-4 h-4 text-[#FFCB56]" />
               <span>WhatsApp Direct Chat</span>
             </a>
           </motion.div>
