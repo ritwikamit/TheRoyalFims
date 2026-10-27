@@ -129,11 +129,11 @@ export default function Footer({ onSelectTab, onOpenLegal }: FooterProps) {
                   Dubai Destination
                 </Link>
                 <Link
-                  href="/contact"
-                  onClick={() => onSelectTab('contact')}
+                  href="/gallery"
+                  onClick={() => onSelectTab('gallery')}
                   className="text-left hover:text-[#FFE9A9] transition-colors cursor-pointer"
                 >
-                  Contact &amp; Dates
+                  Photo Gallery
                 </Link>
               </nav>
             </div>

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { Film, Camera, Play, Sparkles, Filter, Lock } from 'lucide-react';
+import { Film, Camera, Play, Filter, Lock } from 'lucide-react';
 import { motion } from 'motion/react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -185,6 +185,10 @@ export default function PortfolioPage() {
   }, []);
 
   const handleTabChange = (tab: string) => {
+    if (tab === 'gallery') {
+      window.location.href = '/gallery';
+      return;
+    }
     if (tab === 'contact') {
       setIsAvailabilityOpen(true);
       return;
@@ -270,8 +274,7 @@ export default function PortfolioPage() {
                   initial={{ opacity: 0, y: 25, filter: 'blur(6px)' }}
                   animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                   transition={{ duration: 0.5, delay: idx * 0.04 }}
-                  onClick={() => setSelectedPortfolioItem(item)}
-                  className="group relative flex flex-col rounded-2xl overflow-hidden shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 cursor-pointer bg-white border border-[#FFCB56]/40"
+                  className="clay-card group relative flex flex-col overflow-hidden bg-white border border-[#FFCB56]/40 select-none"
                 >
                   <div className={`relative overflow-hidden bg-stone-900 ${isLandscape ? 'aspect-video' : 'aspect-[4/5]'}`}>
                     <Image

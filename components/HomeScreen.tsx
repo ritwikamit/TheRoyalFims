@@ -19,7 +19,6 @@ import {
   Volume2,
   VolumeX,
   Award,
-  Sparkles,
   Instagram,
   ExternalLink,
   MessageCircle,
@@ -54,97 +53,113 @@ interface MinimalReelBoxProps {
 }
 
 function MinimalReelBox({ reel, className = '', aspectClass }: MinimalReelBoxProps) {
+  const containerRef = React.useRef<HTMLDivElement>(null);
   const videoRef = React.useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
 
-  const handleMouseEnter = () => {
-    if (videoRef.current) {
+  // Auto-play when stopped there on smartphone / desktop (IntersectionObserver)
+  React.useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            if (videoRef.current) {
+              const playPromise = videoRef.current.play();
+              if (playPromise !== undefined) {
+                playPromise.then(() => setIsPlaying(true)).catch(() => {});
+              }
+            }
+          } else {
+            if (videoRef.current) {
+              videoRef.current.pause();
+              setIsPlaying(false);
+            }
+          }
+        });
+      },
+      { threshold: 0.55 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  const handleTogglePlay = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (!videoRef.current) return;
+    if (videoRef.current.paused) {
       const playPromise = videoRef.current.play();
       if (playPromise !== undefined) {
         playPromise.then(() => setIsPlaying(true)).catch(() => {});
       }
+    } else {
+      videoRef.current.pause();
+      setIsPlaying(false);
     }
   };
 
-  const handleMouseLeave = () => {
-    if (videoRef.current) {
-      videoRef.current.pause();
-      videoRef.current.currentTime = 0;
-      setIsPlaying(false);
-    }
+  const handleToggleMute = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+    if (!videoRef.current) return;
+    const nextMuted = !videoRef.current.muted;
+    videoRef.current.muted = nextMuted;
+    setIsMuted(nextMuted);
   };
 
   const defaultAspect = reel.orientation === 'landscape' ? 'aspect-[16/10] sm:aspect-video' : 'aspect-[9/16]';
 
   return (
-    <a
-      href={reel.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      className={`group relative block rounded-2xl overflow-hidden bg-black border border-[#FFCB56]/35 shadow-md hover:shadow-2xl hover:border-[#FF933E] transition-all duration-500 ease-out hover:scale-[1.03] sm:hover:scale-105 cursor-pointer select-none ${aspectClass || defaultAspect} ${className}`}
+    <div
+      ref={containerRef}
+      onClick={handleTogglePlay}
+      className={`clay-video-box group relative block overflow-hidden bg-black border-2 border-[#FFCB56]/50 transition-all duration-500 ease-out cursor-pointer select-none ${aspectClass || defaultAspect} ${className}`}
     >
-      {/* Video Element (Plays while hovered) */}
+      {/* Video Element (Plays in-place without redirecting) */}
       <video
         ref={videoRef}
         src={reel.video}
         poster={reel.poster}
-        muted
+        muted={isMuted}
         loop
         playsInline
         preload="metadata"
-        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-102"
       />
 
-      {/* Atmospheric Vignette Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-black/30 group-hover:via-transparent transition-all pointer-events-none" />
+      {/* Atmospheric Subtle Vignette (no text clutter covering the video) */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-black/20 pointer-events-none" />
 
-      {/* Top Minimal Header Badge */}
-      <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none z-10">
-        <span className="px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-[10px] uppercase tracking-wider font-semibold text-[#FFE9A9] flex items-center gap-1.5 shadow-sm">
-          {reel.isAward ? (
-            <>
-              <Award className="w-3.5 h-3.5 text-[#FFCB56]" />
-              <span>Founder Award</span>
-            </>
-          ) : (
-            <>
-              <Film className="w-3 h-3 text-[#FF933E]" />
-              <span>{reel.badge || 'Reel'}</span>
-            </>
-          )}
-        </span>
-        <div className="w-7 h-7 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center text-white/90 group-hover:text-[#FFCB56] transition-colors border border-white/15">
-          <Instagram className="w-3.5 h-3.5" />
-        </div>
-      </div>
-
-      {/* Center Subtle Play Watermark (Smoothly fades out on hover-play) */}
+      {/* Center Play/Pause Indicator (Smoothly fades out when playing) */}
       <div
         className={`absolute inset-0 flex items-center justify-center pointer-events-none transition-opacity duration-300 ${
-          isPlaying ? 'opacity-0' : 'opacity-80 group-hover:opacity-100'
+          isPlaying ? 'opacity-0' : 'opacity-85 group-hover:opacity-100'
         }`}
       >
-        <div className="w-12 h-12 rounded-full bg-black/50 backdrop-blur-md border border-[#FFCB56]/60 flex items-center justify-center text-white shadow-[0_0_20px_rgba(255,147,62,0.4)] group-hover:scale-110 transition-transform">
+        <div className="w-12 h-12 rounded-full bg-black/60 backdrop-blur-md border border-[#FFCB56] flex items-center justify-center text-white shadow-[0_0_20px_rgba(255,147,62,0.45)] group-hover:scale-110 transition-transform">
           <Play className="w-5 h-5 ml-0.5 text-[#FFE9A9] fill-[#FFE9A9]" />
         </div>
       </div>
 
-      {/* Bottom Minimal Info Overlay */}
-      <div className="absolute bottom-3 left-3 right-3 flex flex-col gap-1 pointer-events-none z-10 text-white">
-        <h4 className="text-xs sm:text-sm font-semibold tracking-wide text-[#FFFDF9] line-clamp-1 drop-shadow-md">
-          {reel.title}
-        </h4>
-        <p className="text-[10px] sm:text-[11px] text-[#FFE9A9]/80 line-clamp-1 font-light drop-shadow">
-          {reel.subtitle}
-        </p>
-        <div className="pt-0.5 flex items-center gap-1 text-[10px] uppercase tracking-wider text-[#FF933E] font-bold group-hover:text-[#FFCB56] transition-colors">
-          <span>Watch on Instagram</span>
-          <ExternalLink className="w-3 h-3" />
-        </div>
-      </div>
-    </a>
+      {/* Dedicated Mute / Unmute Button on Video */}
+      <button
+        type="button"
+        onClick={handleToggleMute}
+        className="absolute bottom-3 right-3 z-20 w-8 h-8 rounded-full bg-black/70 hover:bg-black backdrop-blur-md border border-[#FFCB56]/70 text-white flex items-center justify-center transition-all duration-200 active:scale-90 shadow-md cursor-pointer"
+        aria-label={isMuted ? 'Unmute video' : 'Mute video'}
+        title={isMuted ? 'Unmute audio' : 'Mute audio'}
+      >
+        {isMuted ? (
+          <VolumeX className="w-4 h-4 text-[#FFE9A9]" />
+        ) : (
+          <Volume2 className="w-4 h-4 text-[#FF933E]" />
+        )}
+      </button>
+    </div>
   );
 }
 
@@ -166,6 +181,38 @@ export default function HomeScreen({
     service: 'both',
     details: '',
   });
+
+  const heroVideoRef = React.useRef<HTMLVideoElement>(null);
+
+  // Guarantee hero background video loops and never halts on smartphone / battery saver
+  React.useEffect(() => {
+    const vid = heroVideoRef.current;
+    if (!vid) return;
+
+    const playLoop = () => {
+      vid.play().catch(() => {});
+    };
+    playLoop();
+
+    vid.addEventListener('ended', playLoop);
+    vid.addEventListener('pause', () => {
+      if (document.visibilityState === 'visible') {
+        playLoop();
+      }
+    });
+
+    const handleVisibility = () => {
+      if (document.visibilityState === 'visible') {
+        playLoop();
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
+
+    return () => {
+      vid.removeEventListener('ended', playLoop);
+      document.removeEventListener('visibilitychange', handleVisibility);
+    };
+  }, []);
 
   // Authentic TRF Portfolio Items combining Landscape & Portrait with wise orientation handling
   const portfolioItems: (PortfolioItemData & { orientation: 'landscape' | 'portrait' })[] = [
@@ -332,6 +379,7 @@ export default function HomeScreen({
         {/* Fullscreen Video Background Playing Seamlessly in Loop Without Chrome */}
         <div className="absolute inset-0 w-full h-full overflow-hidden">
           <video
+            ref={heroVideoRef}
             autoPlay
             loop
             muted
@@ -490,22 +538,22 @@ export default function HomeScreen({
             </p>
 
             {/* Analysis of signature.jpg in narrative form */}
-            <div className="p-5 bg-[#FFF8EE] rounded-2xl border border-[#FFCB56]/40 flex flex-col gap-3">
+            <div className="clay-card p-5 sm:p-6 bg-[#FFF8EE] border border-[#FFCB56]/40 flex flex-col gap-3">
               <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#FF933E]">
-                <span>🌸 The Royal Signature Shringaar</span>
+                <span>The Royal Signature Shringaar</span>
               </div>
               <p className="text-xs sm:text-sm text-[#594233] leading-relaxed font-light">
                 Observed in quiet contemplation: the bride adorned in hand-stitched crimson velvet, adorned with ancestral Polki jewels, traditional red chooda, and holding a solitary scarlet blossom in serene prayer. Every fold of silk, delicate mehendi flourish, and quiet prayer is preserved with reverence.
               </p>
               <div className="flex flex-wrap items-center gap-2 pt-1 text-[11px] text-[#241912] font-semibold">
-                <span className="px-2.5 py-1 bg-white rounded-md border border-[#FFCB56]/60 shadow-xs">
-                  🌺 Crimson Velvet &amp; Zardozi
+                <span className="clay-pill px-3 py-1 bg-white border border-[#FFCB56]/60 shadow-xs">
+                  Crimson Velvet &amp; Zardozi
                 </span>
-                <span className="px-2.5 py-1 bg-white rounded-md border border-[#FFCB56]/60 shadow-xs">
-                  👑 Polki Maang Tikka &amp; Nath
+                <span className="clay-pill px-3 py-1 bg-white border border-[#FFCB56]/60 shadow-xs">
+                  Polki Maang Tikka &amp; Nath
                 </span>
-                <span className="px-2.5 py-1 bg-white rounded-md border border-[#FFCB56]/60 shadow-xs">
-                  ✨ Sacred Chooda &amp; Mehendi
+                <span className="clay-pill px-3 py-1 bg-white border border-[#FFCB56]/60 shadow-xs">
+                  Sacred Chooda &amp; Mehendi
                 </span>
               </div>
             </div>
@@ -715,8 +763,14 @@ export default function HomeScreen({
               <span className="text-xs text-[#FF933E] uppercase tracking-[0.25em] font-bold">
                 Authentic Royal Archive
               </span>
-              <h2 className="font-headline text-3xl sm:text-4xl text-[#241912] font-light">
-                Captured In Gold &amp; Motion
+              <h2 className="font-headline text-3xl sm:text-5xl text-[#241912] font-light leading-tight">
+                Captured In Gold &amp; Motion. <br />
+                <span
+                  className="font-normal text-[#FF933E]"
+                  style={{ fontFamily: "'Alex Brush', 'Allura', 'Great Vibes', 'Pinyon Script', 'Apple Chancery', Georgia, serif" }}
+                >
+                  Preserving Sacred Dynasties.
+                </span>
               </h2>
               <p className="text-xs sm:text-sm text-[#594233] max-w-xl font-light">
                 Real wedding films, bridal portraits, and pre-wedding stories from Gaya, Patna, and Dubai.
@@ -735,9 +789,9 @@ export default function HomeScreen({
                 <button
                   key={filter.id}
                   onClick={() => setActiveFilter(filter.id)}
-                  className={`px-4 py-2 rounded-full text-xs uppercase tracking-[0.18em] font-semibold transition-all cursor-pointer ${
+                  className={`clay-pill px-4 py-2 text-xs uppercase tracking-[0.18em] font-semibold transition-all cursor-pointer ${
                     activeFilter === filter.id
-                      ? 'bg-[#FF933E] text-white shadow-[0_4px_14px_rgba(255,147,62,0.35)]'
+                      ? 'bg-[#FF933E] text-white border border-[#FFCB56] shadow-[0_4px_14px_rgba(255,147,62,0.35)]'
                       : 'bg-white/80 border border-[#FFCB56]/40 text-[#594233] hover:bg-[#FFE9A9]/50'
                   }`}
                 >
@@ -747,7 +801,7 @@ export default function HomeScreen({
             </div>
           </div>
 
-          {/* Gallery Grid - Responsive Wise Placement */}
+          {/* Gallery Grid - Responsive Wise Placement (No popup on photo click) */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {filteredPortfolio.map((item, idx) => {
               const isLandscape = item.orientation === 'landscape';
@@ -758,8 +812,7 @@ export default function HomeScreen({
                   whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: idx * 0.06 }}
-                  onClick={() => onOpenPortfolioItem(item)}
-                  className="group relative flex flex-col rounded-2xl overflow-hidden shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 cursor-pointer bg-white border border-[#FFCB56]/40"
+                  className="clay-card group relative flex flex-col overflow-hidden bg-white border border-[#FFCB56]/40 select-none"
                 >
                   {/* Image Container with Proper Aspect Ratio */}
                   <div className={`relative overflow-hidden bg-stone-900 ${isLandscape ? 'aspect-video' : 'aspect-[4/5]'}`}>
@@ -816,13 +869,13 @@ export default function HomeScreen({
           <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
             <button
               onClick={onOpenAvailability}
-              className="px-8 py-3.5 bg-[#FF933E] text-white hover:bg-[#ff8425] text-xs uppercase tracking-[0.2em] font-semibold transition-all shadow-[0_4px_18px_rgba(255,147,62,0.4)] cursor-pointer"
+              className="clay-button px-8 py-3.5 bg-[#FF933E] text-white hover:bg-[#ff8425] text-xs uppercase tracking-[0.2em] font-bold transition-all shadow-[0_4px_18px_rgba(255,147,62,0.4)] cursor-pointer"
             >
               Check Date Availability
             </button>
             <Link
-              href="/portfolio"
-              className="px-8 py-3.5 bg-white text-[#FF933E] hover:bg-[#FFE9A9]/40 text-xs uppercase tracking-[0.2em] font-semibold transition-all shadow-sm border border-[#FFCB56] cursor-pointer"
+              href="/gallery"
+              className="clay-button px-8 py-3.5 bg-white text-[#FF933E] hover:bg-[#FFE9A9]/40 text-xs uppercase tracking-[0.2em] font-bold transition-all shadow-sm border border-[#FFCB56] cursor-pointer"
             >
               Explore Full Dedicated Gallery
             </Link>
@@ -856,9 +909,7 @@ export default function HomeScreen({
                   <span className="font-headline text-xl sm:text-2xl font-bold text-[#241912]">
                     {INSTAGRAM_HANDLE}
                   </span>
-                  <span className="w-4 h-4 rounded-full bg-[#73A5CA] text-white flex items-center justify-center text-[10px] font-bold">
-                    ✓
-                  </span>
+                  <CheckCircle2 className="w-4 h-4 text-[#73A5CA]" />
                 </div>
                 <span
                   className="text-lg sm:text-xl text-[#FF933E]"
@@ -932,14 +983,14 @@ export default function HomeScreen({
 
                 {/* Accolades Pills */}
                 <div className="flex flex-wrap items-center gap-2.5 pt-1 text-xs">
-                  <span className="px-3 py-1.5 rounded-full bg-white border border-[#FFCB56] text-[#241912] font-semibold text-[11px] shadow-sm">
-                    🏆 National Film Felicitation
+                  <span className="clay-pill px-3.5 py-1.5 bg-white border border-[#FFCB56] text-[#241912] font-semibold text-[11px] shadow-xs">
+                    National Film Felicitation
                   </span>
-                  <span className="px-3 py-1.5 rounded-full bg-white border border-[#FFCB56] text-[#241912] font-semibold text-[11px] shadow-sm">
-                    🎓 AAFT Film Direction Alumnus
+                  <span className="clay-pill px-3.5 py-1.5 bg-white border border-[#FFCB56] text-[#241912] font-semibold text-[11px] shadow-xs">
+                    AAFT Film Direction Alumnus
                   </span>
-                  <span className="px-3 py-1.5 rounded-full bg-white border border-[#FFCB56] text-[#241912] font-semibold text-[11px] shadow-sm">
-                    🇦🇪 Dubai Destination Certified
+                  <span className="clay-pill px-3.5 py-1.5 bg-white border border-[#FFCB56] text-[#241912] font-semibold text-[11px] shadow-xs">
+                    Dubai Destination Certified
                   </span>
                 </div>
 

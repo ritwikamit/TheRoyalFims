@@ -44,7 +44,7 @@ export default function Navbar({
     { id: 'portfolio', label: 'Portfolio', href: '/portfolio' },
     { id: 'services', label: 'Services', href: '/services' },
     { id: 'dubai-destination', label: 'Dubai', href: '/dubai' },
-    { id: 'contact', label: 'Inquiries', href: '/contact' },
+    { id: 'gallery', label: 'Gallery', href: '/gallery' },
   ];
 
   const handleNavClick = (id: string, href: string) => {
@@ -57,8 +57,8 @@ export default function Navbar({
       <header
         className={`pointer-events-auto transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-[width,max-width,margin,border-radius,padding,box-shadow,transform] relative overflow-hidden ${
           isScrolled
-            ? 'w-[92%] sm:w-[88%] max-w-5xl mt-3 sm:mt-4 rounded-full py-2 sm:py-2.5 px-5 sm:px-7 bg-[#73A5CA]/75 backdrop-blur-2xl border-2 border-[#FFCB56] shadow-[0_16px_50px_rgba(115,165,202,0.45),0_0_25px_rgba(255,203,86,0.5),inset_0_1.5px_2px_rgba(255,255,255,0.85),inset_0_-1.5px_2px_rgba(255,147,62,0.35)] ring-1 ring-[#FFE9A9]/70'
-            : 'w-full max-w-full mt-0 rounded-none py-3.5 sm:py-4 px-6 lg:px-12 bg-[#73A5CA]/75 backdrop-blur-2xl border-b-2 border-[#FFCB56] shadow-[0_4px_25px_rgba(115,165,202,0.35),0_6px_22px_rgba(255,203,86,0.4),inset_0_-1.5px_2px_rgba(255,233,169,0.95)]'
+            ? 'w-[94%] sm:w-[88%] max-w-5xl mt-2 sm:mt-4 rounded-full py-2 sm:py-2.5 px-3.5 sm:px-7 bg-[#73A5CA]/80 backdrop-blur-2xl border-2 border-[#FFCB56] shadow-[0_16px_50px_rgba(115,165,202,0.45),0_0_25px_rgba(255,203,86,0.5),inset_0_1.5px_2px_rgba(255,255,255,0.85),inset_0_-1.5px_2px_rgba(255,147,62,0.35)] ring-1 ring-[#FFE9A9]/70'
+            : 'w-full max-w-full mt-0 rounded-none py-3 sm:py-4 px-4 sm:px-6 lg:px-12 bg-[#73A5CA]/80 backdrop-blur-2xl border-b-2 border-[#FFCB56] shadow-[0_4px_25px_rgba(115,165,202,0.35),0_6px_22px_rgba(255,203,86,0.4),inset_0_-1.5px_2px_rgba(255,233,169,0.95)]'
         }`}
       >
         {/* Golden Glossy Specular Sheen Streaks & Gloss Wash */}
@@ -67,7 +67,7 @@ export default function Navbar({
         <div className="absolute bottom-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-[#FFE9A9] to-transparent shadow-[0_0_12px_#FFCB56] pointer-events-none" />
 
         <div className="w-full flex items-center justify-between">
-          {/* Brand Zone - Smooth GPU Scaled Logo (No Layout Snap) */}
+          {/* Brand Zone - Smooth GPU Scaled Logo for Smartphone & Desktop */}
           <Link
             href="/"
             onClick={() => handleNavClick('home', '/')}
@@ -76,7 +76,7 @@ export default function Navbar({
           >
             <div
               className={`transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] origin-left will-change-transform ${
-                isScrolled ? 'scale-[0.88]' : 'scale-100'
+                isScrolled ? 'scale-[0.80] sm:scale-[0.88]' : 'scale-[0.90] sm:scale-100'
               }`}
             >
               <RoyalLogo size="md" theme="blue" />
@@ -110,24 +110,11 @@ export default function Navbar({
             })}
           </nav>
 
-          {/* Action Zone: Minimal WhatsApp Icon & Check Dates (Call icon removed) */}
+          {/* Desktop Action Zone: Check Dates CTA (WhatsApp icon removed from header) */}
           <div className="hidden sm:flex items-center gap-2.5 sm:gap-3">
-            {/* Minimal WhatsApp Icon Button */}
-            <a
-              href="https://wa.me/918210351286?text=Hello%20The%20Royal%20Films%2C%20I%20would%20like%20to%20inquire%20about%20wedding%20dates."
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="WhatsApp Concierge"
-              title="Chat on WhatsApp"
-              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#25D366] border border-white/35 flex items-center justify-center transition-all duration-300 hover:scale-105 active:scale-95 shadow-xs group"
-            >
-              <MinimalWhatsAppIcon className="w-4 h-4 transition-transform group-hover:scale-110" />
-            </a>
-
-            {/* Check Dates CTA */}
             <button
               onClick={onOpenAvailability}
-              className="flex items-center gap-2 bg-[#FF933E] hover:bg-[#ff8425] text-white border border-[#FFCB56] text-xs uppercase tracking-[0.2em] font-bold shadow-[0_4px_16px_rgba(255,147,62,0.4)] transition-all duration-300 cursor-pointer active:scale-95 group rounded-full px-4 sm:px-5 py-2 sm:py-2.5"
+              className="clay-button flex items-center gap-2 bg-[#FF933E] hover:bg-[#ff8425] text-white border border-[#FFCB56] text-xs uppercase tracking-[0.2em] font-bold shadow-[0_4px_16px_rgba(255,147,62,0.4)] transition-all duration-300 cursor-pointer active:scale-95 group rounded-full px-4 sm:px-5 py-2 sm:py-2.5"
             >
               <Calendar className="w-3.5 h-3.5 text-[#FFE9A9] group-hover:scale-110 transition-transform" />
               <span className="hidden md:inline">Check Dates</span>
@@ -135,19 +122,16 @@ export default function Navbar({
             </button>
           </div>
 
-          {/* Mobile Right Action: Minimal WhatsApp Icon & Hamburger Toggle (Call icon removed) */}
-          <div className="flex lg:hidden items-center gap-2.5">
-            {/* Mobile Minimal WhatsApp Icon */}
-            <a
-              href="https://wa.me/918210351286?text=Hello%20The%20Royal%20Films%2C%20I%20would%20like%20to%20inquire%20about%20wedding%20dates."
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="WhatsApp Concierge"
-              title="WhatsApp Concierge"
-              className="w-8 h-8 rounded-full bg-white/20 text-white border border-white/35 flex items-center justify-center transition-all active:scale-95 shadow-xs"
+          {/* Smartphone Action Zone: Compact Dates Button + Minimal Hamburger Toggle */}
+          <div className="flex lg:hidden items-center gap-2">
+            <button
+              onClick={onOpenAvailability}
+              className="clay-button px-2.5 py-1.5 rounded-full bg-[#FF933E] text-white border border-[#FFCB56] text-[10px] uppercase tracking-wider font-bold shadow-xs flex items-center gap-1 active:scale-95 cursor-pointer"
+              aria-label="Check Dates"
             >
-              <MinimalWhatsAppIcon className="w-3.5 h-3.5" />
-            </a>
+              <Calendar className="w-3 h-3 text-[#FFE9A9]" />
+              <span>Dates</span>
+            </button>
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -167,7 +151,7 @@ export default function Navbar({
               animate={{ opacity: 1, height: 'auto', scale: 1 }}
               exit={{ opacity: 0, height: 0, scale: 0.98 }}
               transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-              className={`lg:hidden bg-[#73A5CA]/98 border border-white/25 px-6 py-6 flex flex-col gap-4 shadow-2xl backdrop-blur-2xl text-white ${
+              className={`lg:hidden bg-[#73A5CA]/98 border border-white/25 px-5 py-5 flex flex-col gap-3 shadow-2xl backdrop-blur-2xl text-white ${
                 isScrolled ? 'rounded-3xl mt-2 mx-1' : 'rounded-b-2xl mt-2'
               }`}
             >
@@ -175,7 +159,7 @@ export default function Navbar({
                 <button
                   key={link.id}
                   onClick={() => handleNavClick(link.id, link.href)}
-                  className={`text-left text-sm uppercase tracking-[0.2em] py-2.5 border-b border-white/15 cursor-pointer flex items-center justify-between ${
+                  className={`text-left text-xs uppercase tracking-[0.2em] py-2.5 border-b border-white/15 cursor-pointer flex items-center justify-between ${
                     currentTab === link.id
                       ? 'text-[#FFE9A9] font-bold'
                       : 'text-white/90'
@@ -188,24 +172,12 @@ export default function Navbar({
                 </button>
               ))}
 
-              <div className="flex items-center gap-3 pt-2">
-                <a
-                  href="https://wa.me/918210351286?text=Hello%20The%20Royal%20Films%2C%20I%20would%20like%20to%20inquire%20about%20wedding%20dates."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full py-3 bg-white/20 hover:bg-white text-white hover:text-[#25D366] border border-white/35 text-xs uppercase tracking-wider font-semibold rounded-lg flex items-center justify-center gap-2 transition-colors shadow-sm"
-                >
-                  <MinimalWhatsAppIcon className="w-4 h-4" />
-                  <span>Chat on WhatsApp</span>
-                </a>
-              </div>
-
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
                   onOpenAvailability();
                 }}
-                className="mt-1 w-full py-3.5 bg-[#FF933E] hover:bg-[#ff8425] text-white font-bold text-xs uppercase tracking-[0.2em] text-center shadow-lg cursor-pointer rounded-lg transition-colors border border-[#FFCB56]"
+                className="clay-button mt-2 w-full py-3 bg-[#FF933E] hover:bg-[#ff8425] text-white font-bold text-xs uppercase tracking-[0.2em] text-center shadow-lg cursor-pointer rounded-xl transition-colors border border-[#FFCB56]"
               >
                 Check Date Availability
               </button>

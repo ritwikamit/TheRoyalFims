@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { X, CheckCircle2, Calendar, MapPin, User, Phone, Sparkles, Check, ArrowRight } from 'lucide-react';
+import { X, CheckCircle2, Calendar, MapPin, User, Phone, Camera, Check, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import MinimalWhatsAppIcon from './MinimalWhatsAppIcon';
 
@@ -59,7 +59,7 @@ export default function AvailabilityModal({ isOpen, onClose }: AvailabilityModal
 
   // Build WhatsApp concierge inquiry URL
   const generateWhatsAppUrl = () => {
-    const message = `Hello The Royal Films! ✨%0A%0AI would like to inquire about wedding / event date availability:%0A%0A• *Client / Couple:* ${encodeURIComponent(name || 'Client')}%0A• *Date:* ${encodeURIComponent(date || 'Upcoming')}%0A• *Destination / Venue:* ${encodeURIComponent(city || 'Gaya / Destination')}%0A• *Coverage:* ${encodeURIComponent(serviceLabels[service] || 'Photo & Film')}${phone ? `%0A• *Phone:* ${encodeURIComponent(phone)}` : ''}${notes ? `%0A• *Notes:* ${encodeURIComponent(notes)}` : ''}%0A%0APlease let me know the availability and package details. Thank you!`;
+    const message = `Hello The Royal Films!%0A%0AI would like to inquire about wedding / event date availability:%0A%0A• *Client / Couple:* ${encodeURIComponent(name || 'Client')}%0A• *Date:* ${encodeURIComponent(date || 'Upcoming')}%0A• *Destination / Venue:* ${encodeURIComponent(city || 'Gaya / Destination')}%0A• *Coverage:* ${encodeURIComponent(serviceLabels[service] || 'Photo & Film')}${phone ? `%0A• *Phone:* ${encodeURIComponent(phone)}` : ''}${notes ? `%0A• *Notes:* ${encodeURIComponent(notes)}` : ''}%0A%0APlease let me know the availability and package details. Thank you!`;
     return `https://wa.me/918210351286?text=${message}`;
   };
 
@@ -267,7 +267,7 @@ export default function AvailabilityModal({ isOpen, onClose }: AvailabilityModal
               {/* Coverage Requirement Pills */}
               <div className="flex flex-col gap-1.5">
                 <label className="text-xs uppercase tracking-wider text-[#FF933E] font-bold flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-[#FFCB56]" />
+                  <Camera className="w-3.5 h-3.5 text-[#FFCB56]" />
                   <span>Coverage Requirement</span>
                 </label>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">

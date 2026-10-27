@@ -34,6 +34,10 @@ export default function Page() {
 
   // Handle tab switching and auto-scroll to top
   const handleTabChange = (tab: string) => {
+    if (tab === 'gallery') {
+      window.location.href = '/gallery';
+      return;
+    }
     if (tab === 'contact') {
       setIsAvailabilityOpen(true);
       return;
@@ -73,7 +77,7 @@ export default function Page() {
       <main className="w-full flex-1 pb-24 md:pb-0">
         {currentTab === 'home' && (
           <HomeScreen 
-            onOpenPortfolioItem={(item) => setSelectedPortfolioItem(item)}
+            onOpenPortfolioItem={() => {}}
             onOpenAvailability={() => setIsAvailabilityOpen(true)}
             onSelectTab={handleTabChange}
           />
@@ -81,7 +85,7 @@ export default function Page() {
 
         {currentTab === 'portfolio' && (
           <HomeScreen 
-            onOpenPortfolioItem={(item) => setSelectedPortfolioItem(item)}
+            onOpenPortfolioItem={() => {}}
             onOpenAvailability={() => setIsAvailabilityOpen(true)}
             onSelectTab={handleTabChange}
           />

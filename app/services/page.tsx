@@ -25,6 +25,10 @@ export default function ServicesPage() {
   }, []);
 
   const handleTabChange = (tab: string) => {
+    if (tab === 'gallery') {
+      window.location.href = '/gallery';
+      return;
+    }
     if (tab === 'contact') {
       setIsAvailabilityOpen(true);
       return;

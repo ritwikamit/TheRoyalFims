@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { 
   Camera, 
   Film, 
-  Sparkles, 
   Clock, 
   CheckCircle2, 
   Phone, 
@@ -259,9 +258,9 @@ export default function ServicesScreen({ onOpenAvailability, onNavigateTab }: Se
                     Quiet smiles, fleeting glances, emotional embraces, and unprompted family joy documented without intrusive posing.
                   </p>
                 </div>
-                <div className="pt-3 border-t border-[#FFCB56]/30 flex items-center justify-between text-xs text-[#FF933E] dark:text-[#FFCB56] uppercase tracking-wider font-semibold">
+                <div className="pt-3 border-t border-[#FFCB56]/30 flex items-center justify-between text-xs text-[#FF933E] uppercase tracking-wider font-semibold">
                   <span>Unscripted Emotion</span>
-                  <Sparkles className="w-4 h-4" />
+                  <Camera className="w-4 h-4" />
                 </div>
               </div>
             </motion.div>
@@ -415,7 +414,7 @@ export default function ServicesScreen({ onOpenAvailability, onNavigateTab }: Se
                   desc: 'Grand cinematic establishing shots and aerial procession angles where regulations permit.',
                 },
                 {
-                  icon: Sparkles,
+                  icon: SlidersHorizontal,
                   title: 'Editorial Color Grading',
                   desc: 'Skin tones calibrated to look naturally luminous and timeless across all displays.',
                 },

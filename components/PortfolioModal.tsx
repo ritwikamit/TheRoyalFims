@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react';
 import Image from 'next/image';
-import { X, Play, Camera, Film, MapPin, Sparkles } from 'lucide-react';
+import { X, Play, Camera, Film, MapPin } from 'lucide-react';
 
 export interface PortfolioItemData {
   id: string;
@@ -119,9 +119,9 @@ export default function PortfolioModal({ item, onClose, onInquireStyle }: Portfo
               </p>
             </div>
 
-            <div className="bg-white  p-5 rounded-xl border border-[#FFCB56]/30 flex flex-col gap-3 shadow-md">
+            <div className="bg-white p-5 rounded-xl border border-[#FFCB56]/30 flex flex-col gap-3 shadow-md">
               <h4 className="text-xs uppercase tracking-[0.2em] text-[#241912] font-semibold flex items-center gap-2">
-                <Sparkles className="w-3.5 h-3.5 text-[#FF933E] dark:text-[#FFCB56]" />
+                <Camera className="w-3.5 h-3.5 text-[#FF933E]" />
                 Technical Specs
               </h4>
               <div className="flex flex-col gap-2 text-xs text-[#594233]">

@@ -218,7 +218,7 @@ export const INSTAGRAM_POSTS: InstagramFeedItem[] = [
   {
     id: 'ig-1',
     image: '/TRFImages/Portrait/imgi_28_655435081_18146026807467047_9067940825357840759_n.jpg',
-    caption: 'Pure royal aura. When traditions speak to the heart in Gaya. ✨💍 #TheRoyalFilms #BihariBride',
+    caption: 'Pure royal aura. When traditions speak to the heart in Gaya. #TheRoyalFilms #BihariBride',
     likes: '1,420',
     comments: '88',
     type: 'post',
@@ -227,7 +227,7 @@ export const INSTAGRAM_POSTS: InstagramFeedItem[] = [
   {
     id: 'ig-2',
     image: '/TRFImages/Landscape/imgi_21_640426438_18570792793001135_5456093389828733330_n.jpg',
-    caption: 'The Sacred Pheras. 4K HDR master film teaser now streaming. 🎥🔥 #WeddingCinema #RoyalWeddings',
+    caption: 'The Sacred Pheras. 4K HDR master film teaser now streaming. #WeddingCinema #RoyalWeddings',
     likes: '2,890',
     comments: '142',
     type: 'reel',
@@ -236,7 +236,7 @@ export const INSTAGRAM_POSTS: InstagramFeedItem[] = [
   {
     id: 'ig-3',
     image: '/TRFImages/Portrait/imgi_21_655473194_18223040449311700_6507073203845010531_n.jpg',
-    caption: 'Yellow bliss! Haldi celebrations filled with unfiltered family joy in Chhotki Nawada. 🌼💛 #HaldiVibes',
+    caption: 'Yellow bliss! Haldi celebrations filled with unfiltered family joy in Chhotki Nawada. #HaldiVibes',
     likes: '1,830',
     comments: '76',
     type: 'post',
@@ -245,7 +245,7 @@ export const INSTAGRAM_POSTS: InstagramFeedItem[] = [
   {
     id: 'ig-4',
     image: '/TRFImages/Landscape/imgi_24_626668006_18323915833220040_8719699378467942941_n.jpg',
-    caption: 'The grand Varmala entry of Abhishek & Priya. Cinematic fireworks and sheer perfection! 🎇👑 #RoyalEntry',
+    caption: 'The grand Varmala entry of Abhishek & Priya. Cinematic fireworks and sheer perfection. #RoyalEntry',
     likes: '3,210',
     comments: '195',
     type: 'reel',
@@ -254,7 +254,7 @@ export const INSTAGRAM_POSTS: InstagramFeedItem[] = [
   {
     id: 'ig-5',
     image: '/TRFImages/Portrait/imgi_18_652309555_18103077068497863_7634200969736434127_n.jpg',
-    caption: 'Quiet glances before eternity begins. Booking 2026-2027 wedding seasons now. 💫 #CoupleGoals',
+    caption: 'Quiet glances before eternity begins. Booking 2026-2027 wedding seasons now. #CoupleGoals',
     likes: '2,150',
     comments: '110',
     type: 'post',
@@ -263,7 +263,7 @@ export const INSTAGRAM_POSTS: InstagramFeedItem[] = [
   {
     id: 'ig-6',
     image: '/TRFImages/Landscape/imgi_25_636516568_18330827845174499_281208456552251551_n.jpg',
-    caption: 'Dubai Destination Diaries. Filming love stories across desert horizons and luxury yachts. 🇦🇪🎥 #DubaiWedding',
+    caption: 'Dubai Destination Diaries. Filming love stories across desert horizons and luxury yachts. #DubaiWedding',
     likes: '2,940',
     comments: '164',
     type: 'reel',

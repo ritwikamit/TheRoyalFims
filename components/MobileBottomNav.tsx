@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Home, Film, Sparkles, Compass, Calendar } from 'lucide-react';
+import { Home, Film, Layers, Compass, Calendar } from 'lucide-react';
 
 interface MobileBottomNavProps {
   currentTab: string;
@@ -17,7 +17,7 @@ export default function MobileBottomNav({
   const navItems = [
     { id: 'home', label: 'Home', icon: Home },
     { id: 'portfolio', label: 'Work', icon: Film },
-    { id: 'services', label: 'Services', icon: Sparkles },
+    { id: 'services', label: 'Services', icon: Layers },
     { id: 'dubai-destination', label: 'Dubai', icon: Compass },
   ];
 
