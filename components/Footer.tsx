@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Phone, Mail, MapPin, Shield, FileText, Cookie, Instagram, Youtube, Award } from 'lucide-react';
+import { Phone, Mail, MapPin, Shield, FileText, Cookie, Instagram, Youtube, Award, MessageCircle } from 'lucide-react';
 import RoyalLogo from '@/components/RoyalLogo';
 import { INSTAGRAM_PROFILE_URL, INSTAGRAM_HANDLE } from '@/lib/trfImages';
 
@@ -161,13 +161,26 @@ export default function Footer({ onSelectTab, onOpenLegal }: FooterProps) {
                     Chhotki Nawada, Delha, Gaya, Bihar 823002
                   </span>
                 </div>
-                <div className="flex items-center gap-2.5">
-                  <Phone className="w-4 h-4 text-[#FF933E] shrink-0" />
+                <div className="flex flex-wrap items-center gap-2 pt-1">
                   <a
                     href="tel:+918210351286"
-                    className="hover:text-[#FFCB56] transition-colors font-medium tracking-wide"
+                    aria-label="Call Atelier Direct"
+                    title="Call Atelier Direct"
+                    className="flex items-center gap-1.5 px-3 py-1.5 bg-white/10 hover:bg-[#FF933E] text-[#FFE9A9] hover:text-white border border-[#FFCB56]/60 transition-all text-[11px] font-semibold uppercase tracking-wider rounded-md group"
                   >
-                    +91 82103 51286
+                    <Phone className="w-3.5 h-3.5 text-[#FF933E] group-hover:text-white" />
+                    <span>Call Direct</span>
+                  </a>
+                  <a
+                    href="https://wa.me/918210351286?text=Hello%20The%20Royal%20Films%2C%20I%20would%20like%20to%20inquire%20about%20wedding%20dates."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="WhatsApp Concierge"
+                    title="WhatsApp Concierge"
+                    className="flex items-center gap-1.5 px-3 py-1.5 bg-[#25D366]/20 hover:bg-[#25D366] text-[#25D366] hover:text-white border border-[#25D366]/60 transition-all text-[11px] font-semibold uppercase tracking-wider rounded-md group"
+                  >
+                    <MessageCircle className="w-3.5 h-3.5" />
+                    <span>WhatsApp</span>
                   </a>
                 </div>
                 <div className="flex items-center gap-2.5">

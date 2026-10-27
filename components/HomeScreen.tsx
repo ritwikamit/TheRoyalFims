@@ -452,11 +452,14 @@ export default function HomeScreen({
 
       {/* =========================================================================
           STORY & ATELIER PHILOSOPHY SECTION (WISE COMBINATION OF PORTRAIT & LANDSCAPE)
+      {/* =========================================================================
+          REDESIGNED: ATELIER HERITAGE & SIGNATURE MASTERPIECE SECTION
+          Featuring signature.jpg, ambient backlights, and strict photo/video distinction
           ========================================================================= */}
       <section className="relative w-full py-20 sm:py-28 bg-[#FFFDF9] px-5 sm:px-8 lg:px-14 border-t border-[#FFCB56]/30 overflow-hidden">
         <InteractiveGrid />
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          {/* Left Text Narrative */}
+          {/* Left Text Narrative (Content carefully crafted from signature.jpg visual analysis) */}
           <motion.div
             initial={{ opacity: 0, x: -30, filter: 'blur(8px)' }}
             whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
@@ -477,13 +480,34 @@ export default function HomeScreen({
                 className="font-normal text-[#FF933E]"
                 style={{ fontFamily: "'Alex Brush', 'Allura', 'Great Vibes', 'Pinyon Script', 'Apple Chancery', Georgia, serif" }}
               >
-                We Preserve Family Dynasties.
+                We Preserve Sacred Dynasties.
               </span>
             </h2>
 
             <p className="text-sm sm:text-base text-[#594233] leading-relaxed font-light">
-              Born in Gaya and trusted across the royal wedding circuits of Bihar and Dubai, The Royal Films operates on a singular principle: your wedding is a once-in-a-lifetime historic celebration that deserves high cinema, patient observation, and fine-art editorial framing.
+              Grounded in the sacred heritage of Gaya and trusted across the palatial wedding circuits of Bihar and Dubai, The Royal Films approaches wedding cinema not as an ordinary event, but as an heirloom royal chronicle.
             </p>
+
+            {/* Analysis of signature.jpg in narrative form */}
+            <div className="p-5 bg-[#FFF8EE] rounded-2xl border border-[#FFCB56]/40 flex flex-col gap-3">
+              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#FF933E]">
+                <span>🌸 The Royal Signature Shringaar</span>
+              </div>
+              <p className="text-xs sm:text-sm text-[#594233] leading-relaxed font-light">
+                Observed in quiet contemplation: the bride adorned in hand-stitched crimson velvet, adorned with ancestral Polki jewels, traditional red chooda, and holding a solitary scarlet blossom in serene prayer. Every fold of silk, delicate mehendi flourish, and quiet prayer is preserved with reverence.
+              </p>
+              <div className="flex flex-wrap items-center gap-2 pt-1 text-[11px] text-[#241912] font-semibold">
+                <span className="px-2.5 py-1 bg-white rounded-md border border-[#FFCB56]/60 shadow-xs">
+                  🌺 Crimson Velvet &amp; Zardozi
+                </span>
+                <span className="px-2.5 py-1 bg-white rounded-md border border-[#FFCB56]/60 shadow-xs">
+                  👑 Polki Maang Tikka &amp; Nath
+                </span>
+                <span className="px-2.5 py-1 bg-white rounded-md border border-[#FFCB56]/60 shadow-xs">
+                  ✨ Sacred Chooda &amp; Mehendi
+                </span>
+              </div>
+            </div>
 
             {/* Cursive Highlight Quote */}
             <blockquote className="p-5 bg-[#FFE9A9]/35 border-l-4 border-[#FF933E] rounded-r-xl">
@@ -491,7 +515,7 @@ export default function HomeScreen({
                 className="text-xl sm:text-2xl text-[#241912] leading-snug"
                 style={{ fontFamily: "'Alex Brush', 'Allura', 'Great Vibes', 'Pinyon Script', 'Apple Chancery', Georgia, serif" }}
               >
-                &ldquo;Behind every grand ritual is a quiet glance between a father and daughter, or a stolen smile across a crowded mandap. That is where eternity lives.&rdquo;
+                &ldquo;Behind every grand ritual is a quiet prayer, an auspicious blossom, and a stolen smile across the sacred fire. That is where eternity lives.&rdquo;
               </p>
             </blockquote>
 
@@ -511,77 +535,158 @@ export default function HomeScreen({
             </div>
           </motion.div>
 
-          {/* Right Visual Collage: Wise Pairing of Authentic Portrait & Landscape */}
-          <div className="lg:col-span-6 grid grid-cols-2 gap-4 sm:gap-6 items-center">
-            {/* Portrait Card (Tall Bridal Portrait) */}
+          {/* Right Visual Exhibition: signature.jpg + Ambient Backlights + Photo/Video Pairing */}
+          <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-12 gap-5 sm:gap-6 items-center">
+            {/* Signature Portrait Masterpiece Card with Ambient Halo Light */}
             <motion.div
               initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
               whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              onClick={() => onOpenPortfolioItem(portfolioItems[1])}
-              className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl border-2 border-[#FFCB56]/50 group cursor-pointer"
+              className="sm:col-span-7 relative group select-none"
             >
-              <Image
-                src={TRF_PORTRAIT[0].src}
-                alt="Heirloom Royal Bride"
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-700"
-                sizes="(max-width: 768px) 50vw, 25vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-              <div className="absolute bottom-3 left-3 right-3 text-white">
-                <span className="text-[10px] uppercase tracking-widest text-[#FFCB56] font-semibold">Editorial Portrait</span>
-                <h4 className="font-headline text-sm sm:text-base font-semibold leading-tight mt-0.5">The Regal Bride</h4>
+              {/* AMBIENT LIGHT HALO BEHIND PHOTO (Rich Honey Gold & Crimson Glow) */}
+              <div className="absolute -inset-4 sm:-inset-6 bg-gradient-to-tr from-[#FF933E]/40 via-[#FFCB56]/30 to-[#C41E3A]/25 rounded-3xl blur-2xl sm:blur-3xl opacity-80 group-hover:opacity-100 transition-opacity pointer-events-none -z-10" />
+
+              {/* Photo Box: Face completely visible, no cutting of bride's face or crown */}
+              <div className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl border-2 border-[#FFCB56] bg-[#120E0A]">
+                <Image
+                  src="/assets/signature.jpg"
+                  alt="The Royal Films Signature Royal Bride - Crimson Velvet & Scarlet Blossom"
+                  fill
+                  priority
+                  className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
+                  sizes="(max-width: 768px) 100vw, 35vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/25 pointer-events-none" />
+
+                {/* Top Badge */}
+                <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10">
+                  <span className="px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-[#FFCB56]/60 text-[10px] uppercase tracking-wider font-bold text-[#FFE9A9] shadow-sm flex items-center gap-1.5">
+                    <Award className="w-3.5 h-3.5 text-[#FFCB56]" />
+                    <span>Signature Masterpiece</span>
+                  </span>
+                </div>
+
+                {/* Bottom Photo Caption matching actual visual */}
+                <div className="absolute bottom-4 left-4 right-4 text-white z-10">
+                  <span className="text-[10px] uppercase tracking-widest text-[#FFCB56] font-semibold">
+                    Editorial Bridal Portrait
+                  </span>
+                  <h4 className="font-headline text-base sm:text-lg font-bold leading-tight mt-0.5 text-[#FFFDF9]">
+                    The Serenity of Royal Shringaar
+                  </h4>
+                  <p className="text-[11px] text-[#FFE9A9]/80 line-clamp-2 mt-1 font-light">
+                    Crimson velvet, Polki maang tikka, traditional chooda, and solitary scarlet blossom.
+                  </p>
+                </div>
               </div>
             </motion.div>
 
-            {/* Stacked Side Cards */}
-            <div className="flex flex-col gap-4 sm:gap-6">
-              {/* Landscape Card (Wide Sacred Pheras Ceremony) */}
+            {/* Stacked Side Elements: Real Photo & Real Video Card (Both with Ambient Light) */}
+            <div className="sm:col-span-5 flex flex-col gap-5 sm:gap-6">
+              {/* Photo Card: Sacred Pheras Still (Faces not cut) */}
               <motion.div
                 initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
                 whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.15 }}
-                onClick={() => onOpenPortfolioItem(portfolioItems[0])}
-                className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl border-2 border-[#FFCB56]/40 group cursor-pointer"
+                className="relative group select-none"
               >
-                <Image
-                  src={TRF_LANDSCAPE[0].src}
-                  alt="Sacred Pheras Mandap"
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-700"
-                  sizes="(max-width: 768px) 50vw, 25vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
-                <div className="absolute bottom-3 left-3 text-white">
-                  <span className="text-[9px] uppercase tracking-widest text-[#FF933E] font-semibold">4K Cinema</span>
-                  <h4 className="font-headline text-xs sm:text-sm font-semibold leading-tight">Sacred Mandap</h4>
+                {/* Ambient Backlight Glow */}
+                <div className="absolute -inset-3 bg-gradient-to-br from-[#FFCB56]/30 via-[#FF933E]/20 to-transparent rounded-2xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity pointer-events-none -z-10" />
+
+                <div className="relative aspect-[16/11] rounded-2xl overflow-hidden shadow-xl border-2 border-[#FFCB56]/50 bg-black group-hover:scale-105 transition-transform duration-500">
+                  <Image
+                    src={TRF_LANDSCAPE[0].src}
+                    alt="Sacred Pheras & Royal Mandap Ceremony Still"
+                    fill
+                    className="object-cover object-top"
+                    sizes="(max-width: 768px) 100vw, 25vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
+                  <div className="absolute top-2.5 left-2.5">
+                    <span className="px-2 py-0.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-[9px] uppercase tracking-wider font-semibold text-[#FFE9A9] flex items-center gap-1">
+                      <Camera className="w-2.5 h-2.5 text-[#FFCB56]" />
+                      <span>Fine Art Still</span>
+                    </span>
+                  </div>
+                  <div className="absolute bottom-2.5 left-2.5 right-2.5 text-white">
+                    <span className="text-[9px] uppercase tracking-widest text-[#FFCB56] font-semibold">
+                      Authentic Photo
+                    </span>
+                    <h5 className="font-headline text-xs sm:text-sm font-semibold leading-tight text-[#FFFDF9]">
+                      Sacred Pheras &amp; Mandap
+                    </h5>
+                  </div>
                 </div>
               </motion.div>
 
-              {/* Portrait Card (Haldi Ceremony Joy) */}
+              {/* Video Card: Real Cinema Video Reel (Plays on hover) */}
               <motion.div
                 initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
                 whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                onClick={() => onOpenPortfolioItem(portfolioItems[3])}
-                className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl border-2 border-[#FFCB56]/40 group cursor-pointer"
+                className="relative group select-none"
               >
-                <Image
-                  src={TRF_PORTRAIT[3].src}
-                  alt="Haldi Celebrations"
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-700"
-                  sizes="(max-width: 768px) 50vw, 25vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
-                <div className="absolute bottom-3 left-3 text-white">
-                  <span className="text-[9px] uppercase tracking-widest text-[#FFCB56] font-semibold">Haldi Glow</span>
-                  <h4 className="font-headline text-xs sm:text-sm font-semibold leading-tight">Joy of Marigolds</h4>
-                </div>
+                {/* Ambient Backlight Glow */}
+                <div className="absolute -inset-3 bg-gradient-to-br from-[#73A5CA]/30 via-[#FF933E]/25 to-transparent rounded-2xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity pointer-events-none -z-10" />
+
+                <a
+                  href="https://www.instagram.com/reel/DYUk0fbpr85/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onMouseEnter={(e) => {
+                    const video = e.currentTarget.querySelector('video');
+                    if (video) video.play().catch(() => {});
+                  }}
+                  onMouseLeave={(e) => {
+                    const video = e.currentTarget.querySelector('video');
+                    if (video) {
+                      video.pause();
+                      video.currentTime = 0;
+                    }
+                  }}
+                  className="relative aspect-[16/11] rounded-2xl overflow-hidden shadow-xl border-2 border-[#FFCB56]/50 bg-black block group-hover:scale-105 transition-transform duration-500 cursor-pointer"
+                >
+                  <video
+                    src="/assets/reels/DYUk0fbpr85.mp4"
+                    poster="/assets/reels/DYUk0fbpr85.jpg"
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 pointer-events-none" />
+
+                  {/* Top Badge */}
+                  <div className="absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between">
+                    <span className="px-2 py-0.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-[9px] uppercase tracking-wider font-semibold text-[#FFE9A9] flex items-center gap-1">
+                      <Film className="w-2.5 h-2.5 text-[#FF933E]" />
+                      <span>Cinema Video Reel</span>
+                    </span>
+                    <Instagram className="w-3.5 h-3.5 text-[#FFCB56]" />
+                  </div>
+
+                  {/* Center Play Icon */}
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none group-hover:opacity-0 transition-opacity">
+                    <div className="w-9 h-9 rounded-full bg-black/60 backdrop-blur-md border border-[#FFCB56] flex items-center justify-center text-white shadow-lg">
+                      <Play className="w-4 h-4 ml-0.5 text-[#FFE9A9] fill-[#FFE9A9]" />
+                    </div>
+                  </div>
+
+                  {/* Bottom Video Caption */}
+                  <div className="absolute bottom-2.5 left-2.5 right-2.5 text-white">
+                    <span className="text-[9px] uppercase tracking-widest text-[#FF933E] font-semibold">
+                      Live Video Link
+                    </span>
+                    <h5 className="font-headline text-xs sm:text-sm font-semibold leading-tight text-[#FFFDF9]">
+                      Grand Vows &amp; Pheras Teaser
+                    </h5>
+                  </div>
+                </a>
               </motion.div>
             </div>
           </div>
@@ -1144,10 +1249,166 @@ export default function HomeScreen({
       </section>
 
       {/* =========================================================================
+          ATELIER STUDIO HEADQUARTERS & GOOGLE MAPS SECTION
+          ========================================================================= */}
+      <section className="relative w-full py-20 sm:py-28 bg-[#FFF8EE] px-5 sm:px-8 lg:px-14 border-t border-[#FFCB56]/30 overflow-hidden" id="studio-map">
+        <InteractiveGrid />
+        <div className="max-w-7xl mx-auto flex flex-col gap-10">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-[#FFCB56]/30 pb-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
+              whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="flex flex-col gap-2"
+            >
+              <div className="flex items-center gap-2">
+                <MapPin className="w-4 h-4 text-[#FF933E]" />
+                <span className="text-xs text-[#FF933E] uppercase tracking-[0.25em] font-bold">
+                  Atelier Headquarters &amp; Studio
+                </span>
+              </div>
+              <h2 className="font-headline text-3xl sm:text-5xl text-[#241912] font-light">
+                Visit The Royal Films Studio
+              </h2>
+              <span
+                className="text-xl sm:text-2xl text-[#FF933E]"
+                style={{ fontFamily: "'Alex Brush', 'Allura', 'Great Vibes', 'Pinyon Script', Georgia, serif" }}
+              >
+                Gaya • Patna • Bodh Gaya • Dubai
+              </span>
+            </motion.div>
+
+            {/* Quick Minimal Direction & WhatsApp Actions (NO number exposed) */}
+            <div className="flex flex-wrap items-center gap-3">
+              <a
+                href="https://maps.google.com/?q=Chhotki+Nawada,+Delha,+Gaya,+Bihar+823002"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-5 py-2.5 bg-[#FF933E] hover:bg-[#ff8425] text-white text-xs uppercase tracking-[0.2em] font-semibold rounded-none border border-[#FFCB56] shadow-[0_4px_16px_rgba(255,147,62,0.35)] flex items-center gap-2 transition-all hover:scale-105 active:scale-95 cursor-pointer"
+              >
+                <MapPin className="w-4 h-4 text-[#FFE9A9]" />
+                <span>Open in Google Maps</span>
+              </a>
+              <a
+                href="https://wa.me/918210351286?text=Hello%20The%20Royal%20Films%2C%20I%20would%20like%20to%20visit%20the%20Gaya%20studio."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-5 py-2.5 bg-[#25D366] hover:bg-[#20ba59] text-white text-xs uppercase tracking-[0.2em] font-semibold rounded-none border border-[#25D366] shadow-[0_4px_16px_rgba(37,211,102,0.35)] flex items-center gap-2 transition-all hover:scale-105 active:scale-95 cursor-pointer"
+              >
+                <MessageCircle className="w-4 h-4" />
+                <span>WhatsApp Appointment</span>
+              </a>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+            {/* Google Map Embedded Iframe Card */}
+            <motion.div
+              initial={{ opacity: 0, x: -30, filter: 'blur(8px)' }}
+              whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="lg:col-span-8 relative rounded-3xl overflow-hidden shadow-2xl border-2 border-[#FFCB56]/50 bg-black min-h-[380px] sm:min-h-[460px] group"
+            >
+              {/* Ambient backlight glow */}
+              <div className="absolute -inset-4 bg-gradient-to-tr from-[#FF933E]/25 via-[#FFCB56]/20 to-[#73A5CA]/20 rounded-3xl blur-2xl pointer-events-none -z-10" />
+              
+              <iframe
+                title="The Royal Films Atelier Location"
+                src="https://maps.google.com/maps?q=Chhotki+Nawada,+Delha,+Gaya,+Bihar+823002&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                className="w-full h-full min-h-[380px] sm:min-h-[460px] border-0 filter contrast-[1.05] brightness-[0.98]"
+                loading="lazy"
+                allowFullScreen
+              />
+              <div className="absolute bottom-4 left-4 right-4 sm:right-auto px-4 py-3 bg-white/95 backdrop-blur-md rounded-xl border border-[#FFCB56] shadow-lg flex items-center gap-3 text-xs text-[#241912] pointer-events-none">
+                <MapPin className="w-4 h-4 text-[#FF933E] shrink-0" />
+                <div>
+                  <p className="font-bold">The Royal Films Atelier</p>
+                  <p className="text-[11px] text-[#594233]">Chhotki Nawada, Delha, Gaya, Bihar 823002</p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Studio Info Card with Minimal Icons (No raw numbers) */}
+            <motion.div
+              initial={{ opacity: 0, x: 30, filter: 'blur(8px)' }}
+              whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="lg:col-span-4 p-7 sm:p-8 bg-white rounded-3xl shadow-xl border border-[#FFCB56]/50 flex flex-col justify-between gap-6 relative overflow-hidden"
+            >
+              <div className="flex flex-col gap-5">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-2xl bg-[#FF933E]/15 border border-[#FFCB56] flex items-center justify-center text-[#FF933E] shrink-0 shadow-sm">
+                    <MapPin className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h3 className="font-headline text-lg sm:text-xl font-bold text-[#241912]">
+                      Gaya Atelier Studio
+                    </h3>
+                    <p className="text-xs text-[#FF933E] font-semibold tracking-wider uppercase">
+                      Primary Headquarters
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-3 text-xs text-[#594233] pt-2">
+                  <div className="p-3.5 bg-[#FFF8EE] rounded-xl border border-[#FFCB56]/30">
+                    <p className="font-bold text-[#241912] mb-1">Address:</p>
+                    <p className="leading-relaxed">
+                      Chhotki Nawada, Delha, Gaya, Bihar 823002 <br />
+                      <span className="text-[11px] text-[#73A5CA] font-medium">Near Delha Post Office</span>
+                    </p>
+                  </div>
+
+                  <div className="p-3.5 bg-[#FFF8EE] rounded-xl border border-[#FFCB56]/30">
+                    <p className="font-bold text-[#241912] mb-1">Consultation Hours:</p>
+                    <p className="leading-relaxed">
+                      Monday – Sunday <br />
+                      10:00 AM – 8:00 PM IST <br />
+                      <span className="text-[11px] text-[#FF933E] font-medium italic">By Advance Appointment Only</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Minimal Action Buttons (NO raw numbers exposed) */}
+              <div className="flex flex-col gap-3 pt-3 border-t border-[#FFE9A9]">
+                <p className="text-[11px] uppercase tracking-wider font-semibold text-[#594233]">
+                  Direct Atelier Assistance:
+                </p>
+                <div className="grid grid-cols-2 gap-2.5">
+                  <a
+                    href="tel:+918210351286"
+                    className="py-3 px-3 bg-[#FF933E] hover:bg-[#ff8425] text-white text-xs font-semibold uppercase tracking-wider rounded-xl shadow-md flex items-center justify-center gap-1.5 transition-all hover:scale-105 active:scale-95 cursor-pointer"
+                    aria-label="Direct Phone Concierge"
+                  >
+                    <Phone className="w-3.5 h-3.5" />
+                    <span>Call Concierge</span>
+                  </a>
+                  <a
+                    href="https://wa.me/918210351286?text=Hello%20The%20Royal%20Films%2C%20I%20would%20like%20to%20inquire%20about%20wedding%20dates."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="py-3 px-3 bg-[#25D366] hover:bg-[#20ba59] text-white text-xs font-semibold uppercase tracking-wider rounded-xl shadow-md flex items-center justify-center gap-1.5 transition-all hover:scale-105 active:scale-95 cursor-pointer"
+                    aria-label="WhatsApp Concierge"
+                  >
+                    <MessageCircle className="w-3.5 h-3.5" />
+                    <span>WhatsApp</span>
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
           BOOKING & DATE RESERVATION FORM
           ========================================================================= */}
       <section
-        className="relative w-full py-20 sm:py-28 bg-[#FFF8EE] px-5 sm:px-8 lg:px-14 border-t border-[#FFCB56]/30 overflow-hidden"
+        className="relative w-full py-20 sm:py-28 bg-[#FFFDF9] px-5 sm:px-8 lg:px-14 border-t border-[#FFCB56]/30 overflow-hidden"
         id="enquiry"
       >
         <InteractiveGrid />
@@ -1167,23 +1428,35 @@ export default function HomeScreen({
                 </p>
               </div>
 
-              {/* Direct Atelier Contacts */}
+              {/* Direct Atelier Minimal Icon Contacts (No Raw Number Exposed) */}
               <div className="flex flex-col gap-3 text-xs sm:text-sm text-[#594233] pt-4 border-t border-[#FFE9A9]">
-                <div className="flex items-center gap-3">
-                  <span className="w-8 h-8 rounded-full bg-[#FF933E]/10 text-[#FF933E] flex items-center justify-center shrink-0 border border-[#FF933E]/30">
-                    <Phone className="w-4 h-4" />
-                  </span>
-                  <span>
-                    Concierge:{' '}
-                    <a
-                      className="text-[#FF933E] font-bold hover:underline"
-                      href="tel:+918210351286"
-                    >
-                      +91 82103 51286
-                    </a>
+                <div className="flex items-center gap-2.5">
+                  <span className="text-xs uppercase tracking-wider font-semibold text-[#594233]">
+                    Instant Concierge:
                   </span>
                 </div>
-                <div className="flex items-center gap-3">
+                <div className="flex flex-wrap items-center gap-3">
+                  <a
+                    href="tel:+918210351286"
+                    className="flex items-center gap-2 px-3.5 py-2 bg-[#FFF8EE] border border-[#FFCB56] text-[#FF933E] hover:bg-[#FF933E] hover:text-white transition-all rounded-lg text-xs font-semibold uppercase tracking-wider shadow-xs cursor-pointer group"
+                    aria-label="Call Atelier Direct"
+                  >
+                    <Phone className="w-3.5 h-3.5 group-hover:rotate-12 transition-transform" />
+                    <span>Call Concierge</span>
+                  </a>
+                  <a
+                    href="https://wa.me/918210351286?text=Hello%20The%20Royal%20Films%2C%20I%20would%20like%20to%20inquire%20about%20wedding%20dates."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-3.5 py-2 bg-[#25D366]/15 border border-[#25D366]/50 text-[#25D366] hover:bg-[#25D366] hover:text-white transition-all rounded-lg text-xs font-semibold uppercase tracking-wider shadow-xs cursor-pointer group"
+                    aria-label="WhatsApp Concierge"
+                  >
+                    <MessageCircle className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" />
+                    <span>WhatsApp</span>
+                  </a>
+                </div>
+
+                <div className="flex items-center gap-3 pt-2">
                   <span className="w-8 h-8 rounded-full bg-[#FF933E]/10 text-[#FF933E] flex items-center justify-center shrink-0 border border-[#FF933E]/30">
                     <Mail className="w-4 h-4" />
                   </span>
