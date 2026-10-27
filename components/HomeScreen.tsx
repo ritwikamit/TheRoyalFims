@@ -446,25 +446,6 @@ export default function HomeScreen({
             Heirloom 4K wedding films and editorial stills documenting sacred rituals, authentic emotion, and grand royal family traditions across Bihar and Dubai.
           </motion.p>
 
-          {/* Floating Location & Credential Pills Over Video */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.55 }}
-            className="flex flex-wrap items-center justify-center gap-3 text-xs uppercase tracking-[0.22em] text-white/90 font-medium"
-          >
-            <span className="px-3.5 py-1.5 bg-black/50 backdrop-blur-md rounded-full border border-white/25">
-              Gaya • Patna • Bodh Gaya
-            </span>
-            <span className="hidden sm:inline text-[#FFCB56]">•</span>
-            <span className="px-3.5 py-1.5 bg-[#FF933E]/30 backdrop-blur-md rounded-full border border-[#FFCB56]/60 text-[#FFE9A9]">
-              Dubai Destination Hub
-            </span>
-            <span className="hidden sm:inline text-[#FFCB56]">•</span>
-            <span className="px-3.5 py-1.5 bg-black/50 backdrop-blur-md rounded-full border border-white/25">
-              AAFT Alumnus Direction
-            </span>
-          </motion.div>
 
           {/* Floating CTA Buttons Over Video */}
           <motion.div
