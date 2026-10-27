@@ -155,14 +155,14 @@ export default function Footer({ onSelectTab, onOpenLegal }: FooterProps) {
 
             {/* Col 4: Atelier Studio Direct Contact with Claymorphism */}
             <div className="lg:col-span-3">
-              <div className="clay-card p-5 bg-white/10 backdrop-blur-xl border border-[#FFCB56]/50 rounded-2xl flex flex-col gap-4 shadow-xl text-white">
-                <h4 className="text-xs font-bold uppercase tracking-[0.24em] text-[#FFE9A9] drop-shadow-sm">
+              <div className="clay-card p-5 !bg-[#FFFDF9] border-2 border-[#FFCB56] rounded-2xl flex flex-col gap-4 shadow-[0_16px_40px_rgba(36,25,18,0.18)] text-[#241912]">
+                <h4 className="text-xs font-bold uppercase tracking-[0.24em] text-[#FF933E]">
                   Atelier Headquarters
                 </h4>
-                <div className="flex flex-col gap-3 text-xs text-white/95">
+                <div className="flex flex-col gap-3 text-xs text-[#241912]">
                   <div className="flex items-start gap-2.5">
-                    <MapPin className="w-4 h-4 text-[#FFE9A9] shrink-0 mt-0.5" />
-                    <span className="leading-relaxed">
+                    <MapPin className="w-4 h-4 text-[#FF933E] shrink-0 mt-0.5" />
+                    <span className="leading-relaxed font-semibold text-[#241912]">
                       Chhotki Nawada, Delha, Gaya, Bihar 823002
                     </span>
                   </div>
@@ -171,9 +171,9 @@ export default function Footer({ onSelectTab, onOpenLegal }: FooterProps) {
                       href="tel:+918210351286"
                       aria-label="Call Atelier Direct"
                       title="Call Atelier Direct"
-                      className="clay-button flex items-center gap-1.5 px-3.5 py-2 bg-[#FFFDF9] hover:bg-[#FFE9A9]/50 text-[#FF933E] border border-[#FFCB56] transition-all text-[11px] font-bold uppercase tracking-wider rounded-full shadow-sm active:scale-95 cursor-pointer"
+                      className="clay-button flex items-center gap-1.5 px-3.5 py-2 bg-[#FF933E] hover:bg-[#ff8425] text-white border border-[#FFCB56] transition-all text-[11px] font-bold uppercase tracking-wider rounded-full shadow-sm active:scale-95 cursor-pointer"
                     >
-                      <Phone className="w-3.5 h-3.5" />
+                      <Phone className="w-3.5 h-3.5 text-[#FFE9A9]" />
                       <span>Call Direct</span>
                     </a>
                     <a
@@ -189,10 +189,10 @@ export default function Footer({ onSelectTab, onOpenLegal }: FooterProps) {
                     </a>
                   </div>
                   <div className="flex items-center gap-2.5 pt-1">
-                    <Mail className="w-4 h-4 text-[#FFE9A9] shrink-0" />
+                    <Mail className="w-4 h-4 text-[#FF933E] shrink-0" />
                     <a
                       href="mailto:contact@theroyalfilms.com"
-                      className="hover:text-[#FFE9A9] transition-colors tracking-wide font-medium"
+                      className="hover:text-[#FF933E] transition-colors tracking-wide font-medium text-[#594233]"
                     >
                       contact@theroyalfilms.com
                     </a>
@@ -202,7 +202,7 @@ export default function Footer({ onSelectTab, onOpenLegal }: FooterProps) {
                       href={INSTAGRAM_PROFILE_URL}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="clay-button flex items-center gap-2 px-3.5 py-2 bg-[#FFFDF9] hover:bg-white text-[#241912] hover:text-[#E4405F] border border-[#FFCB56]/60 text-xs font-bold tracking-wider transition-all rounded-full shadow-sm active:scale-95 cursor-pointer"
+                      className="clay-button flex items-center gap-2 px-3.5 py-2 bg-[#FAF3E6] hover:bg-[#FFE9A9]/50 text-[#241912] hover:text-[#E4405F] border border-[#FFCB56] text-xs font-bold tracking-wider transition-all rounded-full shadow-sm active:scale-95 cursor-pointer"
                     >
                       <Instagram className="w-4 h-4 text-[#FF933E]" />
                       <span>{INSTAGRAM_HANDLE}</span>
