@@ -54,7 +54,7 @@ export default function ScrollToTop() {
           transition={{ duration: 0.3 }}
           onClick={scrollToTop}
           aria-label="Scroll to top"
-          className="fixed bottom-20 right-4 md:bottom-8 md:right-8 z-30 w-12 h-12 rounded-full flex items-center justify-center bg-black/80 dark:bg-black/80 light:bg-white/90 backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.85)] hover:scale-105 active:scale-95 transition-transform group cursor-pointer border border-white/10 dark:border-white/10 light:border-black/10"
+          className="fixed bottom-20 right-4 md:bottom-8 md:right-8 z-30 w-12 h-12 rounded-full flex items-center justify-center bg-white/95 dark:bg-[#1A140F]/90 backdrop-blur-xl shadow-[0_8px_30px_rgba(82,55,30,0.12)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.85)] hover:scale-105 active:scale-95 transition-transform group cursor-pointer border border-[#E8DCCF] dark:border-white/10"
         >
           {/* SVG Progress Ring */}
           <svg className="absolute inset-0 w-full h-full -rotate-90 pointer-events-none" viewBox={`0 0 ${size} ${size}`}>
@@ -63,7 +63,7 @@ export default function ScrollToTop() {
               cx={size / 2}
               cy={size / 2}
               r={radius}
-              stroke="rgba(255, 255, 255, 0.12)"
+              stroke="rgba(212, 103, 67, 0.15)"
               strokeWidth={strokeWidth}
               fill="none"
             />
@@ -72,7 +72,7 @@ export default function ScrollToTop() {
               cx={size / 2}
               cy={size / 2}
               r={radius}
-              stroke="#e8c17a"
+              stroke="#D46743"
               strokeWidth={strokeWidth}
               fill="none"
               strokeDasharray={circumference}
@@ -83,7 +83,7 @@ export default function ScrollToTop() {
           </svg>
 
           {/* Minimalist Arrow Icon */}
-          <ArrowUp className="w-4 h-4 text-[#e8c17a] group-hover:text-white dark:group-hover:text-white light:group-hover:text-black transition-colors" />
+          <ArrowUp className="w-4 h-4 text-[#D46743] dark:text-[#E89B5B] group-hover:scale-110 transition-transform" />
         </motion.button>
       )}
     </AnimatePresence>

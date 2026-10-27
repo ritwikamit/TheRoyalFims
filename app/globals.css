@@ -1,41 +1,47 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Great+Vibes&family=Manrope:wght@300;400;500;600;700&family=Parisienne&family=Pinyon+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Cinzel:wght@400..900&family=Great+Vibes&family=Manrope:wght@300;400;500;600;700;800&family=Pinyon+Script&display=swap');
+
+@custom-variant light (&:where(.light, .light *));
 
 @theme {
-  --color-surface: #131313;
-  --color-surface-dim: #131313;
-  --color-surface-bright: #3a3939;
-  --color-surface-container-lowest: #0e0e0e;
-  --color-surface-container-low: #1c1b1b;
-  --color-surface-container: #201f1f;
-  --color-surface-container-high: #2a2a2a;
-  --color-surface-container-highest: #353534;
-  --color-surface-elevated: #1a1a1a;
-  --color-surface-muted: #262626;
-  --color-surface-variant: #353534;
-  --color-on-surface: #e5e2e1;
-  --color-on-surface-variant: #e8bcb5;
-  --color-inverse-surface: #e5e2e1;
-  --color-inverse-on-surface: #313030;
-  --color-outline: #af8781;
-  --color-outline-variant: #5e3f3a;
-  --color-surface-tint: #ffb4a8;
-  --color-primary: #ffb4a8;
-  --color-on-primary: #690000;
-  --color-primary-container: #d60000;
-  --color-on-primary-container: #ffe5e1;
-  --color-inverse-primary: #c00000;
-  --color-secondary: #e8c17a;
-  --color-on-secondary: #412d00;
-  --color-secondary-container: #5d4205;
-  --color-on-secondary-container: #d6b06b;
-  --color-crimson-glow: #ff3333;
-  --color-crimson-deep: #850000;
-  --color-obsidian-base: #000000;
-  --color-gold-light: #fef9f1;
-  --color-gold-dim: #ce8508;
-  --color-background: #131313;
-  --color-on-background: #e5e2e1;
+  /* Royal Palette: https://colorhunt.co/palette/ffead3bfe7eae89b5bd46743 */
+  --color-palette-cream: #FFEAD3;
+  --color-palette-aqua: #BFE7EA;
+  --color-palette-amber: #E89B5B;
+  --color-palette-terracotta: #D46743;
+
+  /* Semantic Default (Light Theme Focused) */
+  --color-surface: #FAF4ED;
+  --color-surface-dim: #F3EAE0;
+  --color-surface-bright: #FFFFFF;
+  --color-surface-container-lowest: #FFFFFF;
+  --color-surface-container-low: #F8F1E7;
+  --color-surface-container: #F3EAE0;
+  --color-surface-container-high: #EDE2D5;
+  --color-surface-container-highest: #E5D8C9;
+  --color-surface-elevated: #FFFDFC;
+  --color-surface-muted: #EFE4D6;
+  --color-surface-variant: #E8DCCF;
+  --color-on-surface: #1A130E;
+  --color-on-surface-variant: #524237;
+  --color-inverse-surface: #1A130E;
+  --color-inverse-on-surface: #FAF4ED;
+  --color-outline: #D4BFA9;
+  --color-outline-variant: #E8DCCF;
+  --color-surface-tint: #D46743;
+  --color-primary: #D46743;
+  --color-on-primary: #FFFFFF;
+  --color-primary-container: #FCE8E0;
+  --color-on-primary-container: #8F371B;
+  --color-inverse-primary: #E89B5B;
+  --color-secondary: #E89B5B;
+  --color-on-secondary: #2C1808;
+  --color-secondary-container: #FFEAD3;
+  --color-on-secondary-container: #7E4514;
+  --color-tertiary: #BFE7EA;
+  --color-on-tertiary: #0F3538;
+  --color-background: #FAF4ED;
+  --color-on-background: #1A130E;
 
   --spacing-space-xs: 0.25rem;
   --spacing-space-sm: 0.5rem;
@@ -47,11 +53,10 @@
   --spacing-gutter: 1.5rem;
   --spacing-gutter-mobile: 1rem;
 
-  --font-headline: "Bodoni Moda", Georgia, serif;
+  --font-headline: "Bodoni Moda", "Cinzel", Georgia, serif;
   --font-body: "Manrope", system-ui, -apple-system, sans-serif;
   --font-cursive: "Pinyon Script", cursive, Georgia, serif;
   --font-cursive-romantic: "Great Vibes", cursive, Georgia, serif;
-  --font-cursive-editorial: "Parisienne", cursive, Georgia, serif;
   --font-cursive-calligraphy: "Alex Brush", cursive, Georgia, serif;
 }
 
@@ -69,25 +74,37 @@
     height: 0 !important;
   }
 
+  /* DEFAULT LIGHT THEME */
   html {
     scroll-behavior: smooth;
-    color-scheme: dark;
-    background-color: #0c0c0c;
-    color: #e5e2e1;
+    color-scheme: light;
+    background-color: #FAF4ED;
+    color: #1A130E;
     font-family: "Manrope", system-ui, -apple-system, sans-serif;
     overflow-x: hidden;
   }
 
-  /* BESPOKE LUXURY LIGHT THEME */
   html.light {
     color-scheme: light;
-    background-color: #FAF7F2;
-    color: #1A1918;
+    background-color: #FAF4ED;
+    color: #1A130E;
   }
 
   html.light body {
-    background-color: #FAF7F2;
-    color: #1A1918;
+    background-color: #FAF4ED;
+    color: #1A130E;
+  }
+
+  /* DARK THEME */
+  html.dark {
+    color-scheme: dark;
+    background-color: #120E0A;
+    color: #FAF3EC;
+  }
+
+  html.dark body {
+    background-color: #120E0A;
+    color: #FAF3EC;
   }
 
   body {
@@ -98,104 +115,92 @@
 }
 
 .font-headline {
-  font-family: "Bodoni Moda", Georgia, serif;
+  font-family: "Bodoni Moda", "Cinzel", Georgia, serif;
 }
 
 .font-manrope {
   font-family: "Manrope", system-ui, -apple-system, sans-serif;
 }
 
-/* DIFFERENT CURSIVE FONTS FOR DISTINCT SPECIAL CONTENTS */
+/* CURSIVE FONTS FOR BESPOKE WEDDING ACCENTS */
 .font-cursive {
   font-family: "Pinyon Script", cursive, Georgia, serif;
   font-weight: 400;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.03em;
 }
 
 .font-cursive-romantic {
   font-family: "Great Vibes", cursive, Georgia, serif;
   font-weight: 400;
-  letter-spacing: 0.03em;
-}
-
-.font-cursive-editorial {
-  font-family: "Parisienne", cursive, Georgia, serif;
-  font-weight: 400;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.04em;
 }
 
 .font-cursive-calligraphy {
   font-family: "Alex Brush", cursive, Georgia, serif;
   font-weight: 400;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.04em;
 }
 
-/* Glassmorphism Luxury Utilities */
+/* Glassmorphism Luxury Utilities for Light & Dark */
 .glass-panel {
-  background: rgba(22, 22, 22, 0.7);
+  background: rgba(255, 250, 245, 0.9);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(212, 103, 67, 0.2);
+  box-shadow: 0 12px 36px -8px rgba(82, 55, 30, 0.08);
 }
 
-.light .glass-panel,
-html.light .glass-panel {
-  background: rgba(255, 255, 255, 0.88);
+.dark .glass-panel,
+html.dark .glass-panel {
+  background: rgba(22, 17, 13, 0.85);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(160, 140, 115, 0.22);
-  box-shadow: 0 12px 36px -8px rgba(110, 85, 45, 0.09);
+  border: 1px solid rgba(232, 155, 91, 0.18);
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.7);
 }
 
 .glass-panel-subtle {
-  background: rgba(18, 18, 18, 0.55);
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(232, 193, 122, 0.15);
+  border: 1px solid rgba(232, 155, 91, 0.25);
+  box-shadow: 0 8px 24px -6px rgba(82, 55, 30, 0.06);
 }
 
-.light .glass-panel-subtle,
-html.light .glass-panel-subtle {
-  background: rgba(255, 255, 255, 0.92);
+.dark .glass-panel-subtle,
+html.dark .glass-panel-subtle {
+  background: rgba(26, 20, 15, 0.7);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(179, 136, 66, 0.25);
-  box-shadow: 0 8px 24px -6px rgba(110, 85, 45, 0.06);
+  border: 1px solid rgba(232, 155, 91, 0.15);
+  box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.5);
 }
 
 .glass-panel-gold {
-  background: rgba(30, 24, 18, 0.65);
+  background: rgba(255, 244, 230, 0.95);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(232, 193, 122, 0.28);
+  border: 1px solid rgba(212, 103, 67, 0.35);
+  box-shadow: 0 16px 40px -10px rgba(212, 103, 67, 0.12);
 }
 
-.light .glass-panel-gold,
-html.light .glass-panel-gold {
-  background: rgba(254, 250, 242, 0.95);
+.dark .glass-panel-gold,
+html.dark .glass-panel-gold {
+  background: rgba(30, 22, 16, 0.85);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(179, 136, 66, 0.38);
-  box-shadow: 0 16px 40px -10px rgba(179, 136, 66, 0.15);
+  border: 1px solid rgba(232, 155, 91, 0.3);
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.65);
 }
 
 /* Carved & Engraved Chiseled Text Shadows */
 .text-carved {
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.16), 0 -1px 2px rgba(0, 0, 0, 0.95), 1px 0 2px rgba(0, 0, 0, 0.8);
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.95), 0 -1px 1px rgba(120, 80, 50, 0.25);
 }
 
-.light .text-carved,
-html.light .text-carved {
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.95), 0 -1px 2px rgba(130, 110, 80, 0.35);
-}
-
-.carved-logo {
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.95)) drop-shadow(0 -1px 1px rgba(255, 255, 255, 0.22));
-}
-
-.light .carved-logo,
-html.light .carved-logo {
-  filter: drop-shadow(0 2px 4px rgba(130, 110, 80, 0.2));
+.dark .text-carved,
+html.dark .text-carved {
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.16), 0 -1px 2px rgba(0, 0, 0, 0.95);
 }
 
 /* ANIMATED MOVING LINE BORDER ANIMATION */
@@ -216,15 +221,15 @@ html.light .carved-logo {
   animation-duration: 3.5s;
 }
 
-/* Ambient Glowing Fire and Embers */
+/* Ambient Glowing Fire and Embers with Brand Palette */
 @keyframes intenseFireGlow {
   0% {
     transform: scale(1) translateY(0) rotate(0deg);
     opacity: 0.45;
   }
   30% {
-    transform: scale(1.22) translateY(-18px) rotate(2deg);
-    opacity: 0.85;
+    transform: scale(1.18) translateY(-14px) rotate(2deg);
+    opacity: 0.75;
   }
   65% {
     transform: scale(0.96) translateY(-8px) rotate(-1.5deg);

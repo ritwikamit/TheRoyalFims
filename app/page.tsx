@@ -21,23 +21,24 @@ export default function Page() {
   const [isAvailabilityOpen, setIsAvailabilityOpen] = useState(false);
   const [isPortalOpen, setIsPortalOpen] = useState(false);
   
-  // Initialize theme from localStorage without causing setState in effect
-  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
+  // LIGHT THEME AS DEFAULT
+  const [theme, setTheme] = useState<'dark' | 'light'>('light');
   const [legalModal, setLegalModal] = useState<{ isOpen: boolean; tab: LegalTabType }>({
     isOpen: false,
     tab: 'privacy',
   });
 
-  // Load and apply saved theme preference to the DOM
+  // Load and apply saved theme preference to the DOM (default: light)
   useEffect(() => {
     const savedTheme = localStorage.getItem('trf_theme') as 'dark' | 'light' | null;
-    const active = savedTheme || 'dark';
-    if (active === 'light') {
-      document.documentElement.classList.remove('dark');
-      document.documentElement.classList.add('light');
-    } else {
+    const active = savedTheme || 'light';
+    setTheme(active);
+    if (active === 'dark') {
       document.documentElement.classList.remove('light');
       document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light');
     }
   }, []);
 
@@ -45,12 +46,12 @@ export default function Page() {
     const newTheme = theme === 'dark' ? 'light' : 'dark';
     setTheme(newTheme);
     localStorage.setItem('trf_theme', newTheme);
-    if (newTheme === 'light') {
-      document.documentElement.classList.remove('dark');
-      document.documentElement.classList.add('light');
-    } else {
+    if (newTheme === 'dark') {
       document.documentElement.classList.remove('light');
       document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light');
     }
   };
 
@@ -80,11 +81,11 @@ export default function Page() {
   }, [currentTab]);
 
   return (
-    <div className={`min-h-screen flex flex-col font-sans transition-colors duration-300 selection:bg-primary-container selection:text-on-primary-container ${
-      theme === 'dark' ? 'bg-[#0c0c0c] text-[#e5e2e1]' : 'bg-[#f7f4ee] text-[#1a1918]'
+    <div className={`min-h-screen flex flex-col font-sans transition-colors duration-300 selection:bg-[#FFEAD3] selection:text-[#D46743] ${
+      theme === 'dark' ? 'bg-[#120E0A] text-[#FAF3EC]' : 'bg-[#FAF4ED] text-[#1A130E]'
     }`}>
-      {/* Animated Luxury Splash Loading Screen with Big Logo */}
-      <LoadingScreen minDuration={1600} />
+      {/* Animated Luxury Splash Loading Screen with Redesigned Logo */}
+      <LoadingScreen minDuration={1400} />
 
       {/* Fixed Luxury Navigation Header */}
       <Navbar 
@@ -95,7 +96,7 @@ export default function Page() {
         onOpenAvailability={() => setIsAvailabilityOpen(true)}
       />
 
-      {/* Main Viewport Container with safe padding for mobile bottom nav */}
+      {/* Main Viewport Container */}
       <main className="w-full flex-1 pb-24 md:pb-0">
         {currentTab === 'home' && (
           <HomeScreen 
@@ -128,26 +129,26 @@ export default function Page() {
         )}
       </main>
 
-      {/* Dynamic Scroll Up Button with Circular Filling Border */}
+      {/* Dynamic Scroll Up Button */}
       <ScrollToTop />
 
-      {/* Mobile Quick Bottom Navigation Bar (md:hidden) */}
+      {/* Mobile Quick Bottom Navigation Bar */}
       <MobileBottomNav 
         currentTab={currentTab}
         onSelectTab={handleTabChange}
         onOpenAvailability={() => setIsAvailabilityOpen(true)}
       />
 
-      {/* Cookie Consent Banner for New Users */}
+      {/* Cookie Consent Banner */}
       <CookieBanner onOpenCookiePolicy={() => handleOpenLegal('cookies')} />
 
-      {/* Luxury Translucent Footer with Slow Fire Glowing Backdrop & Carved Text */}
+      {/* Luxury Translucent Footer with Big Minimalist Logo */}
       <Footer 
         onSelectTab={handleTabChange}
         onOpenLegal={handleOpenLegal}
       />
 
-      {/* Full-Feature Legal Modal (Privacy Policy, Terms of Commission, Cookie Policy) */}
+      {/* Legal Modal */}
       <LegalModal 
         isOpen={legalModal.isOpen}
         initialTab={legalModal.tab}

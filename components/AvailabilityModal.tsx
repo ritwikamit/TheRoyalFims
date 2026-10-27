@@ -36,58 +36,57 @@ export default function AvailabilityModal({ isOpen, onClose }: AvailabilityModal
     setCheckedState('checking');
     setTimeout(() => {
       setCheckedState('available');
-    }, 500);
+    }, 450);
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/90 backdrop-blur-2xl">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md">
       <div
-        className="relative w-full max-w-lg glass-panel border border-[#e8c17a]/30 rounded-2xl p-6 sm:p-8 shadow-2xl flex flex-col gap-6"
+        className="relative w-full max-w-lg bg-[#FAF4ED] dark:bg-[#16110D] text-[#1A130E] dark:text-[#FAF3EC] border border-[#E8DCCF] dark:border-[#E89B5B]/30 rounded-2xl p-6 sm:p-8 shadow-2xl flex flex-col gap-6"
         onClick={(e) => e.stopPropagation()}
       >
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-[#e5e2e1]/70 hover:text-white p-2 cursor-pointer"
+          className="absolute top-4 right-4 text-[#524237] dark:text-[#D9C7B8] hover:text-[#1A130E] dark:hover:text-white p-2 cursor-pointer"
           aria-label="Close"
         >
           <X className="w-5 h-5" />
         </button>
 
         <div className="flex flex-col gap-1.5">
-          {/* NO dots or cylinders - Clean text */}
-          <span className="text-[11px] text-[#e8c17a] uppercase tracking-[0.25em] font-semibold">
+          <span className="text-[11px] text-[#D46743] dark:text-[#E89B5B] uppercase tracking-[0.25em] font-semibold">
             Live Studio Calendar
           </span>
-          <h3 className="font-headline text-2xl sm:text-3xl text-[#fef9f1]">
+          <h3 className="font-headline text-2xl sm:text-3xl text-[#1A130E] dark:text-[#FAF3EC]">
             Check Wedding Date Availability
           </h3>
-          <p className="text-xs sm:text-sm text-[#e8bcb5]/80 font-light leading-relaxed">
+          <p className="text-xs sm:text-sm text-[#524237] dark:text-[#D9C7B8] font-light leading-relaxed">
             We limit commissions to ensure unhurried presence and archival grade color-grading for every celebration.
           </p>
         </div>
 
         {checkedState === 'available' ? (
-          <div className="flex flex-col gap-5 bg-black/50 backdrop-blur-md p-5 rounded-xl border border-[#e8c17a]/40">
+          <div className="flex flex-col gap-5 bg-white dark:bg-black/50 p-5 rounded-xl border border-[#D46743]/30 shadow-md">
             <div className="flex items-start gap-3">
-              <CheckCircle2 className="w-6 h-6 text-[#e8c17a] shrink-0 mt-0.5" />
+              <CheckCircle2 className="w-6 h-6 text-[#D46743] dark:text-[#E89B5B] shrink-0 mt-0.5" />
               <div className="flex flex-col">
-                <span className="text-sm font-semibold text-[#fef9f1]">
+                <span className="text-sm font-semibold text-[#1A130E] dark:text-[#FAF3EC]">
                   Date Is Currently Open for Booking
                 </span>
-                <span className="text-xs text-[#e8bcb5]/80 mt-0.5">
+                <span className="text-xs text-[#524237] dark:text-[#D9C7B8] mt-0.5">
                   Our premier cinema &amp; stills crew is available for {city} on {date || 'your requested dates'}.
                 </span>
               </div>
             </div>
 
-            <div className="flex flex-col gap-2 pt-2 border-t border-white/10 text-xs">
-              <div className="flex justify-between text-[#e5e2e1]/80">
+            <div className="flex flex-col gap-2 pt-2 border-t border-[#E8DCCF] dark:border-white/10 text-xs">
+              <div className="flex justify-between text-[#524237] dark:text-[#D9C7B8]">
                 <span>Crew Configuration:</span>
-                <span className="text-[#fef9f1] font-medium">4–6 Visual Artists</span>
+                <span className="text-[#1A130E] dark:text-[#FAF3EC] font-semibold">4–6 Visual Artists</span>
               </div>
-              <div className="flex justify-between text-[#e5e2e1]/80">
+              <div className="flex justify-between text-[#524237] dark:text-[#D9C7B8]">
                 <span>Drone Aerial:</span>
-                <span className="text-[#e8c17a] font-medium">Included Subject to Permissions</span>
+                <span className="text-[#D46743] dark:text-[#E89B5B] font-semibold">Included Subject to Permissions</span>
               </div>
             </div>
 
@@ -98,7 +97,7 @@ export default function AvailabilityModal({ isOpen, onClose }: AvailabilityModal
                 )}%20in%20${encodeURIComponent(city)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 py-3 bg-[#d60000] hover:bg-[#ff3333] text-[#ffe5e1] text-xs font-semibold uppercase tracking-[0.18em] text-center flex items-center justify-center gap-2 shadow-lg"
+                className="flex-1 py-3 bg-[#D46743] hover:bg-[#E89B5B] text-white text-xs font-semibold uppercase tracking-[0.18em] text-center flex items-center justify-center gap-2 shadow-lg transition-colors"
               >
                 <MessageSquare className="w-4 h-4" />
                 <span>Confirm on WhatsApp</span>
@@ -106,76 +105,81 @@ export default function AvailabilityModal({ isOpen, onClose }: AvailabilityModal
 
               <a
                 href="tel:+917004375740"
-                className="px-4 py-3 bg-black/60 hover:bg-black/80 text-[#e8c17a] text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 border border-white/10"
+                className="px-4 py-3 bg-white dark:bg-black/60 hover:bg-[#FAF4ED] text-[#D46743] dark:text-[#E89B5B] text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 border border-[#E8DCCF] dark:border-white/10 transition-colors"
               >
-                <Phone className="w-3.5 h-3.5 text-[#e8c17a]" />
+                <Phone className="w-3.5 h-3.5 text-[#D46743] dark:text-[#E89B5B]" />
                 <span>Call Studio</span>
               </a>
             </div>
 
             <button
               onClick={() => setCheckedState('idle')}
-              className="text-[11px] text-[#e5e2e1]/60 hover:text-white underline text-center cursor-pointer"
+              className="text-[11px] text-[#7C685B] dark:text-[#A49182] hover:underline text-center cursor-pointer"
             >
               Check another date
             </button>
           </div>
         ) : (
           <form onSubmit={handleCheck} className="flex flex-col gap-4">
-            <div className="flex flex-col gap-1">
-              <label className="text-[11px] uppercase tracking-wider text-[#e8c17a] font-medium">
-                Wedding / Ceremony Date *
+            <div className="flex flex-col gap-1.5">
+              <label className="text-xs uppercase tracking-wider text-[#D46743] dark:text-[#E89B5B] font-semibold">
+                Event Date
               </label>
               <input
                 type="date"
                 required
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
-                className="w-full px-3.5 py-2.5 bg-black/50 text-[#fef9f1] text-xs sm:text-sm rounded border border-white/10 focus:border-[#e8c17a] focus:outline-none"
+                className="w-full px-4 py-3 rounded-lg bg-white dark:bg-black/50 border border-[#E8DCCF] dark:border-white/10 text-sm text-[#1A130E] dark:text-[#FAF3EC] focus:outline-none focus:border-[#D46743]"
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-3">
-              <div className="flex flex-col gap-1">
-                <label className="text-[11px] uppercase tracking-wider text-[#e8c17a] font-medium">
-                  Destination / City *
-                </label>
-                <select
-                  value={city}
-                  onChange={(e) => setCity(e.target.value)}
-                  className="w-full px-3 py-2.5 bg-black/50 text-[#fef9f1] text-xs sm:text-sm rounded border border-white/10 focus:border-[#e8c17a] focus:outline-none"
-                >
-                  <option value="Gaya" className="bg-[#121212]">Gaya, Bihar</option>
-                  <option value="Bodh Gaya" className="bg-[#121212]">Bodh Gaya</option>
-                  <option value="Patna" className="bg-[#121212]">Patna</option>
-                  <option value="Varanasi" className="bg-[#121212]">Varanasi</option>
-                  <option value="Dubai" className="bg-[#121212]">Dubai Destination</option>
-                  <option value="Other" className="bg-[#121212]">Other Destination</option>
-                </select>
-              </div>
+            <div className="flex flex-col gap-1.5">
+              <label className="text-xs uppercase tracking-wider text-[#D46743] dark:text-[#E89B5B] font-semibold">
+                Event Destination / Venue
+              </label>
+              <input
+                type="text"
+                required
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+                placeholder="e.g. Gaya, Bodh Gaya, Patna, Dubai"
+                className="w-full px-4 py-3 rounded-lg bg-white dark:bg-black/50 border border-[#E8DCCF] dark:border-white/10 text-sm text-[#1A130E] dark:text-[#FAF3EC] placeholder:text-[#7C685B]/60 focus:outline-none focus:border-[#D46743]"
+              />
+            </div>
 
-              <div className="flex flex-col gap-1">
-                <label className="text-[11px] uppercase tracking-wider text-[#e8c17a] font-medium">
-                  Coverage Medium
-                </label>
-                <select
-                  value={service}
-                  onChange={(e) => setService(e.target.value)}
-                  className="w-full px-3 py-2.5 bg-black/50 text-[#fef9f1] text-xs sm:text-sm rounded border border-white/10 focus:border-[#e8c17a] focus:outline-none"
-                >
-                  <option value="both" className="bg-[#121212]">Photo &amp; Cinema</option>
-                  <option value="photo" className="bg-[#121212]">Stills Only</option>
-                  <option value="film" className="bg-[#121212]">Cinema Only</option>
-                </select>
+            <div className="flex flex-col gap-1.5">
+              <label className="text-xs uppercase tracking-wider text-[#D46743] dark:text-[#E89B5B] font-semibold">
+                Coverage Requirement
+              </label>
+              <div className="grid grid-cols-3 gap-2">
+                {[
+                  { id: 'both', label: 'Photo & Film' },
+                  { id: 'photo', label: 'Photo Only' },
+                  { id: 'film', label: 'Film Only' },
+                ].map((item) => (
+                  <button
+                    key={item.id}
+                    type="button"
+                    onClick={() => setService(item.id)}
+                    className={`py-2.5 px-3 rounded text-xs font-semibold border transition-all ${
+                      service === item.id
+                        ? 'bg-[#FFEAD3] dark:bg-[#251C15] border-[#D46743] text-[#D46743] dark:text-[#E89B5B]'
+                        : 'bg-white dark:bg-black/30 border-[#E8DCCF] dark:border-white/10 text-[#524237] dark:text-[#D9C7B8]'
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                ))}
               </div>
             </div>
 
             <button
               type="submit"
               disabled={checkedState === 'checking'}
-              className="w-full py-3 bg-[#d60000] hover:bg-[#ff3333] text-[#ffe5e1] hover:text-white text-xs font-semibold uppercase tracking-[0.2em] transition-all duration-300 shadow-xl cursor-pointer mt-2"
+              className="mt-2 w-full py-3.5 bg-[#D46743] hover:bg-[#E89B5B] text-white text-xs uppercase tracking-[0.2em] font-semibold transition-all shadow-[0_0_20px_rgba(212,103,67,0.45)] cursor-pointer"
             >
-              {checkedState === 'checking' ? 'Consulting Master Calendar...' : 'Check Availability'}
+              {checkedState === 'checking' ? 'Querying Calendar...' : 'Check Availability'}
             </button>
           </form>
         )}
