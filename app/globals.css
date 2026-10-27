@@ -388,3 +388,16 @@ body {
   will-change: transform;
 }
 
+/* Smartphone Safe Area Padding & Touch Handling */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .safe-bottom {
+    padding-bottom: calc(0.5rem + env(safe-area-inset-bottom));
+  }
+}
+
+/* Eliminate tap delay on iOS Safari & Android Chrome */
+button, a {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+

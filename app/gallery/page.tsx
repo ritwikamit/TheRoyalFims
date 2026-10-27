@@ -93,10 +93,10 @@ export default function GalleryPage() {
               <button
                 key={filter.id}
                 onClick={() => setActiveFilter(filter.id)}
-                className={`clay-pill px-4 sm:px-5 py-2 sm:py-2.5 text-xs uppercase tracking-[0.18em] font-semibold transition-all cursor-pointer select-none active:scale-95 ${
+                className={`clay-pill px-4 sm:px-5 py-2 sm:py-2.5 text-xs uppercase tracking-[0.18em] font-bold transition-all cursor-pointer select-none active:scale-95 ${
                   activeFilter === filter.id
-                    ? 'bg-[#FF933E] text-white border-2 border-[#FFCB56] shadow-[0_6px_20px_rgba(255,147,62,0.35)]'
-                    : 'bg-[#FFFDF9] text-[#594233] border border-[#FFCB56]/40 hover:border-[#FF933E]'
+                    ? '!bg-[#FF933E] !text-white border-2 border-[#FFCB56] shadow-[0_6px_20px_rgba(255,147,62,0.45)]'
+                    : 'bg-[#FFFDF9] text-[#241912] border border-[#FFCB56]/50 hover:border-[#FF933E]'
                 }`}
               >
                 {filter.label}

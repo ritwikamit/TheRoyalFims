@@ -135,7 +135,7 @@ export default function RoyalLogo({
         </span>
         {showSubtitle && (
           <span
-            className={`font-headline uppercase tracking-[0.28em] font-semibold ${subColor} mt-1 ${dim.subSize}`}
+            className={`font-headline uppercase tracking-[0.28em] font-semibold ${subColor} mt-1 ${dim.subSize} hidden xs:inline-block`}
           >
             Bespoke Cinema • Gaya &amp; Dubai
           </span>

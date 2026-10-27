@@ -84,7 +84,7 @@ export default function AvailabilityModal({ isOpen, onClose }: AvailabilityModal
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.94, y: 16 }}
           transition={{ type: 'spring', damping: 26, stiffness: 320 }}
-          className="relative w-full max-w-lg max-h-[92vh] overflow-y-auto bg-[#FFFDF9] text-[#241912] border-2 border-[#FFCB56] rounded-2xl p-6 sm:p-8 shadow-[0_24px_70px_rgba(36,25,18,0.25),0_0_30px_rgba(255,203,86,0.35)] flex flex-col gap-6 z-10 my-auto"
+          className="clay-card relative w-full max-w-lg max-h-[92vh] overflow-y-auto bg-[#FFFDF9] text-[#241912] border-2 border-[#FFCB56] rounded-3xl p-5 sm:p-8 shadow-[0_24px_70px_rgba(36,25,18,0.25),0_0_30px_rgba(255,203,86,0.35)] flex flex-col gap-5 sm:gap-6 z-10 my-auto"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Top Golden Glossy Sheen Line */}
@@ -168,7 +168,7 @@ export default function AvailabilityModal({ isOpen, onClose }: AvailabilityModal
                   href={generateWhatsAppUrl()}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full py-3.5 bg-[#FF933E] hover:bg-[#ff8425] text-white text-xs font-bold uppercase tracking-[0.2em] rounded-xl flex items-center justify-center gap-2.5 shadow-[0_4px_18px_rgba(255,147,62,0.4)] transition-transform active:scale-98 group cursor-pointer"
+                  className="clay-button w-full py-3.5 bg-[#FF933E] hover:bg-[#ff8425] text-white text-xs font-bold uppercase tracking-[0.2em] rounded-full flex items-center justify-center gap-2.5 shadow-[0_6px_20px_rgba(255,147,62,0.45)] border border-[#FFCB56] transition-transform active:scale-95 group cursor-pointer"
                 >
                   <MinimalWhatsAppIcon className="w-4 h-4 transition-transform group-hover:scale-110" />
                   <span>Connect on WhatsApp Concierge</span>
@@ -311,7 +311,7 @@ export default function AvailabilityModal({ isOpen, onClose }: AvailabilityModal
               <button
                 type="submit"
                 disabled={checkedState === 'checking'}
-                className="mt-2 w-full py-3.5 bg-[#FF933E] hover:bg-[#ff8425] text-white text-xs uppercase tracking-[0.2em] font-bold rounded-xl shadow-[0_4px_18px_rgba(255,147,62,0.4)] transition-all active:scale-98 cursor-pointer flex items-center justify-center gap-2"
+                className="clay-button mt-2 w-full py-3.5 bg-[#FF933E] hover:bg-[#ff8425] text-white text-xs uppercase tracking-[0.2em] font-bold rounded-full shadow-[0_6px_20px_rgba(255,147,62,0.45)] border border-[#FFCB56] transition-all active:scale-95 cursor-pointer flex items-center justify-center gap-2"
               >
                 {checkedState === 'checking' ? (
                   <span>Checking Live Studio Schedule...</span>

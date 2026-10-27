@@ -22,6 +22,7 @@ import {
   Instagram,
   ExternalLink,
   MessageCircle,
+  Calendar,
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import { PortfolioItemData } from './PortfolioModal';
@@ -452,11 +453,11 @@ export default function HomeScreen({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.7 }}
-            className="flex flex-wrap items-center justify-center gap-4 pt-3"
+            className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 pt-3 w-full sm:w-auto max-w-md sm:max-w-none"
           >
             <button
               onClick={onOpenAvailability}
-              className="clay-button px-8 py-3.5 bg-[#FF933E] hover:bg-[#ff8425] text-white rounded-full border border-[#FFCB56] text-xs uppercase tracking-[0.24em] font-bold shadow-[0_8px_24px_rgba(255,147,62,0.45)] transition-all cursor-pointer active:scale-95 flex items-center gap-2 group"
+              className="clay-button w-full sm:w-auto px-7 sm:px-8 py-3.5 bg-[#FF933E] hover:bg-[#ff8425] text-white rounded-full border border-[#FFCB56] text-xs uppercase tracking-[0.24em] font-bold shadow-[0_8px_24px_rgba(255,147,62,0.45)] transition-all cursor-pointer active:scale-95 flex items-center justify-center gap-2 group"
             >
               <span>Reserve Your Wedding Date</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform text-[#FFE9A9]" />
@@ -466,7 +467,7 @@ export default function HomeScreen({
                 const el = document.getElementById('portfolio');
                 el?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="clay-button px-8 py-3.5 bg-[#FFFDF9] hover:bg-[#FFE9A9]/50 text-[#FF933E] rounded-full border border-[#FFCB56] text-xs uppercase tracking-[0.24em] font-bold transition-all cursor-pointer active:scale-95 shadow-[0_6px_20px_rgba(115,165,202,0.22)]"
+              className="clay-button w-full sm:w-auto px-7 sm:px-8 py-3.5 bg-[#FFFDF9] hover:bg-[#FFE9A9]/50 text-[#FF933E] rounded-full border border-[#FFCB56] text-xs uppercase tracking-[0.24em] font-bold transition-all cursor-pointer active:scale-95 shadow-[0_6px_20px_rgba(115,165,202,0.22)] text-center justify-center flex items-center"
             >
               Explore Royal Gallery
             </button>
@@ -820,16 +821,16 @@ export default function HomeScreen({
             </div>
 
             {/* Direct Link to Instagram */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 w-full md:w-auto">
               <a
                 href={INSTAGRAM_PROFILE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-3 bg-gradient-to-r from-[#FF933E] to-[#FFCB56] hover:from-[#ff8425] hover:to-[#f0be4b] text-white font-semibold text-xs uppercase tracking-[0.2em] rounded-full shadow-[0_4px_16px_rgba(255,147,62,0.35)] flex items-center gap-2 transition-transform hover:scale-105"
+                className="clay-button w-full sm:w-auto px-6 py-3 bg-[#FF933E] hover:bg-[#ff8425] text-white font-bold text-xs uppercase tracking-[0.2em] rounded-full shadow-[0_6px_18px_rgba(255,147,62,0.4)] flex items-center justify-center gap-2 transition-all active:scale-95 cursor-pointer"
               >
-                <Instagram className="w-4 h-4" />
+                <Instagram className="w-4 h-4 text-[#FFE9A9]" />
                 <span>Follow on Instagram</span>
-                <ExternalLink className="w-3.5 h-3.5" />
+                <ExternalLink className="w-3.5 h-3.5 text-[#FFE9A9]" />
               </a>
             </div>
           </div>
@@ -891,17 +892,14 @@ export default function HomeScreen({
                 </div>
 
                 {/* Action Link */}
-                <div className="pt-2">
-                  <a
-                    href={SIGNATURE_AWARD_REEL.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2.5 px-6 py-3 bg-[#FF933E] hover:bg-[#ff8425] text-white font-semibold text-xs uppercase tracking-[0.2em] rounded-full shadow-[0_4px_16px_rgba(255,147,62,0.35)] transition-all hover:scale-105 active:scale-95"
+                <div className="pt-2 flex flex-wrap items-center gap-3">
+                  <button
+                    onClick={onOpenAvailability}
+                    className="clay-button w-full sm:w-auto px-6 py-3 bg-[#FF933E] hover:bg-[#ff8425] text-white font-bold text-xs uppercase tracking-[0.2em] rounded-full shadow-[0_6px_20px_rgba(255,147,62,0.4)] transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
                   >
-                    <Instagram className="w-4 h-4" />
-                    <span>Watch Award Reel on Instagram</span>
-                    <ExternalLink className="w-3.5 h-3.5" />
-                  </a>
+                    <Calendar className="w-4 h-4 text-[#FFE9A9]" />
+                    <span>Inquire for Direction by Neeraj</span>
+                  </button>
                 </div>
               </div>
             </div>
