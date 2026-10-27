@@ -1,5 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Allura&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Cinzel:wght@400..900&family=Great+Vibes&family=Manrope:wght@300;400;500;600;700;800&family=Parisienne&family=Pinyon+Script&display=swap');
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Cinzel:wght@400..900&family=Great+Vibes&family=Manrope:wght@300;400;500;600;700;800&family=Pinyon+Script&display=swap');
 
 @theme {
   /* Brand Palette: https://colorhunt.co/palette/ff933effcb56ffe9a973a5ca */
@@ -53,10 +53,10 @@
 
   --font-headline: "Bodoni Moda", "Cinzel", Georgia, serif;
   --font-body: "Manrope", system-ui, -apple-system, sans-serif;
-  --font-cursive: "Great Vibes", "Pinyon Script", "Alex Brush", cursive, Georgia, serif;
-  --font-cursive-emblem: "Great Vibes", cursive, Georgia, serif;
-  --font-cursive-calligraphy: "Alex Brush", cursive, Georgia, serif;
-  --font-cursive-romantic: "Pinyon Script", cursive, Georgia, serif;
+  --font-cursive: "Alex Brush", "Allura", "Great Vibes", "Pinyon Script", "Parisienne", "Apple Chancery", "Brush Script MT", Georgia, serif;
+  --font-cursive-emblem: "Alex Brush", "Allura", "Great Vibes", Georgia, serif;
+  --font-cursive-calligraphy: "Alex Brush", "Allura", Georgia, serif;
+  --font-cursive-romantic: "Pinyon Script", "Parisienne", Georgia, serif;
 }
 
 @layer base {
@@ -98,24 +98,24 @@
   font-family: "Manrope", system-ui, -apple-system, sans-serif;
 }
 
-/* CURSIVE LUXURY FONTS MATCHING EMBLEM */
+/* CURSIVE LUXURY FONTS MATCHING EMBLEM (EXPLICIT FALLBACKS, NEVER COMIC SANS) */
 .font-cursive,
 .font-cursive-emblem {
-  font-family: "Great Vibes", "Pinyon Script", "Alex Brush", cursive, Georgia, serif !important;
+  font-family: "Alex Brush", "Allura", "Great Vibes", "Pinyon Script", "Parisienne", "Apple Chancery", "Brush Script MT", Georgia, serif !important;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.font-cursive-calligraphy {
+  font-family: "Alex Brush", "Allura", "Great Vibes", "Apple Chancery", Georgia, serif !important;
   font-weight: 400;
   letter-spacing: 0.03em;
 }
 
-.font-cursive-calligraphy {
-  font-family: "Alex Brush", cursive, Georgia, serif !important;
-  font-weight: 400;
-  letter-spacing: 0.04em;
-}
-
 .font-cursive-romantic {
-  font-family: "Pinyon Script", cursive, Georgia, serif !important;
+  font-family: "Pinyon Script", "Parisienne", "Allura", Georgia, serif !important;
   font-weight: 400;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
 }
 
 /* Luxury Light Glassmorphism Utilities */

@@ -58,7 +58,7 @@ export default function Footer({ onSelectTab, onOpenLegal }: FooterProps) {
                   <div className="flex flex-col">
                     <span 
                       className="text-3xl sm:text-4xl text-[#FF933E] leading-none drop-shadow-sm"
-                      style={{ fontFamily: "'Great Vibes', cursive" }}
+                      style={{ fontFamily: "'Alex Brush', 'Allura', 'Great Vibes', 'Apple Chancery', Georgia, serif" }}
                     >
                       The Royal Films
                     </span>
@@ -201,7 +201,7 @@ export default function Footer({ onSelectTab, onOpenLegal }: FooterProps) {
                 &copy; {new Date().getFullYear()} The Royal Films Atelier. All rights reserved.
               </p>
               <span className="hidden sm:inline text-[#FFCB56]">•</span>
-              <span className="hidden sm:inline font-cursive text-sm text-[#FF933E]" style={{ fontFamily: "'Great Vibes', cursive" }}>
+              <span className="hidden sm:inline font-cursive text-sm text-[#FF933E]" style={{ fontFamily: "'Alex Brush', 'Allura', 'Great Vibes', 'Apple Chancery', Georgia, serif" }}>
                 Filmed with Devotion
               </span>
             </div>

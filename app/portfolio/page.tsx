@@ -221,7 +221,7 @@ export default function PortfolioPage() {
               </h1>
               <p 
                 className="text-2xl sm:text-3xl text-[#FF933E] -mt-1"
-                style={{ fontFamily: "'Great Vibes', cursive" }}
+                style={{ fontFamily: "'Alex Brush', 'Allura', 'Great Vibes', 'Pinyon Script', 'Apple Chancery', Georgia, serif" }}
               >
                 &ldquo;A visual archive of family legacies and unscripted devotion.&rdquo;
               </p>

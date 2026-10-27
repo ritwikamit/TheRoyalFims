@@ -255,7 +255,7 @@ export default function HomeScreen({
             <Sparkles className="w-4 h-4 text-[#FFCB56]" />
             <span
               className="text-2xl sm:text-3xl text-[#FFE9A9] drop-shadow-md"
-              style={{ fontFamily: "'Great Vibes', cursive" }}
+              style={{ fontFamily: "'Alex Brush', 'Allura', 'Great Vibes', 'Pinyon Script', 'Apple Chancery', Georgia, serif" }}
             >
               The Royal Films Atelier
             </span>
@@ -272,7 +272,7 @@ export default function HomeScreen({
             Timeless Cinema for <br className="hidden sm:inline" />
             <span
               className="font-normal text-[#FFCB56] italic drop-shadow-[0_2px_14px_rgba(255,203,86,0.6)]"
-              style={{ fontFamily: "'Great Vibes', cursive" }}
+              style={{ fontFamily: "'Alex Brush', 'Allura', 'Great Vibes', 'Pinyon Script', 'Apple Chancery', Georgia, serif" }}
             >
               Royal Celebrations
             </span>
@@ -366,7 +366,7 @@ export default function HomeScreen({
               We Don&apos;t Just Shoot Weddings. <br />
               <span
                 className="font-normal text-[#FF933E]"
-                style={{ fontFamily: "'Great Vibes', cursive" }}
+                style={{ fontFamily: "'Alex Brush', 'Allura', 'Great Vibes', 'Pinyon Script', 'Apple Chancery', Georgia, serif" }}
               >
                 We Preserve Family Dynasties.
               </span>
@@ -380,7 +380,7 @@ export default function HomeScreen({
             <blockquote className="p-5 bg-[#FFE9A9]/35 border-l-4 border-[#FF933E] rounded-r-xl">
               <p
                 className="text-xl sm:text-2xl text-[#241912] leading-snug"
-                style={{ fontFamily: "'Great Vibes', cursive" }}
+                style={{ fontFamily: "'Alex Brush', 'Allura', 'Great Vibes', 'Pinyon Script', 'Apple Chancery', Georgia, serif" }}
               >
                 &ldquo;Behind every grand ritual is a quiet glance between a father and daughter, or a stolen smile across a crowded mandap. That is where eternity lives.&rdquo;
               </p>
@@ -647,7 +647,7 @@ export default function HomeScreen({
                 </div>
                 <span
                   className="text-lg sm:text-xl text-[#FF933E]"
-                  style={{ fontFamily: "'Great Vibes', cursive" }}
+                  style={{ fontFamily: "'Alex Brush', 'Allura', 'Great Vibes', 'Pinyon Script', 'Apple Chancery', Georgia, serif" }}
                 >
                   The Royal Films • Cinema &amp; Photography
                 </span>
@@ -829,7 +829,7 @@ export default function HomeScreen({
             >
               <p
                 className="text-2xl sm:text-3xl text-[#FF933E] leading-relaxed"
-                style={{ fontFamily: "'Great Vibes', cursive" }}
+                style={{ fontFamily: "'Alex Brush', 'Allura', 'Great Vibes', 'Pinyon Script', 'Apple Chancery', Georgia, serif" }}
               >
                 &ldquo;They documented each sacred ritual with unmatched patience. Looking at our wedding film brought back every emotion of that evening. Truly royal.&rdquo;
               </p>
@@ -858,7 +858,7 @@ export default function HomeScreen({
             >
               <p
                 className="text-2xl sm:text-3xl text-[#FF933E] leading-relaxed"
-                style={{ fontFamily: "'Great Vibes', cursive" }}
+                style={{ fontFamily: "'Alex Brush', 'Allura', 'Great Vibes', 'Pinyon Script', 'Apple Chancery', Georgia, serif" }}
               >
                 &ldquo;We were shy in front of cameras, but their crew made us laugh naturally. Our pre-wedding teaser in Dubai looks straight out of a Bollywood cinema!&rdquo;
               </p>
@@ -887,7 +887,7 @@ export default function HomeScreen({
             >
               <p
                 className="text-2xl sm:text-3xl text-[#FF933E] leading-relaxed"
-                style={{ fontFamily: "'Great Vibes', cursive" }}
+                style={{ fontFamily: "'Alex Brush', 'Allura', 'Great Vibes', 'Pinyon Script', 'Apple Chancery', Georgia, serif" }}
               >
                 &ldquo;My parents loved the traditional family portraits and how respectfully the crew handled all rituals. The coffee table album is our family heirloom.&rdquo;
               </p>

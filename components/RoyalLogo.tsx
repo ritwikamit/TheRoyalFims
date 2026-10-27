@@ -84,7 +84,7 @@ export default function RoyalLogo({
         <div className="flex flex-col items-center">
           <span
             className={`font-cursive-emblem ${dim.titleSize} leading-none text-[#FF933E] drop-shadow-[0_1px_2px_rgba(255,147,62,0.2)]`}
-            style={{ fontFamily: "'Great Vibes', cursive" }}
+            style={{ fontFamily: "'Alex Brush', 'Allura', 'Great Vibes', 'Apple Chancery', Georgia, serif" }}
           >
             The Royal Films
           </span>
@@ -107,7 +107,7 @@ export default function RoyalLogo({
       <div className="flex flex-col leading-tight">
         <span
           className={`font-cursive-emblem ${dim.titleSize} text-[#FF933E] leading-none drop-shadow-[0_1px_2px_rgba(255,147,62,0.15)]`}
-          style={{ fontFamily: "'Great Vibes', cursive" }}
+          style={{ fontFamily: "'Alex Brush', 'Allura', 'Great Vibes', 'Apple Chancery', Georgia, serif" }}
         >
           The Royal Films
         </span>
