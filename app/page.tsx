@@ -64,7 +64,7 @@ export default function Page() {
   return (
     <div className="min-h-screen flex flex-col font-sans bg-[#FFFDF9] text-[#241912] selection:bg-[#FFE9A9] selection:text-[#FF933E]">
       {/* Animated Luxury Splash Loading Screen with Golden Emblem */}
-      <LoadingScreen minDuration={1200} />
+      <LoadingScreen minDuration={550} />
 
       {/* Fixed Luxury Navigation Header */}
       <Navbar 

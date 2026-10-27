@@ -55,28 +55,30 @@ export default function Navbar({
   return (
     <div className="fixed top-0 inset-x-0 z-50 flex justify-center pointer-events-none w-full">
       <header
-        className={`pointer-events-auto transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-[width,max-width,margin,border-radius,padding,box-shadow,transform] relative overflow-hidden ${
-          isScrolled
-            ? 'w-[94%] sm:w-[88%] max-w-5xl mt-2 sm:mt-4 rounded-full py-2 sm:py-2.5 px-3.5 sm:px-7 bg-[#73A5CA]/80 backdrop-blur-2xl border-2 border-[#FFCB56] shadow-[0_16px_50px_rgba(115,165,202,0.45),0_0_25px_rgba(255,203,86,0.5),inset_0_1.5px_2px_rgba(255,255,255,0.85),inset_0_-1.5px_2px_rgba(255,147,62,0.35)] ring-1 ring-[#FFE9A9]/70'
-            : 'w-full max-w-full mt-0 rounded-none py-3 sm:py-4 px-4 sm:px-6 lg:px-12 bg-[#73A5CA]/80 backdrop-blur-2xl border-b-2 border-[#FFCB56] shadow-[0_4px_25px_rgba(115,165,202,0.35),0_6px_22px_rgba(255,203,86,0.4),inset_0_-1.5px_2px_rgba(255,233,169,0.95)]'
+        className={`pointer-events-auto transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-[width,max-width,margin,border-radius,padding,box-shadow,transform] relative ${
+          mobileMenuOpen
+            ? 'w-[95%] sm:w-[90%] max-w-5xl mt-2 rounded-3xl py-2.5 px-3.5 sm:px-7 bg-[#73A5CA]/95 backdrop-blur-2xl border-2 border-[#FFCB56] shadow-[0_20px_50px_rgba(115,165,202,0.5)] ring-1 ring-[#FFE9A9]/70'
+            : isScrolled
+            ? 'w-[95%] sm:w-[88%] max-w-5xl mt-2 sm:mt-4 rounded-full py-2 sm:py-2.5 px-3.5 sm:px-7 bg-[#73A5CA]/80 backdrop-blur-2xl border-2 border-[#FFCB56] shadow-[0_16px_50px_rgba(115,165,202,0.45),0_0_25px_rgba(255,203,86,0.5),inset_0_1.5px_2px_rgba(255,255,255,0.85),inset_0_-1.5px_2px_rgba(255,147,62,0.35)] ring-1 ring-[#FFE9A9]/70'
+            : 'w-full max-w-full mt-0 rounded-none py-2.5 sm:py-4 px-3 sm:px-6 lg:px-12 bg-[#73A5CA]/80 backdrop-blur-2xl border-b-2 border-[#FFCB56] shadow-[0_4px_25px_rgba(115,165,202,0.35),0_6px_22px_rgba(255,203,86,0.4),inset_0_-1.5px_2px_rgba(255,233,169,0.95)]'
         }`}
       >
         {/* Golden Glossy Specular Sheen Streaks & Gloss Wash */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white/12 via-transparent to-black/10 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/12 via-transparent to-black/10 pointer-events-none rounded-[inherit]" />
         <div className="absolute top-0 inset-x-8 sm:inset-x-14 h-[1.5px] bg-gradient-to-r from-transparent via-white/90 to-transparent pointer-events-none" />
         <div className="absolute bottom-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-[#FFE9A9] to-transparent shadow-[0_0_12px_#FFCB56] pointer-events-none" />
 
-        <div className="w-full flex items-center justify-between">
+        <div className="w-full flex items-center justify-between gap-2">
           {/* Brand Zone - Smooth GPU Scaled Logo for Smartphone & Desktop */}
           <Link
             href="/"
             onClick={() => handleNavClick('home', '/')}
-            className="flex items-center text-left focus:outline-none group cursor-pointer shrink-0"
+            className="flex items-center text-left focus:outline-none group cursor-pointer shrink min-w-0"
             aria-label="The Royal Films Home"
           >
             <div
               className={`transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] origin-left will-change-transform ${
-                isScrolled ? 'scale-[0.80] sm:scale-[0.88]' : 'scale-[0.90] sm:scale-100'
+                isScrolled ? 'scale-[0.78] xs:scale-[0.84] sm:scale-[0.88]' : 'scale-[0.85] xs:scale-[0.92] sm:scale-100'
               }`}
             >
               <RoyalLogo size="md" theme="blue" />
@@ -111,7 +113,7 @@ export default function Navbar({
           </nav>
 
           {/* Desktop Action Zone: Check Dates CTA (WhatsApp icon removed from header) */}
-          <div className="hidden sm:flex items-center gap-2.5 sm:gap-3">
+          <div className="hidden sm:flex items-center gap-2.5 sm:gap-3 shrink-0">
             <button
               onClick={onOpenAvailability}
               className="clay-button flex items-center gap-2 bg-[#FF933E] hover:bg-[#ff8425] text-white border border-[#FFCB56] text-xs uppercase tracking-[0.2em] font-bold shadow-[0_4px_16px_rgba(255,147,62,0.4)] transition-all duration-300 cursor-pointer active:scale-95 group rounded-full px-4 sm:px-5 py-2 sm:py-2.5"
@@ -123,10 +125,10 @@ export default function Navbar({
           </div>
 
           {/* Smartphone Action Zone: Compact Dates Button + Minimal Hamburger Toggle */}
-          <div className="flex lg:hidden items-center gap-2">
+          <div className="flex lg:hidden items-center gap-1.5 xs:gap-2 shrink-0">
             <button
               onClick={onOpenAvailability}
-              className="clay-button px-2.5 py-1.5 rounded-full bg-[#FF933E] text-white border border-[#FFCB56] text-[10px] uppercase tracking-wider font-bold shadow-xs flex items-center gap-1 active:scale-95 cursor-pointer"
+              className="clay-button px-2.5 py-1.5 rounded-full bg-[#FF933E] hover:bg-[#ff8425] text-white border border-[#FFCB56] text-[10px] uppercase tracking-wider font-bold shadow-xs flex items-center gap-1 active:scale-95 cursor-pointer"
               aria-label="Check Dates"
             >
               <Calendar className="w-3 h-3 text-[#FFE9A9]" />
@@ -135,51 +137,53 @@ export default function Navbar({
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-1.5 text-white hover:text-[#FFE9A9] transition-colors cursor-pointer"
+              className="clay-button p-2 text-white hover:text-[#FFE9A9] bg-white/15 hover:bg-white/25 rounded-full border border-white/30 transition-colors cursor-pointer active:scale-95"
               aria-label="Toggle navigation menu"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? <X className="w-5 h-5 text-[#FFE9A9]" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>
 
-        {/* Mobile Drawer Menu */}
+        {/* Mobile Drawer Menu with Claymorphic Items */}
         <AnimatePresence>
           {mobileMenuOpen && (
             <motion.div
-              initial={{ opacity: 0, height: 0, scale: 0.98 }}
-              animate={{ opacity: 1, height: 'auto', scale: 1 }}
-              exit={{ opacity: 0, height: 0, scale: 0.98 }}
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-              className={`lg:hidden bg-[#73A5CA]/98 border border-white/25 px-5 py-5 flex flex-col gap-3 shadow-2xl backdrop-blur-2xl text-white ${
-                isScrolled ? 'rounded-3xl mt-2 mx-1' : 'rounded-b-2xl mt-2'
-              }`}
+              className="lg:hidden mt-3 pt-3 border-t border-white/20 flex flex-col gap-2 overflow-hidden"
             >
-              {navLinks.map((link) => (
-                <button
-                  key={link.id}
-                  onClick={() => handleNavClick(link.id, link.href)}
-                  className={`text-left text-xs uppercase tracking-[0.2em] py-2.5 border-b border-white/15 cursor-pointer flex items-center justify-between ${
-                    currentTab === link.id
-                      ? 'text-[#FFE9A9] font-bold'
-                      : 'text-white/90'
-                  }`}
-                >
-                  <span>{link.label}</span>
-                  {currentTab === link.id && (
-                    <span className="w-2 h-2 rounded-full bg-[#FFCB56] shadow-[0_0_8px_#FFCB56]" />
-                  )}
-                </button>
-              ))}
+              {navLinks.map((link) => {
+                const isActive = currentTab === link.id;
+                return (
+                  <button
+                    key={link.id}
+                    onClick={() => handleNavClick(link.id, link.href)}
+                    className={`clay-pill px-4 py-2.5 text-left text-xs uppercase tracking-[0.2em] font-semibold cursor-pointer flex items-center justify-between transition-all ${
+                      isActive
+                        ? 'bg-[#FF933E] text-white border border-[#FFCB56] shadow-[0_4px_14px_rgba(255,147,62,0.4)]'
+                        : 'bg-white/15 hover:bg-white/25 text-white/95 border border-white/25'
+                    }`}
+                  >
+                    <span>{link.label}</span>
+                    {isActive && (
+                      <span className="w-2 h-2 rounded-full bg-[#FFE9A9] shadow-[0_0_8px_#FFE9A9]" />
+                    )}
+                  </button>
+                );
+              })}
 
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
                   onOpenAvailability();
                 }}
-                className="clay-button mt-2 w-full py-3 bg-[#FF933E] hover:bg-[#ff8425] text-white font-bold text-xs uppercase tracking-[0.2em] text-center shadow-lg cursor-pointer rounded-xl transition-colors border border-[#FFCB56]"
+                className="clay-button mt-2 w-full py-3 bg-[#FF933E] hover:bg-[#ff8425] text-white font-bold text-xs uppercase tracking-[0.2em] text-center shadow-lg cursor-pointer rounded-full transition-colors border border-[#FFCB56] flex items-center justify-center gap-2"
               >
-                Check Date Availability
+                <Calendar className="w-3.5 h-3.5 text-[#FFE9A9]" />
+                <span>Check Date Availability</span>
               </button>
             </motion.div>
           )}

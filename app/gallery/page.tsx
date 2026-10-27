@@ -9,11 +9,17 @@ import ScrollToTop from '@/components/ScrollToTop';
 import MobileBottomNav from '@/components/MobileBottomNav';
 import InteractiveGrid from '@/components/InteractiveGrid';
 import { Camera, Film, MapPin, Eye, Calendar } from 'lucide-react';
+import CookieBanner from '@/components/CookieBanner';
+import LegalModal, { LegalTabType } from '@/components/LegalModal';
 import { TRF_LANDSCAPE, TRF_PORTRAIT, TrfImageItem } from '@/lib/trfImages';
 
 export default function GalleryPage() {
   const [activeFilter, setActiveFilter] = useState<'all' | 'wedding' | 'prewedding' | 'haldi' | 'reception' | 'dubai'>('all');
   const [isAvailabilityOpen, setIsAvailabilityOpen] = useState(false);
+  const [legalModal, setLegalModal] = useState<{ isOpen: boolean; tab: LegalTabType }>({
+    isOpen: false,
+    tab: 'privacy',
+  });
 
   // Permanently enforce 100% light theme
   useEffect(() => {
@@ -191,7 +197,14 @@ export default function GalleryPage() {
           else if (tab === 'dubai-destination') window.location.href = '/dubai';
           else window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
-        onOpenLegal={() => {}}
+        onOpenLegal={(tab) => setLegalModal({ isOpen: true, tab })}
+      />
+
+      <CookieBanner onOpenCookiePolicy={() => setLegalModal({ isOpen: true, tab: 'cookies' })} />
+      <LegalModal 
+        isOpen={legalModal.isOpen}
+        initialTab={legalModal.tab}
+        onClose={() => setLegalModal({ ...legalModal, isOpen: false })}
       />
 
       <ScrollToTop />

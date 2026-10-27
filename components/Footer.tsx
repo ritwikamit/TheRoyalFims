@@ -82,13 +82,13 @@ export default function Footer({ onSelectTab, onOpenLegal }: FooterProps) {
               </p>
 
               <div className="flex flex-wrap items-center gap-2 pt-1">
-                <span className="px-3 py-1 bg-white/15 border border-white/30 text-white text-[10px] uppercase tracking-[0.2em] font-semibold shadow-sm rounded-sm">
+                <span className="clay-pill px-3.5 py-1 bg-white/20 border border-white/35 text-[#FFE9A9] text-[10px] uppercase tracking-[0.2em] font-bold shadow-sm">
                   AAFT Trained Cinema
                 </span>
-                <span className="px-3 py-1 bg-white/15 border border-white/30 text-white text-[10px] uppercase tracking-[0.2em] font-semibold shadow-sm rounded-sm">
+                <span className="clay-pill px-3.5 py-1 bg-white/20 border border-white/35 text-[#FFE9A9] text-[10px] uppercase tracking-[0.2em] font-bold shadow-sm">
                   4K HDR Master Film
                 </span>
-                <span className="px-3 py-1 bg-[#FF933E] text-white text-[10px] uppercase tracking-[0.2em] font-bold rounded-sm shadow-sm">
+                <span className="clay-pill px-3.5 py-1 bg-[#FF933E] text-white text-[10px] uppercase tracking-[0.2em] font-bold shadow-sm border border-[#FFCB56]">
                   Dubai Certified
                 </span>
               </div>
@@ -153,59 +153,61 @@ export default function Footer({ onSelectTab, onOpenLegal }: FooterProps) {
               </ul>
             </div>
 
-            {/* Col 4: Atelier Studio Direct Contact */}
-            <div className="lg:col-span-3 flex flex-col gap-4">
-              <h4 className="text-xs font-bold uppercase tracking-[0.24em] text-[#FFE9A9] drop-shadow-sm">
-                Atelier Headquarters
-              </h4>
-              <div className="flex flex-col gap-3 text-xs text-white/95">
-                <div className="flex items-start gap-2.5">
-                  <MapPin className="w-4 h-4 text-[#FFE9A9] shrink-0 mt-0.5" />
-                  <span>
-                    Chhotki Nawada, Delha, Gaya, Bihar 823002
-                  </span>
-                </div>
-                <div className="flex flex-wrap items-center gap-2 pt-1">
-                  <a
-                    href="tel:+918210351286"
-                    aria-label="Call Atelier Direct"
-                    title="Call Atelier Direct"
-                    className="flex items-center gap-1.5 px-3 py-1.5 bg-white/20 hover:bg-[#FF933E] text-white hover:text-white border border-white/35 transition-all text-[11px] font-semibold uppercase tracking-wider rounded-md group shadow-sm"
-                  >
-                    <Phone className="w-3.5 h-3.5 group-hover:rotate-12 transition-transform" />
-                    <span>Call Direct</span>
-                  </a>
-                  <a
-                    href="https://wa.me/918210351286?text=Hello%20The%20Royal%20Films%2C%20I%20would%20like%20to%20inquire%20about%20wedding%20dates."
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="WhatsApp Concierge"
-                    title="WhatsApp Concierge"
-                    className="flex items-center gap-1.5 px-3 py-1.5 bg-white/20 hover:bg-[#25D366] text-white hover:text-white border border-white/35 transition-all text-[11px] font-semibold uppercase tracking-wider rounded-md group shadow-sm"
-                  >
-                    <MinimalWhatsAppIcon className="w-3.5 h-3.5" />
-                    <span>WhatsApp</span>
-                  </a>
-                </div>
-                <div className="flex items-center gap-2.5">
-                  <Mail className="w-4 h-4 text-[#FFE9A9] shrink-0" />
-                  <a
-                    href="mailto:contact@theroyalfilms.com"
-                    className="hover:text-[#FFE9A9] transition-colors tracking-wide"
-                  >
-                    contact@theroyalfilms.com
-                  </a>
-                </div>
-                <div className="pt-2 flex items-center gap-3">
-                  <a
-                    href={INSTAGRAM_PROFILE_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-3 py-1.5 bg-white/20 hover:bg-white text-white hover:text-[#E4405F] border border-white/35 text-xs font-semibold tracking-wider transition-all rounded-md shadow-sm"
-                  >
-                    <Instagram className="w-4 h-4" />
-                    <span>{INSTAGRAM_HANDLE}</span>
-                  </a>
+            {/* Col 4: Atelier Studio Direct Contact with Claymorphism */}
+            <div className="lg:col-span-3">
+              <div className="clay-card p-5 bg-white/10 backdrop-blur-xl border border-[#FFCB56]/50 rounded-2xl flex flex-col gap-4 shadow-xl text-white">
+                <h4 className="text-xs font-bold uppercase tracking-[0.24em] text-[#FFE9A9] drop-shadow-sm">
+                  Atelier Headquarters
+                </h4>
+                <div className="flex flex-col gap-3 text-xs text-white/95">
+                  <div className="flex items-start gap-2.5">
+                    <MapPin className="w-4 h-4 text-[#FFE9A9] shrink-0 mt-0.5" />
+                    <span className="leading-relaxed">
+                      Chhotki Nawada, Delha, Gaya, Bihar 823002
+                    </span>
+                  </div>
+                  <div className="flex flex-wrap items-center gap-2 pt-1">
+                    <a
+                      href="tel:+918210351286"
+                      aria-label="Call Atelier Direct"
+                      title="Call Atelier Direct"
+                      className="clay-button flex items-center gap-1.5 px-3.5 py-2 bg-[#FFFDF9] hover:bg-[#FFE9A9]/50 text-[#FF933E] border border-[#FFCB56] transition-all text-[11px] font-bold uppercase tracking-wider rounded-full shadow-sm active:scale-95 cursor-pointer"
+                    >
+                      <Phone className="w-3.5 h-3.5" />
+                      <span>Call Direct</span>
+                    </a>
+                    <a
+                      href="https://wa.me/918210351286?text=Hello%20The%20Royal%20Films%2C%20I%20would%20like%20to%20inquire%20about%20wedding%20dates."
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="WhatsApp Concierge"
+                      title="WhatsApp Concierge"
+                      className="clay-button-green flex items-center gap-1.5 px-3.5 py-2 bg-[#25D366] hover:bg-[#20ba59] text-white border border-[#25D366] transition-all text-[11px] font-bold uppercase tracking-wider rounded-full shadow-sm active:scale-95 cursor-pointer"
+                    >
+                      <MinimalWhatsAppIcon className="w-3.5 h-3.5" />
+                      <span>WhatsApp</span>
+                    </a>
+                  </div>
+                  <div className="flex items-center gap-2.5 pt-1">
+                    <Mail className="w-4 h-4 text-[#FFE9A9] shrink-0" />
+                    <a
+                      href="mailto:contact@theroyalfilms.com"
+                      className="hover:text-[#FFE9A9] transition-colors tracking-wide font-medium"
+                    >
+                      contact@theroyalfilms.com
+                    </a>
+                  </div>
+                  <div className="pt-1 flex items-center gap-3">
+                    <a
+                      href={INSTAGRAM_PROFILE_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="clay-button flex items-center gap-2 px-3.5 py-2 bg-[#FFFDF9] hover:bg-white text-[#241912] hover:text-[#E4405F] border border-[#FFCB56]/60 text-xs font-bold tracking-wider transition-all rounded-full shadow-sm active:scale-95 cursor-pointer"
+                    >
+                      <Instagram className="w-4 h-4 text-[#FF933E]" />
+                      <span>{INSTAGRAM_HANDLE}</span>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>

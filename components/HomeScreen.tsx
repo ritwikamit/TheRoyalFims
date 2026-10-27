@@ -396,15 +396,15 @@ export default function HomeScreen({
 
         {/* Floating Highlights & Headlines Directly Over The Video */}
         <div className="relative z-20 max-w-5xl mx-auto px-5 sm:px-8 text-center flex flex-col items-center justify-center gap-6 pt-16">
-          {/* Cursive Brand Tagline (Stars Removed as requested) */}
+          {/* Cursive Brand Tagline with Claymorphism */}
           <motion.div
             initial={{ opacity: 0, y: 25, filter: 'blur(8px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             transition={{ duration: 0.9, delay: 0.1 }}
-            className="flex items-center justify-center px-6 py-2 rounded-full bg-white/15 backdrop-blur-md border border-[#FFCB56]/60 shadow-[0_4px_20px_rgba(255,147,62,0.3)]"
+            className="clay-pill flex items-center justify-center px-8 py-2.5 rounded-full bg-[#FFFDF9]/90 backdrop-blur-md border border-[#FFCB56] shadow-[0_12px_32px_rgba(115,165,202,0.28),inset_2px_2px_4px_rgba(255,255,255,0.95),inset_-2px_-2px_4px_rgba(232,213,176,0.45)]"
           >
             <span
-              className="text-2xl sm:text-3xl text-[#FFE9A9] drop-shadow-md"
+              className="text-2xl sm:text-3xl text-[#FF933E] font-medium drop-shadow-sm"
               style={{ fontFamily: "'Alex Brush', 'Allura', 'Great Vibes', 'Pinyon Script', 'Apple Chancery', Georgia, serif" }}
             >
               The Royal Films Atelier
@@ -447,7 +447,7 @@ export default function HomeScreen({
           </motion.p>
 
 
-          {/* Floating CTA Buttons Over Video */}
+          {/* Floating CTA Buttons Over Video with Claymorphism */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -456,17 +456,17 @@ export default function HomeScreen({
           >
             <button
               onClick={onOpenAvailability}
-              className="px-8 py-3.5 bg-[#FF933E] hover:bg-[#ff8425] text-white rounded-none border border-[#FFCB56] text-xs uppercase tracking-[0.24em] font-semibold shadow-[0_0_25px_rgba(255,147,62,0.6)] transition-all cursor-pointer active:scale-95 flex items-center gap-2 group"
+              className="clay-button px-8 py-3.5 bg-[#FF933E] hover:bg-[#ff8425] text-white rounded-full border border-[#FFCB56] text-xs uppercase tracking-[0.24em] font-bold shadow-[0_8px_24px_rgba(255,147,62,0.45)] transition-all cursor-pointer active:scale-95 flex items-center gap-2 group"
             >
               <span>Reserve Your Wedding Date</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform text-[#FFE9A9]" />
             </button>
             <button
               onClick={() => {
                 const el = document.getElementById('portfolio');
                 el?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="px-8 py-3.5 bg-white/20 hover:bg-white/30 text-white backdrop-blur-md text-xs uppercase tracking-[0.24em] font-semibold border border-white/40 transition-all cursor-pointer shadow-lg"
+              className="clay-button px-8 py-3.5 bg-[#FFFDF9] hover:bg-[#FFE9A9]/50 text-[#FF933E] rounded-full border border-[#FFCB56] text-xs uppercase tracking-[0.24em] font-bold transition-all cursor-pointer active:scale-95 shadow-[0_6px_20px_rgba(115,165,202,0.22)]"
             >
               Explore Royal Gallery
             </button>
@@ -578,7 +578,7 @@ export default function HomeScreen({
               {/* AMBIENT LIGHT HALO BEHIND PHOTO (Rich Honey Gold & Crimson Glow) */}
               <div className="absolute -inset-4 sm:-inset-6 bg-gradient-to-tr from-[#FF933E]/40 via-[#FFCB56]/30 to-[#C41E3A]/25 rounded-3xl blur-2xl sm:blur-3xl opacity-80 group-hover:opacity-100 transition-opacity pointer-events-none -z-10" />
 
-              {/* Photo Box: Face completely visible, no cutting of bride's face or crown */}
+              {/* Photo Box: Face completely visible, pure photo with zero text clutter */}
               <div className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl border-2 border-[#FFCB56] bg-[#120E0A]">
                 <Image
                   src="/assets/signature.jpg"
@@ -588,34 +588,12 @@ export default function HomeScreen({
                   className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
                   sizes="(max-width: 768px) 100vw, 35vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/25 pointer-events-none" />
-
-                {/* Top Badge */}
-                <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10">
-                  <span className="px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-[#FFCB56]/60 text-[10px] uppercase tracking-wider font-bold text-[#FFE9A9] shadow-sm flex items-center gap-1.5">
-                    <Award className="w-3.5 h-3.5 text-[#FFCB56]" />
-                    <span>Signature Masterpiece</span>
-                  </span>
-                </div>
-
-                {/* Bottom Photo Caption matching actual visual */}
-                <div className="absolute bottom-4 left-4 right-4 text-white z-10">
-                  <span className="text-[10px] uppercase tracking-widest text-[#FFCB56] font-semibold">
-                    Editorial Bridal Portrait
-                  </span>
-                  <h4 className="font-headline text-base sm:text-lg font-bold leading-tight mt-0.5 text-[#FFFDF9]">
-                    The Serenity of Royal Shringaar
-                  </h4>
-                  <p className="text-[11px] text-[#FFE9A9]/80 line-clamp-2 mt-1 font-light">
-                    Crimson velvet, Polki maang tikka, traditional chooda, and solitary scarlet blossom.
-                  </p>
-                </div>
               </div>
             </motion.div>
 
-            {/* Stacked Side Elements: Real Photo & Real Video Card (Both with Ambient Light) */}
+            {/* Stacked Side Elements: Real Photo & Real In-Place Video Card (Both with Ambient Light, Zero Text Clutter) */}
             <div className="sm:col-span-5 flex flex-col gap-5 sm:gap-6">
-              {/* Photo Card: Sacred Pheras Still (Faces not cut) */}
+              {/* Photo Card: Sacred Pheras Still (Faces not cut, pure clean image) */}
               <motion.div
                 initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
                 whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
@@ -634,25 +612,10 @@ export default function HomeScreen({
                     className="object-cover object-top"
                     sizes="(max-width: 768px) 100vw, 25vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
-                  <div className="absolute top-2.5 left-2.5">
-                    <span className="px-2 py-0.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-[9px] uppercase tracking-wider font-semibold text-[#FFE9A9] flex items-center gap-1">
-                      <Camera className="w-2.5 h-2.5 text-[#FFCB56]" />
-                      <span>Fine Art Still</span>
-                    </span>
-                  </div>
-                  <div className="absolute bottom-2.5 left-2.5 right-2.5 text-white">
-                    <span className="text-[9px] uppercase tracking-widest text-[#FFCB56] font-semibold">
-                      Authentic Photo
-                    </span>
-                    <h5 className="font-headline text-xs sm:text-sm font-semibold leading-tight text-[#FFFDF9]">
-                      Sacred Pheras &amp; Mandap
-                    </h5>
-                  </div>
                 </div>
               </motion.div>
 
-              {/* Video Card: Real Cinema Video Reel (Plays on hover) */}
+              {/* Video Card: Real Cinema Video Reel (Plays in place, mute toggle, no Instagram redirect, clean box) */}
               <motion.div
                 initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
                 whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
@@ -663,60 +626,12 @@ export default function HomeScreen({
                 {/* Ambient Backlight Glow */}
                 <div className="absolute -inset-3 bg-gradient-to-br from-[#73A5CA]/30 via-[#FF933E]/25 to-transparent rounded-2xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity pointer-events-none -z-10" />
 
-                <a
-                  href="https://www.instagram.com/reel/DYUk0fbpr85/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onMouseEnter={(e) => {
-                    const video = e.currentTarget.querySelector('video');
-                    if (video) video.play().catch(() => {});
-                  }}
-                  onMouseLeave={(e) => {
-                    const video = e.currentTarget.querySelector('video');
-                    if (video) {
-                      video.pause();
-                      video.currentTime = 0;
-                    }
-                  }}
-                  className="relative aspect-[16/11] rounded-2xl overflow-hidden shadow-xl border-2 border-[#FFCB56]/50 bg-black block group-hover:scale-105 transition-transform duration-500 cursor-pointer"
-                >
-                  <video
-                    src="/assets/reels/DYUk0fbpr85.mp4"
-                    poster="/assets/reels/DYUk0fbpr85.jpg"
-                    muted
-                    loop
-                    playsInline
-                    preload="metadata"
-                    className="w-full h-full object-cover"
+                <div className="clay-video-box relative aspect-[16/11] rounded-2xl overflow-hidden shadow-xl border-2 border-[#FFCB56]/60 bg-black group-hover:scale-105 transition-transform duration-500">
+                  <MinimalReelBox
+                    reel={LANDSCAPE_REELS[1]}
+                    aspectClass="aspect-[16/11]"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 pointer-events-none" />
-
-                  {/* Top Badge */}
-                  <div className="absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between">
-                    <span className="px-2 py-0.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-[9px] uppercase tracking-wider font-semibold text-[#FFE9A9] flex items-center gap-1">
-                      <Film className="w-2.5 h-2.5 text-[#FF933E]" />
-                      <span>Cinema Video Reel</span>
-                    </span>
-                    <Instagram className="w-3.5 h-3.5 text-[#FFCB56]" />
-                  </div>
-
-                  {/* Center Play Icon */}
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none group-hover:opacity-0 transition-opacity">
-                    <div className="w-9 h-9 rounded-full bg-black/60 backdrop-blur-md border border-[#FFCB56] flex items-center justify-center text-white shadow-lg">
-                      <Play className="w-4 h-4 ml-0.5 text-[#FFE9A9] fill-[#FFE9A9]" />
-                    </div>
-                  </div>
-
-                  {/* Bottom Video Caption */}
-                  <div className="absolute bottom-2.5 left-2.5 right-2.5 text-white">
-                    <span className="text-[9px] uppercase tracking-widest text-[#FF933E] font-semibold">
-                      Live Video Link
-                    </span>
-                    <h5 className="font-headline text-xs sm:text-sm font-semibold leading-tight text-[#FFFDF9]">
-                      Grand Vows &amp; Pheras Teaser
-                    </h5>
-                  </div>
-                </a>
+                </div>
               </motion.div>
             </div>
           </div>
@@ -770,10 +685,10 @@ export default function HomeScreen({
                 <button
                   key={filter.id}
                   onClick={() => setActiveFilter(filter.id)}
-                  className={`clay-pill px-4 py-2 text-xs uppercase tracking-[0.18em] font-semibold transition-all cursor-pointer ${
+                  className={`clay-pill px-4.5 py-2 text-xs uppercase tracking-[0.18em] font-bold transition-all cursor-pointer active:scale-95 ${
                     activeFilter === filter.id
-                      ? 'bg-[#FF933E] text-white border border-[#FFCB56] shadow-[0_4px_14px_rgba(255,147,62,0.35)]'
-                      : 'bg-white/80 border border-[#FFCB56]/40 text-[#594233] hover:bg-[#FFE9A9]/50'
+                      ? '!bg-[#FF933E] !text-white border-2 border-[#FFCB56] shadow-[0_6px_18px_rgba(255,147,62,0.45)]'
+                      : 'bg-[#FFFDF9] border border-[#FFCB56]/50 text-[#241912] hover:bg-[#FFE9A9]/50'
                   }`}
                 >
                   {filter.label}
@@ -1312,13 +1227,13 @@ export default function HomeScreen({
               </span>
             </motion.div>
 
-            {/* Quick Minimal Direction & WhatsApp Actions (NO number exposed) */}
+            {/* Quick Minimal Direction & WhatsApp Actions (NO number exposed) with Claymorphism */}
             <div className="flex flex-wrap items-center gap-3">
               <a
                 href="https://maps.google.com/?q=Chhotki+Nawada,+Delha,+Gaya,+Bihar+823002"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-5 py-2.5 bg-[#FF933E] hover:bg-[#ff8425] text-white text-xs uppercase tracking-[0.2em] font-semibold rounded-none border border-[#FFCB56] shadow-[0_4px_16px_rgba(255,147,62,0.35)] flex items-center gap-2 transition-all hover:scale-105 active:scale-95 cursor-pointer"
+                className="clay-button px-6 py-3 bg-[#FF933E] hover:bg-[#ff8425] text-white text-xs uppercase tracking-[0.2em] font-bold rounded-full border border-[#FFCB56] shadow-[0_6px_20px_rgba(255,147,62,0.4)] flex items-center gap-2 transition-all active:scale-95 cursor-pointer"
               >
                 <MapPin className="w-4 h-4 text-[#FFE9A9]" />
                 <span>Open in Google Maps</span>
@@ -1327,7 +1242,7 @@ export default function HomeScreen({
                 href="https://wa.me/918210351286?text=Hello%20The%20Royal%20Films%2C%20I%20would%20like%20to%20visit%20the%20Gaya%20studio."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-5 py-2.5 bg-[#25D366] hover:bg-[#20ba59] text-white text-xs uppercase tracking-[0.2em] font-semibold rounded-none border border-[#25D366] shadow-[0_4px_16px_rgba(37,211,102,0.35)] flex items-center gap-2 transition-all hover:scale-105 active:scale-95 cursor-pointer"
+                className="clay-button-green px-6 py-3 bg-[#25D366] hover:bg-[#20ba59] text-white text-xs uppercase tracking-[0.2em] font-bold rounded-full border border-[#25D366] shadow-[0_6px_20px_rgba(37,211,102,0.4)] flex items-center gap-2 transition-all active:scale-95 cursor-pointer"
               >
                 <MinimalWhatsAppIcon className="w-4 h-4" />
                 <span>WhatsApp Appointment</span>
@@ -1342,7 +1257,7 @@ export default function HomeScreen({
               whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="lg:col-span-8 relative rounded-3xl overflow-hidden shadow-2xl border-2 border-[#FFCB56]/50 bg-black min-h-[380px] sm:min-h-[460px] group"
+              className="clay-card lg:col-span-8 relative rounded-3xl overflow-hidden shadow-2xl border-2 border-[#FFCB56]/50 bg-black min-h-[380px] sm:min-h-[460px] group"
             >
               {/* Ambient backlight glow */}
               <div className="absolute -inset-4 bg-gradient-to-tr from-[#FF933E]/25 via-[#FFCB56]/20 to-[#73A5CA]/20 rounded-3xl blur-2xl pointer-events-none -z-10" />
@@ -1354,7 +1269,7 @@ export default function HomeScreen({
                 loading="lazy"
                 allowFullScreen
               />
-              <div className="absolute bottom-4 left-4 right-4 sm:right-auto px-4 py-3 bg-white/95 backdrop-blur-md rounded-xl border border-[#FFCB56] shadow-lg flex items-center gap-3 text-xs text-[#241912] pointer-events-none">
+              <div className="clay-card absolute bottom-4 left-4 right-4 sm:right-auto px-4 py-3 bg-white/95 backdrop-blur-md rounded-2xl border border-[#FFCB56] shadow-lg flex items-center gap-3 text-xs text-[#241912] pointer-events-none">
                 <MapPin className="w-4 h-4 text-[#FF933E] shrink-0" />
                 <div>
                   <p className="font-bold">The Royal Films Atelier</p>
@@ -1369,7 +1284,7 @@ export default function HomeScreen({
               whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="lg:col-span-4 p-7 sm:p-8 bg-white rounded-3xl shadow-xl border border-[#FFCB56]/50 flex flex-col justify-between gap-6 relative overflow-hidden"
+              className="clay-card lg:col-span-4 p-7 sm:p-8 bg-[#FFFDF9] rounded-3xl shadow-xl border border-[#FFCB56]/50 flex flex-col justify-between gap-6 relative overflow-hidden"
             >
               <div className="flex flex-col gap-5">
                 <div className="flex items-center gap-3">
@@ -1414,7 +1329,7 @@ export default function HomeScreen({
                 <div className="grid grid-cols-2 gap-2.5">
                   <a
                     href="tel:+918210351286"
-                    className="py-3 px-3 bg-[#FF933E] hover:bg-[#ff8425] text-white text-xs font-semibold uppercase tracking-wider rounded-xl shadow-md flex items-center justify-center gap-1.5 transition-all hover:scale-105 active:scale-95 cursor-pointer"
+                    className="clay-button py-3 px-3 bg-[#FF933E] hover:bg-[#ff8425] text-white text-xs font-bold uppercase tracking-wider rounded-full shadow-md flex items-center justify-center gap-1.5 transition-all active:scale-95 cursor-pointer"
                     aria-label="Direct Phone Concierge"
                   >
                     <Phone className="w-3.5 h-3.5" />
@@ -1424,7 +1339,7 @@ export default function HomeScreen({
                     href="https://wa.me/918210351286?text=Hello%20The%20Royal%20Films%2C%20I%20would%20like%20to%20inquire%20about%20wedding%20dates."
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="py-3 px-3 bg-[#25D366] hover:bg-[#20ba59] text-white text-xs font-semibold uppercase tracking-wider rounded-xl shadow-md flex items-center justify-center gap-1.5 transition-all hover:scale-105 active:scale-95 cursor-pointer"
+                    className="clay-button-green py-3 px-3 bg-[#25D366] hover:bg-[#20ba59] text-white text-xs font-bold uppercase tracking-wider rounded-full shadow-md flex items-center justify-center gap-1.5 transition-all active:scale-95 cursor-pointer"
                     aria-label="WhatsApp Concierge"
                   >
                     <MinimalWhatsAppIcon className="w-3.5 h-3.5" />
