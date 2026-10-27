@@ -14,7 +14,7 @@ export default async function Image() {
     (
       <div
         style={{
-          background: 'linear-gradient(135deg, #1C1510 0%, #120E0A 100%)',
+          background: 'linear-gradient(135deg, #FFFDF9 0%, #FFF4E5 50%, #FFE9A9 100%)',
           width: '100%',
           height: '100%',
           display: 'flex',
@@ -23,82 +23,92 @@ export default async function Image() {
           justifyContent: 'center',
           fontFamily: 'serif',
           position: 'relative',
-          border: '12px solid #281E17',
+          border: '14px solid #FFE9A9',
         }}
       >
-        {/* Decorative Inner Golden Border */}
+        {/* Decorative Inner Golden Rim */}
         <div
           style={{
             position: 'absolute',
-            inset: '24px',
-            border: '1px solid #E89B5B',
-            opacity: 0.4,
+            inset: '20px',
+            border: '2px solid #FFCB56',
+            opacity: 0.6,
           }}
         />
 
-        {/* Brand Crest */}
+        {/* Golden Laurel Monogram Crest */}
         <div
           style={{
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            marginBottom: '24px',
+            marginBottom: '16px',
+            background: 'white',
+            borderRadius: '100px',
+            padding: '16px',
+            boxShadow: '0 8px 30px rgba(255,147,62,0.25)',
           }}
         >
-          <svg width="110" height="110" viewBox="0 0 100 100" fill="none">
-            <circle cx="50" cy="50" r="46" stroke="#E89B5B" strokeWidth="2" />
-            <circle cx="50" cy="50" r="42" stroke="#D46743" strokeWidth="1" strokeDasharray="3 3" />
-            <path d="M26 38 L34 26 L50 34 L66 26 L74 38 L70 43 L30 43 Z" fill="#E89B5B" />
-            <circle cx="26" cy="24" r="2.5" fill="#FFEAD3" />
-            <circle cx="50" cy="17" r="3" fill="#BFE7EA" />
-            <circle cx="74" cy="24" r="2.5" fill="#FFEAD3" />
-            <path d="M50 44 L67 52 L61 68" stroke="#D46743" strokeWidth="2" />
-            <path d="M67 52 L59 71 L40 73" stroke="#D46743" strokeWidth="2" />
-            <path d="M59 71 L38 69 L32 54" stroke="#D46743" strokeWidth="2" />
-            <circle cx="50" cy="58" r="6" fill="#D46743" />
-            <circle cx="50" cy="58" r="2.5" fill="#FFEAD3" />
+          <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+            <circle cx="50" cy="50" r="46" stroke="#FFCB56" strokeWidth="2.5" />
+            <circle cx="50" cy="50" r="41" stroke="#FF933E" strokeWidth="1" strokeDasharray="3 3" />
+            {/* Laurel Leaves left */}
+            <path d="M40 28 C34 32, 32 40, 36 48 C32 50, 30 58, 36 66 C40 72, 46 76, 50 82" stroke="#FFCB56" strokeWidth="2.5" strokeLinecap="round" />
+            {/* Royal R */}
+            <path d="M44 32 L44 68 M44 32 C54 32, 64 36, 64 48 C64 58, 52 60, 44 60 M52 58 L68 76" stroke="#FF933E" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
+            {/* Crown Jewel */}
+            <circle cx="50" cy="22" r="3.5" fill="#73A5CA" />
           </svg>
         </div>
 
-        {/* Wordmark */}
+        {/* Cursive Brand Title */}
         <div
           style={{
-            fontSize: 56,
-            letterSpacing: '0.24em',
-            textTransform: 'uppercase',
-            color: '#FFEAD3',
-            fontWeight: 600,
-            marginBottom: '12px',
+            fontSize: 72,
+            color: '#FF933E',
+            fontWeight: 400,
+            letterSpacing: '0.04em',
+            textAlign: 'center',
+            lineHeight: 1.1,
           }}
         >
           The Royal Films
         </div>
 
-        {/* Tagline */}
+        {/* Subtitle */}
         <div
           style={{
-            fontSize: 22,
-            letterSpacing: '0.34em',
+            fontSize: 20,
             textTransform: 'uppercase',
-            color: '#D46743',
-            fontWeight: 500,
-            marginBottom: '20px',
+            letterSpacing: '0.36em',
+            color: '#594233',
+            marginTop: 14,
+            fontWeight: 600,
           }}
         >
-          Cinematography &amp; Editorial Stills
+          Bespoke Wedding Cinematography &amp; Editorial Stills
         </div>
 
-        {/* Cities */}
+        {/* Destinations Pill */}
         <div
           style={{
-            fontSize: 16,
-            letterSpacing: '0.28em',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 16,
+            marginTop: 28,
+            padding: '10px 28px',
+            background: 'rgba(255, 255, 255, 0.9)',
+            border: '1px solid #FFCB56',
+            borderRadius: '9999px',
+            boxShadow: '0 4px 14px rgba(255,147,62,0.12)',
+            fontSize: 14,
             textTransform: 'uppercase',
-            color: '#BFE7EA',
-            opacity: 0.85,
+            letterSpacing: '0.24em',
+            color: '#FF933E',
+            fontWeight: 700,
           }}
         >
-          Gaya • Bodh Gaya • Dubai • Worldwide
+          Gaya • Patna • Bodh Gaya • Dubai
         </div>
       </div>
     ),

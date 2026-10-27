@@ -20,40 +20,17 @@ export default function Page() {
   const [selectedPortfolioItem, setSelectedPortfolioItem] = useState<PortfolioItemData | null>(null);
   const [isAvailabilityOpen, setIsAvailabilityOpen] = useState(false);
   const [isPortalOpen, setIsPortalOpen] = useState(false);
-  
-  // LIGHT THEME AS DEFAULT
-  const [theme, setTheme] = useState<'dark' | 'light'>('light');
   const [legalModal, setLegalModal] = useState<{ isOpen: boolean; tab: LegalTabType }>({
     isOpen: false,
     tab: 'privacy',
   });
 
-  // Load and apply saved theme preference to the DOM (default: light)
+  // Permanently enforce 100% light theme
   useEffect(() => {
-    const savedTheme = localStorage.getItem('trf_theme') as 'dark' | 'light' | null;
-    const active = savedTheme || 'light';
-    setTheme(active);
-    if (active === 'dark') {
-      document.documentElement.classList.remove('light');
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      document.documentElement.classList.add('light');
-    }
+    document.documentElement.classList.remove('dark');
+    document.documentElement.classList.add('light');
+    document.documentElement.style.colorScheme = 'light';
   }, []);
-
-  const toggleTheme = () => {
-    const newTheme = theme === 'dark' ? 'light' : 'dark';
-    setTheme(newTheme);
-    localStorage.setItem('trf_theme', newTheme);
-    if (newTheme === 'dark') {
-      document.documentElement.classList.remove('light');
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      document.documentElement.classList.add('light');
-    }
-  };
 
   // Handle tab switching and auto-scroll to top
   const handleTabChange = (tab: string) => {
@@ -81,17 +58,13 @@ export default function Page() {
   }, [currentTab]);
 
   return (
-    <div className={`min-h-screen flex flex-col font-sans transition-colors duration-300 selection:bg-[#FFEAD3] selection:text-[#D46743] ${
-      theme === 'dark' ? 'bg-[#120E0A] text-[#FAF3EC]' : 'bg-[#FAF4ED] text-[#1A130E]'
-    }`}>
-      {/* Animated Luxury Splash Loading Screen with Redesigned Logo */}
-      <LoadingScreen minDuration={1400} />
+    <div className="min-h-screen flex flex-col font-sans bg-[#FFFDF9] text-[#241912] selection:bg-[#FFE9A9] selection:text-[#FF933E]">
+      {/* Animated Luxury Splash Loading Screen with Golden Emblem */}
+      <LoadingScreen minDuration={1200} />
 
       {/* Fixed Luxury Navigation Header */}
       <Navbar 
         currentTab={currentTab}
-        theme={theme}
-        onToggleTheme={toggleTheme}
         onSelectTab={handleTabChange}
         onOpenAvailability={() => setIsAvailabilityOpen(true)}
       />
@@ -142,7 +115,7 @@ export default function Page() {
       {/* Cookie Consent Banner */}
       <CookieBanner onOpenCookiePolicy={() => handleOpenLegal('cookies')} />
 
-      {/* Luxury Translucent Footer with Big Minimalist Logo */}
+      {/* Luxury Translucent Footer with Big Golden Emblem Logo */}
       <Footer 
         onSelectTab={handleTabChange}
         onOpenLegal={handleOpenLegal}

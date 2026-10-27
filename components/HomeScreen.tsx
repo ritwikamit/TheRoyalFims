@@ -15,13 +15,26 @@ import {
   Mail,
   MapPin,
   Play,
+  Pause,
+  Volume2,
+  VolumeX,
   Award,
   Sparkles,
+  Instagram,
+  ExternalLink,
+  MessageCircle,
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import { PortfolioItemData } from './PortfolioModal';
 import InteractiveGrid from './InteractiveGrid';
-import AnimatedBorderCard from './AnimatedBorderCard';
+import {
+  TRF_LANDSCAPE,
+  TRF_PORTRAIT,
+  INSTAGRAM_POSTS,
+  INSTAGRAM_PROFILE_URL,
+  INSTAGRAM_HANDLE,
+  INSTAGRAM_FOLLOWER_COUNT,
+} from '@/lib/trfImages';
 
 interface HomeScreenProps {
   onSelectTab: (tab: string) => void;
@@ -37,6 +50,10 @@ export default function HomeScreen({
   const [activeFilter, setActiveFilter] = useState('all');
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
+  // Instagram Reel Video Player state
+  const [isReelPlaying, setIsReelPlaying] = useState(true);
+  const [isReelMuted, setIsReelMuted] = useState(true);
+
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -47,78 +64,115 @@ export default function HomeScreen({
     details: '',
   });
 
-  const portfolioItems: PortfolioItemData[] = [
+  // Authentic TRF Portfolio Items combining Landscape & Portrait with wise orientation handling
+  const portfolioItems: (PortfolioItemData & { orientation: 'landscape' | 'portrait' })[] = [
     {
-      id: 'sacred-pheras',
+      id: 'sacred-pheras-mandap',
       category: 'wedding',
-      badge: '4K Film',
+      badge: '4K Master Film',
       badgeType: 'video',
-      location: 'Gaya, Bihar • Wedding Ceremony',
-      title: 'The Sacred Pheras',
+      location: 'Gaya Royal Mandap • Holy Pheras',
+      title: 'The Sacred Pheras & Royal Mandap',
       description:
-        'Documenting the rituals, heartfelt vows, and family tears of joy during an evening royal celebration.',
-      image:
-        'https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=1200&q=80',
+        'Vows around the holy fire in traditional royal splendor, preserving tender glance exchanges and family blessings.',
+      image: TRF_LANDSCAPE[0].src,
+      orientation: 'landscape',
     },
     {
-      id: 'golden-dunes',
-      category: 'prewedding',
-      badge: 'Stills & Film',
-      badgeType: 'video',
-      location: 'Dubai Destination • Pre-Wedding Shoot',
-      title: 'Golden Dunes Session',
+      id: 'royal-heirloom-bride',
+      category: 'wedding',
+      badge: 'Editorial Portrait',
+      badgeType: 'photo',
+      location: 'Royal Bridal Suite • Gaya',
+      title: 'The Regal Heirloom Bride',
       description:
-        'A serene couple session exploring Dubai’s open desert vistas and waterfront skyline before the wedding rush.',
-      image:
-        'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=80',
+        'Crimson silk lehenga, heritage kundan jewelry, and timeless poise captured in natural diffused lighting.',
+      image: TRF_PORTRAIT[0].src,
+      orientation: 'portrait',
     },
     {
-      id: 'yellow-petals',
+      id: 'grand-varmala-spectacle',
+      category: 'wedding',
+      badge: 'Cinematic Highlight',
+      badgeType: 'video',
+      location: 'Patna Heritage Courtyard • Varmala',
+      title: 'The Grand Varmala Exchange',
+      description:
+        'Cold pyro sparks, rose petal showers, and royal entry rhythms celebrating the union of two families.',
+      image: TRF_LANDSCAPE[1].src,
+      orientation: 'landscape',
+    },
+    {
+      id: 'yellow-petals-haldi',
       category: 'haldi',
-      badge: 'Photo Story',
+      badge: 'Candid Joy',
       badgeType: 'story',
-      location: 'Chhotki Nawada • Haldi Celebrations',
-      title: 'Yellow Petals & Laughter',
+      location: 'Chhotki Nawada • Haldi Festivities',
+      title: 'Golden Petals & Haldi Aura',
       description:
-        'Unfiltered laughter among siblings, elders playfully tossing marigold flowers, and pure family affection.',
-      image:
-        'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1200&q=80',
+        'Drenched in vibrant yellow marigold petals and laughter, surrounded by cousins and elders.',
+      image: TRF_PORTRAIT[3].src,
+      orientation: 'portrait',
     },
     {
-      id: 'evening-congratulations',
-      category: 'reception',
-      badge: 'Stills',
-      badgeType: 'photo',
-      location: 'Bodh Gaya Venue • Grand Reception',
-      title: 'Evening of Congratulations',
-      description:
-        'Welcoming hundreds of friends and extended family under grand chandelier lights and royal stage settings.',
-      image:
-        'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1200&q=80',
-    },
-    {
-      id: 'before-vows',
+      id: 'dubai-destination-horizon',
       category: 'prewedding',
-      badge: 'Cinematic Teaser',
+      badge: 'Destination Film',
       badgeType: 'video',
-      location: 'Bihar Heritage • Pre-Wedding Story',
-      title: 'Before the Vows',
+      location: 'Dubai Marina & Desert Oasis',
+      title: 'Arabian Dunes & Skyline Pre-Wedding',
       description:
-        'Quiet moments away from the calendar rush, captured with patience and natural daylight.',
-      image:
-        'https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1200&q=80',
+        'An international destination love story shot against warm desert sands and the Dubai waterfront.',
+      image: TRF_LANDSCAPE[6].src,
+      orientation: 'landscape',
     },
     {
-      id: 'promise-forever',
-      category: 'wedding',
-      badge: 'Stills & Film',
+      id: 'eternal-embrace-couple',
+      category: 'prewedding',
+      badge: 'Intimate Stills',
       badgeType: 'photo',
-      location: 'Gaya • Ring Ceremony',
-      title: 'The Promise of Forever',
+      location: 'Bihar Heritage Escapes',
+      title: 'Eternal Embrace Before the Vows',
       description:
-        'Heartfelt promises spoken in front of both families, preserving every smile and gentle glance.',
-      image:
-        'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=1200&q=80',
+        'A quiet second away from wedding calendar crowds, framed with cinematic intimacy.',
+      image: TRF_PORTRAIT[1].src,
+      orientation: 'portrait',
+    },
+    {
+      id: 'reception-chandeliers',
+      category: 'reception',
+      badge: 'Grand Stills',
+      badgeType: 'photo',
+      location: 'Bodh Gaya Luxury Pavilion',
+      title: 'The Royal Reception Night',
+      description:
+        'Under soaring crystal chandeliers, celebrating heartfelt speeches, toasts, and evening congratulations.',
+      image: TRF_LANDSCAPE[3].src,
+      orientation: 'landscape',
+    },
+    {
+      id: 'under-golden-dupatta',
+      category: 'wedding',
+      badge: 'Atelier Stills',
+      badgeType: 'photo',
+      location: 'Gaya Atelier • Ritual Details',
+      title: 'Under the Golden Dupatta',
+      description:
+        'Delicate zardozi embroidery and emotional eyes capturing sacred traditions handed down through generations.',
+      image: TRF_PORTRAIT[5].src,
+      orientation: 'portrait',
+    },
+    {
+      id: 'family-blessings-candid',
+      category: 'wedding',
+      badge: 'Candid Cinema',
+      badgeType: 'story',
+      location: 'Gaya • Family Blessings',
+      title: 'Unspoken Family Blessings',
+      description:
+        'Paternal tears of pride and joyful smiles preserved with discretion and quiet reverence.',
+      image: TRF_LANDSCAPE[7].src,
+      orientation: 'landscape',
     },
   ];
 
@@ -131,32 +185,22 @@ export default function HomeScreen({
     {
       question: 'What photography and videography services do you offer?',
       answer:
-        'We provide complete wedding photography and videography, pre-wedding shoots, candid and traditional photography, cinematic wedding films, and drone footage across Gaya, Bihar, and destination hubs including Dubai.',
+        'We provide complete royal wedding cinematography, 4K HDR master films, pre-wedding destination shoots, candid and traditional stage photography, licensed drone aerials, and bespoke handcrafted albums across Gaya, Bihar, and Dubai.',
     },
     {
       question: 'When will we receive our photos and films?',
       answer:
-        'We estimate 4–6 weeks for fully edited and color-graded high-resolution photos, and 6–8 weeks for cinematic wedding films and master ceremony documentation. Every booking schedule is agreed in writing prior to signing.',
+        'You receive a curated sneak-peek teaser within 72 hours. Complete color-graded master photography is delivered within 4–6 weeks, and the cinematic wedding feature film within 6–8 weeks, with written schedule guarantees.',
     },
     {
-      question: 'Can we book a pre-wedding shoot in Dubai or heritage locations?',
+      question: 'Do you travel for destination weddings and shoots?',
       answer:
-        'Yes. We offer pre-wedding photography and videography across scenic heritage locations in Gaya, Bodh Gaya, Patna, as well as international destinations like Dubai. Share your preferred date so we can plan the session.',
+        'Yes! We frequently film across Bihar (Gaya, Patna, Bodh Gaya, Muzaffarpur) and internationally across UAE destinations like Dubai Marina, Al Qudra Desert, and luxury Abu Dhabi resorts.',
     },
     {
-      question: 'Do you offer drone footage?',
+      question: 'Who leads the creative direction and filming?',
       answer:
-        'Drone footage is included in our signature packages, subject to venue regulations, airspace permissions, and safe weather conditions.',
-    },
-    {
-      question: 'Can we customise our package?',
-      answer:
-        'Absolutely. We tailor every commission around the number of functions (Haldi, Mehendi, Sangeet, Wedding, Reception), the guest scale, and whether you require photo, video, or complete coverage.',
-    },
-    {
-      question: 'Do you travel outside Gaya?',
-      answer:
-        'Yes. Our team regularly documents destination weddings across Bihar, Varanasi, Kolkata, Delhi NCR, and international horizons including Dubai.',
+        'The atelier is led by AAFT film school alumni using Sony Cinema line gear, prime cinema glass, and pro audio gear to ensure cinematic color science and heirloom storytelling.',
     },
   ];
 
@@ -173,346 +217,261 @@ export default function HomeScreen({
         service: 'both',
         details: '',
       });
-    }, 4500);
+    }, 6000);
   };
 
   return (
-    <div className="flex flex-col w-full overflow-hidden bg-[#FAF4ED] dark:bg-[#120E0A] text-[#1A130E] dark:text-[#FAF3EC] transition-colors duration-300">
-      {/* HERO SECTION - Background Video with Continuous Loop, No UI details */}
-      <section className="relative w-full h-screen min-h-[660px] flex items-end sm:items-center pb-14 sm:pb-20 pt-24 px-5 sm:px-8 lg:px-14 overflow-hidden bg-[#120E0A]">
-        {/* Continuous Looping Hero Background Video with Zero Details */}
-        <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
+    <div className="flex flex-col w-full bg-[#FFFDF9] text-[#241912] selection:bg-[#FFE9A9] selection:text-[#FF933E]">
+      {/* =========================================================================
+          HERO SECTION: SILENT INSTAGRAM REEL LOOP WITH FLOATING HIGHLIGHT OVERLAYS
+          ========================================================================= */}
+      <section className="relative w-full h-screen min-h-[640px] flex items-center justify-center overflow-hidden bg-black">
+        {/* Fullscreen Video Background Playing Seamlessly in Loop Without Chrome */}
+        <div className="absolute inset-0 w-full h-full overflow-hidden">
           <video
             autoPlay
             loop
             muted
             playsInline
-            preload="auto"
-            className="w-full h-full object-cover scale-105 transition-transform duration-1000"
+            className="w-full h-full object-cover scale-105 pointer-events-none"
+            poster={TRF_LANDSCAPE[0].src}
           >
             <source src="/assets/hero-reel.mp4" type="video/mp4" />
           </video>
+          {/* Subtle Warm Gradient Overlay for Perfect Contrast */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/60 pointer-events-none" />
+          <div className="absolute inset-0 bg-radial from-transparent via-[#FF933E]/10 to-black/60 mix-blend-overlay pointer-events-none" />
         </div>
 
-        {/* Cinematic Vignette Overlay - Keeps highlights texts crystal clear and readable */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#120E0A] via-[#120E0A]/40 to-[#120E0A]/60 pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#120E0A]/80 via-[#120E0A]/35 to-transparent pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-[#120E0A]/30 to-[#120E0A]/85 pointer-events-none" />
-
-        {/* Content Container - Highlights Text Floating Over the Video */}
-        <div className="relative z-10 w-full max-w-5xl mx-auto flex flex-col gap-4 sm:gap-6">
-          {/* Studio Marker */}
+        {/* Floating Highlights & Headlines Directly Over The Video */}
+        <div className="relative z-20 max-w-5xl mx-auto px-5 sm:px-8 text-center flex flex-col items-center justify-center gap-6 pt-16">
+          {/* Cursive Brand Tagline */}
           <motion.div
-            initial={{ opacity: 0, y: 15, filter: 'blur(8px)' }}
+            initial={{ opacity: 0, y: 25, filter: 'blur(8px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="flex items-center gap-2"
+            transition={{ duration: 0.9, delay: 0.1 }}
+            className="flex items-center gap-3 px-5 py-2 rounded-full bg-white/15 backdrop-blur-md border border-[#FFCB56]/60 shadow-[0_4px_20px_rgba(255,147,62,0.3)]"
           >
-            <span className="w-2 h-2 rounded-full bg-[#BFE7EA] animate-pulse" />
-            <span className="text-[11px] sm:text-xs text-[#E89B5B] uppercase tracking-[0.28em] font-semibold drop-shadow-sm">
-              Wedding Cinematography &amp; Editorial Stills • Gaya &amp; Dubai
+            <Sparkles className="w-4 h-4 text-[#FFCB56]" />
+            <span
+              className="text-2xl sm:text-3xl text-[#FFE9A9] drop-shadow-md"
+              style={{ fontFamily: "'Great Vibes', cursive" }}
+            >
+              The Royal Films Atelier
+            </span>
+            <Sparkles className="w-4 h-4 text-[#FFCB56]" />
+          </motion.div>
+
+          {/* Main Royal Title */}
+          <motion.h1
+            initial={{ opacity: 0, y: 30, filter: 'blur(10px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            transition={{ duration: 1, delay: 0.25 }}
+            className="font-headline text-4xl sm:text-6xl md:text-7xl font-light text-white tracking-tight leading-[1.08] drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)]"
+          >
+            Timeless Cinema for <br className="hidden sm:inline" />
+            <span
+              className="font-normal text-[#FFCB56] italic drop-shadow-[0_2px_14px_rgba(255,203,86,0.6)]"
+              style={{ fontFamily: "'Great Vibes', cursive" }}
+            >
+              Royal Celebrations
+            </span>
+          </motion.h1>
+
+          {/* Floating Highlight Description Over Video */}
+          <motion.p
+            initial={{ opacity: 0, y: 25, filter: 'blur(8px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            transition={{ duration: 0.9, delay: 0.4 }}
+            className="text-sm sm:text-base md:text-lg text-[#FFE9A9] max-w-2xl font-light leading-relaxed drop-shadow-md"
+          >
+            Heirloom 4K wedding films and editorial stills documenting sacred rituals, authentic emotion, and grand royal family traditions across Bihar and Dubai.
+          </motion.p>
+
+          {/* Floating Location & Credential Pills Over Video */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.55 }}
+            className="flex flex-wrap items-center justify-center gap-3 text-xs uppercase tracking-[0.22em] text-white/90 font-medium"
+          >
+            <span className="px-3.5 py-1.5 bg-black/50 backdrop-blur-md rounded-full border border-white/25">
+              Gaya • Patna • Bodh Gaya
+            </span>
+            <span className="hidden sm:inline text-[#FFCB56]">•</span>
+            <span className="px-3.5 py-1.5 bg-[#FF933E]/30 backdrop-blur-md rounded-full border border-[#FFCB56]/60 text-[#FFE9A9]">
+              Dubai Destination Hub
+            </span>
+            <span className="hidden sm:inline text-[#FFCB56]">•</span>
+            <span className="px-3.5 py-1.5 bg-black/50 backdrop-blur-md rounded-full border border-white/25">
+              AAFT Alumnus Direction
             </span>
           </motion.div>
 
-          {/* Main Headline with Blur Reveal */}
-          <motion.h1
-            initial={{ opacity: 0, y: 25, filter: 'blur(12px)' }}
-            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            transition={{ duration: 0.9, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="font-headline text-3xl sm:text-5xl lg:text-6xl text-[#FFEAD3] max-w-4xl tracking-tight leading-[1.12] drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]"
-          >
-            Your Wedding Day, Just As You Remember It
-          </motion.h1>
-
-          {/* Romantic Cursive Excerpt */}
+          {/* Floating CTA Buttons Over Video */}
           <motion.div
-            initial={{ opacity: 0, y: 15, filter: 'blur(6px)' }}
-            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            transition={{ duration: 0.9, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
-            className="font-cursive text-3xl sm:text-4xl lg:text-5xl text-[#E89B5B] -mt-1 tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
+            className="flex flex-wrap items-center justify-center gap-4 pt-3"
           >
-            &ldquo;Every sacred ritual, every stolen glance, preserved for generations.&rdquo;
-          </motion.div>
-
-          {/* Subheading */}
-          <motion.p
-            initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
-            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            transition={{ duration: 0.9, delay: 0.22, ease: [0.16, 1, 0.3, 1] }}
-            className="text-sm sm:text-base lg:text-lg text-[#FFEAD3]/90 max-w-2xl font-light leading-relaxed drop-shadow-[0_1px_6px_rgba(0,0,0,0.8)]"
-          >
-            Bespoke wedding filmmaking and fine-art photography based in Gaya, Bihar. We capture the grand rituals, candid family smiles, and the intimate poetry that unfolds throughout your celebration.
-          </motion.p>
-
-          {/* Call to Actions */}
-          <motion.div
-            initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
-            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-wrap items-center gap-3 sm:gap-4 pt-2"
-          >
+            <button
+              onClick={onOpenAvailability}
+              className="px-8 py-3.5 bg-[#FF933E] hover:bg-[#ff8425] text-white rounded-none border border-[#FFCB56] text-xs uppercase tracking-[0.24em] font-semibold shadow-[0_0_25px_rgba(255,147,62,0.6)] transition-all cursor-pointer active:scale-95 flex items-center gap-2 group"
+            >
+              <span>Reserve Your Wedding Date</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </button>
             <button
               onClick={() => {
                 const el = document.getElementById('portfolio');
                 el?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="px-6 sm:px-8 py-3.5 bg-[#D46743] text-white hover:bg-[#E89B5B] text-xs uppercase tracking-[0.2em] font-semibold transition-all duration-300 shadow-[0_0_24px_rgba(212,103,67,0.55)] flex items-center gap-2 group cursor-pointer border border-[#D46743]/50"
+              className="px-8 py-3.5 bg-white/20 hover:bg-white/30 text-white backdrop-blur-md text-xs uppercase tracking-[0.24em] font-semibold border border-white/40 transition-all cursor-pointer shadow-lg"
             >
-              <span>View Our Work</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </button>
-
-            <button
-              onClick={() => {
-                const el = document.getElementById('enquiry');
-                el?.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="px-6 sm:px-8 py-3.5 bg-black/60 backdrop-blur-xl text-[#FFEAD3] hover:text-white hover:bg-black/80 text-xs uppercase tracking-[0.2em] font-semibold transition-all duration-300 border border-[#E89B5B]/40 cursor-pointer shadow-lg hover:border-[#E89B5B]"
-            >
-              Talk About Your Wedding
+              Explore Royal Gallery
             </button>
           </motion.div>
+        </div>
 
-          {/* Metric Strip */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="pt-5 flex flex-wrap items-center gap-4 sm:gap-8 text-xs text-[#FFEAD3]/85 border-t border-white/15 mt-2"
-          >
-            {/* Minimalist Review Indicator */}
-            <div className="flex items-center gap-2.5">
-              <span className="font-headline text-lg sm:text-xl text-[#E89B5B] font-bold">4.6</span>
-              <div className="flex flex-col">
-                <span className="text-[10px] sm:text-xs text-[#FFEAD3] font-semibold uppercase tracking-wider">
-                  Rating (108 Reviews)
-                </span>
-                <span className="text-[9px] text-[#BFE7EA] uppercase tracking-widest font-medium">
-                  Google Verified
-                </span>
-              </div>
-            </div>
-
-            <div className="h-4 w-px bg-white/20 hidden sm:block" />
-
-            <div className="flex items-center gap-2">
-              <Film className="w-3.5 h-3.5 text-[#E89B5B]" />
-              <span className="uppercase tracking-wider font-medium text-[11px] sm:text-xs text-[#FFEAD3]">
-                Led by AAFT Alumnus
-              </span>
-            </div>
-
-            <div className="h-4 w-px bg-white/20 hidden sm:block" />
-
-            <div className="flex items-center gap-2">
-              <Plane className="w-3.5 h-3.5 text-[#BFE7EA]" />
-              <span className="uppercase tracking-wider font-medium text-[11px] sm:text-xs text-[#FFEAD3]">
-                Gaya • Destination • Dubai
-              </span>
-            </div>
-          </motion.div>
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 text-white/70 pointer-events-none z-20">
+          <span className="text-[9px] uppercase tracking-[0.3em] font-light">Scroll to Explore</span>
+          <ChevronDown className="w-4 h-4 animate-bounce text-[#FFCB56]" />
         </div>
       </section>
 
-      {/* INTRODUCTION & EMOTIONAL CONNECTION SECTION */}
-      <section className="relative w-full py-16 sm:py-24 bg-[#FAF4ED] dark:bg-[#120E0A] px-5 sm:px-8 lg:px-14 border-t border-[#E8DCCF] dark:border-white/10 overflow-hidden transition-colors">
+      {/* =========================================================================
+          STORY & ATELIER PHILOSOPHY SECTION (WISE COMBINATION OF PORTRAIT & LANDSCAPE)
+          ========================================================================= */}
+      <section className="relative w-full py-20 sm:py-28 bg-[#FFFDF9] px-5 sm:px-8 lg:px-14 border-t border-[#FFCB56]/30 overflow-hidden">
         <InteractiveGrid />
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-          {/* Left Narrative */}
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          {/* Left Text Narrative */}
           <motion.div
-            initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
-            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            viewport={{ once: true, margin: '-50px' }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-6 flex flex-col gap-4"
+            initial={{ opacity: 0, x: -30, filter: 'blur(8px)' }}
+            whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="lg:col-span-6 flex flex-col gap-6"
           >
-            <span className="text-xs text-[#D46743] dark:text-[#E89B5B] uppercase tracking-[0.25em] font-semibold">
-              Authentic Documentary
-            </span>
-            <h2 className="font-headline text-3xl sm:text-4xl text-[#1A130E] dark:text-[#FAF3EC] leading-snug">
-              Wedding Photography That Feels Like Your Day
+            <div className="flex items-center gap-2.5">
+              <span className="w-8 h-[2px] bg-[#FF933E]" />
+              <span className="text-xs uppercase tracking-[0.28em] font-bold text-[#FF933E]">
+                Atelier Heritage &amp; Vision
+              </span>
+            </div>
+
+            <h2 className="font-headline text-3xl sm:text-5xl text-[#241912] font-light leading-tight">
+              We Don&apos;t Just Shoot Weddings. <br />
+              <span
+                className="font-normal text-[#FF933E]"
+                style={{ fontFamily: "'Great Vibes', cursive" }}
+              >
+                We Preserve Family Dynasties.
+              </span>
             </h2>
-            <p className="text-sm sm:text-base text-[#524237] dark:text-[#D9C7B8] leading-relaxed font-light">
-              A wedding moves quickly. Families come together, rituals unfold, friends laugh, and there are moments you may not get to see for yourself. At The Royal Films, we photograph and film your celebration so you can return to those moments whenever you want.
-            </p>
-            <p className="text-xs sm:text-sm text-[#7C685B] dark:text-[#A49182] leading-relaxed font-light">
-              Based in Gaya, Bihar, we cover weddings and pre-wedding shoots across Bihar and international horizons like Dubai. Tell us about your plans and we can discuss the coverage that fits your event.
+
+            <p className="text-sm sm:text-base text-[#594233] leading-relaxed font-light">
+              Born in Gaya and trusted across the royal wedding circuits of Bihar and Dubai, The Royal Films operates on a singular principle: your wedding is a once-in-a-lifetime historic celebration that deserves high cinema, patient observation, and fine-art editorial framing.
             </p>
 
-            {/* Asymmetric Highlight Card */}
-            <div className="group relative mt-4 rounded-xl p-[1.5px] overflow-hidden shadow-xl hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.008] transition-all duration-500">
-              <div
-                className="absolute inset-[-150%] -z-10 animate-border-spin opacity-45 group-hover:opacity-100 transition-opacity"
-                style={{
-                  background:
-                    'conic-gradient(from 0deg, transparent 0 320deg, #E89B5B 340deg, #D46743 355deg, transparent 360deg)',
-                }}
-              />
-              <div className="p-6 sm:p-7 rounded-[10px] bg-[#FFFFFF] dark:bg-[#1A140F] flex flex-col gap-3 border border-[#E8DCCF]/60 dark:border-white/5">
-                <div className="flex items-center gap-2.5 text-[#D46743] dark:text-[#E89B5B]">
-                  <Heart className="w-5 h-5 fill-[#D46743]/20 dark:fill-[#E89B5B]/20" />
-                  <h3 className="text-2xl sm:text-3xl font-cursive text-[#D46743] dark:text-[#E89B5B] tracking-wide">
-                    The Small Moments Matter, Too
-                  </h3>
-                </div>
-                <p className="text-xs sm:text-sm text-[#524237] dark:text-[#D9C7B8] leading-relaxed font-light">
-                  Years from now, you may look back at the way your parents smiled, the laughter among cousins, or the few quiet seconds you shared before a ceremony. We keep an eye out for these moments while documenting the main events of your day.
-                </p>
-                <div className="flex flex-wrap gap-x-4 gap-y-2 pt-2 text-xs text-[#D46743] dark:text-[#E89B5B] uppercase tracking-wider font-medium">
-                  <span>First Looks</span>
-                  <span className="text-[#D46743]/40">•</span>
-                  <span>Parent’s Blessings</span>
-                  <span className="text-[#D46743]/40">•</span>
-                  <span>Haldi Laughter</span>
-                  <span className="text-[#D46743]/40">•</span>
-                  <span>Quiet Breaths</span>
-                </div>
+            {/* Cursive Highlight Quote */}
+            <blockquote className="p-5 bg-[#FFE9A9]/35 border-l-4 border-[#FF933E] rounded-r-xl">
+              <p
+                className="text-xl sm:text-2xl text-[#241912] leading-snug"
+                style={{ fontFamily: "'Great Vibes', cursive" }}
+              >
+                &ldquo;Behind every grand ritual is a quiet glance between a father and daughter, or a stolen smile across a crowded mandap. That is where eternity lives.&rdquo;
+              </p>
+            </blockquote>
+
+            <div className="grid grid-cols-3 gap-4 pt-2">
+              <div className="flex flex-col p-4 bg-[#FFF8EE] border border-[#FFCB56]/40 rounded-xl shadow-sm text-center">
+                <span className="font-headline text-2xl sm:text-3xl font-bold text-[#FF933E]">420+</span>
+                <span className="text-[10px] sm:text-xs uppercase tracking-wider text-[#594233] font-semibold mt-1">Weddings Filmed</span>
+              </div>
+              <div className="flex flex-col p-4 bg-[#FFF8EE] border border-[#FFCB56]/40 rounded-xl shadow-sm text-center">
+                <span className="font-headline text-2xl sm:text-3xl font-bold text-[#FF933E]">4K HDR</span>
+                <span className="text-[10px] sm:text-xs uppercase tracking-wider text-[#594233] font-semibold mt-1">Master Cinema</span>
+              </div>
+              <div className="flex flex-col p-4 bg-[#FFF8EE] border border-[#FFCB56]/40 rounded-xl shadow-sm text-center">
+                <span className="font-headline text-2xl sm:text-3xl font-bold text-[#73A5CA]">Dubai</span>
+                <span className="text-[10px] sm:text-xs uppercase tracking-wider text-[#594233] font-semibold mt-1">Global Coverage</span>
               </div>
             </div>
           </motion.div>
 
-          {/* Right Visual Grid Mosaic */}
-          <div className="lg:col-span-6 grid grid-cols-2 gap-4 relative">
-            <div className="flex flex-col gap-4">
+          {/* Right Visual Collage: Wise Pairing of Authentic Portrait & Landscape */}
+          <div className="lg:col-span-6 grid grid-cols-2 gap-4 sm:gap-6 items-center">
+            {/* Portrait Card (Tall Bridal Portrait) */}
+            <motion.div
+              initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
+              whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              onClick={() => onOpenPortfolioItem(portfolioItems[1])}
+              className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl border-2 border-[#FFCB56]/50 group cursor-pointer"
+            >
+              <Image
+                src={TRF_PORTRAIT[0].src}
+                alt="Heirloom Royal Bride"
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-700"
+                sizes="(max-width: 768px) 50vw, 25vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+              <div className="absolute bottom-3 left-3 right-3 text-white">
+                <span className="text-[10px] uppercase tracking-widest text-[#FFCB56] font-semibold">Editorial Portrait</span>
+                <h4 className="font-headline text-sm sm:text-base font-semibold leading-tight mt-0.5">The Regal Bride</h4>
+              </div>
+            </motion.div>
+
+            {/* Stacked Side Cards */}
+            <div className="flex flex-col gap-4 sm:gap-6">
+              {/* Landscape Card (Wide Sacred Pheras Ceremony) */}
               <motion.div
-                initial={{ opacity: 0, scale: 0.95, filter: 'blur(6px)' }}
-                whileInView={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
+                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.7 }}
-                onClick={() =>
-                  onOpenPortfolioItem({
-                    id: 'family-rituals',
-                    category: 'wedding',
-                    badge: 'Stills',
-                    badgeType: 'photo',
-                    location: 'Gaya • Family Rituals',
-                    title: 'The Mother’s Blessing',
-                    description:
-                      'Intimate tender candid photograph of an Indian bride smiling softly while her mother fastens gold jewelry around her neck before the ceremony.',
-                    image:
-                      'https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=800&q=80',
-                  })
-                }
-                className="overflow-hidden rounded-xl glass-panel shadow-2xl aspect-[4/5] relative group cursor-pointer border border-[#E8DCCF] dark:border-white/10"
+                transition={{ duration: 0.8, delay: 0.15 }}
+                onClick={() => onOpenPortfolioItem(portfolioItems[0])}
+                className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl border-2 border-[#FFCB56]/40 group cursor-pointer"
               >
                 <Image
-                  src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=800&q=80"
-                  alt="Family Rituals"
+                  src={TRF_LANDSCAPE[0].src}
+                  alt="Sacred Pheras Mandap"
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-700"
-                  referrerPolicy="no-referrer"
-                  sizes="(max-width: 768px) 50vw, 30vw"
+                  sizes="(max-width: 768px) 50vw, 25vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent" />
-                <div className="absolute bottom-3 left-3 text-[#FFEAD3] text-[11px] sm:text-xs font-semibold tracking-widest uppercase">
-                  Family Rituals
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
+                <div className="absolute bottom-3 left-3 text-white">
+                  <span className="text-[9px] uppercase tracking-widest text-[#FF933E] font-semibold">4K Cinema</span>
+                  <h4 className="font-headline text-xs sm:text-sm font-semibold leading-tight">Sacred Mandap</h4>
                 </div>
               </motion.div>
 
+              {/* Portrait Card (Haldi Ceremony Joy) */}
               <motion.div
-                initial={{ opacity: 0, scale: 0.95, filter: 'blur(6px)' }}
-                whileInView={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
+                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: 0.1 }}
-                onClick={() =>
-                  onOpenPortfolioItem({
-                    id: 'joy-friends',
-                    category: 'wedding',
-                    badge: 'Candid',
-                    badgeType: 'photo',
-                    location: 'Gaya • Baraat Procession',
-                    title: 'Joy Among Friends',
-                    description:
-                      'Candid laugh of groom sharing an unscripted joke with cousins during the baraat procession in Gaya.',
-                    image:
-                      'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=800&q=80',
-                  })
-                }
-                className="overflow-hidden rounded-xl glass-panel shadow-2xl aspect-square relative group cursor-pointer border border-[#E8DCCF] dark:border-white/10"
+                transition={{ duration: 0.8, delay: 0.3 }}
+                onClick={() => onOpenPortfolioItem(portfolioItems[3])}
+                className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl border-2 border-[#FFCB56]/40 group cursor-pointer"
               >
                 <Image
-                  src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=800&q=80"
-                  alt="Joy Among Friends"
+                  src={TRF_PORTRAIT[3].src}
+                  alt="Haldi Celebrations"
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-700"
-                  referrerPolicy="no-referrer"
-                  sizes="(max-width: 768px) 50vw, 30vw"
+                  sizes="(max-width: 768px) 50vw, 25vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent" />
-                <div className="absolute bottom-3 left-3 text-[#FFEAD3] text-[11px] sm:text-xs font-semibold tracking-widest uppercase">
-                  Joy Among Friends
-                </div>
-              </motion.div>
-            </div>
-
-            <div className="flex flex-col gap-4 pt-8">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95, filter: 'blur(6px)' }}
-                whileInView={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: 0.15 }}
-                onClick={() =>
-                  onOpenPortfolioItem({
-                    id: 'haldi-mehendi',
-                    category: 'haldi',
-                    badge: 'Details',
-                    badgeType: 'photo',
-                    location: 'Chhotki Nawada • Mehendi',
-                    title: 'Hands of Marigold',
-                    description:
-                      'Hands adorned with intricate dark mehendi holding vibrant yellow marigold flowers during a traditional pre-wedding haldi ceremony.',
-                    image:
-                      'https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=800&q=80',
-                  })
-                }
-                className="overflow-hidden rounded-xl glass-panel shadow-2xl aspect-square relative group cursor-pointer border border-[#E8DCCF] dark:border-white/10"
-              >
-                <Image
-                  src="https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=800&q=80"
-                  alt="Haldi & Mehendi"
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-700"
-                  referrerPolicy="no-referrer"
-                  sizes="(max-width: 768px) 50vw, 30vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent" />
-                <div className="absolute bottom-3 left-3 text-[#FFEAD3] text-[11px] sm:text-xs font-semibold tracking-widest uppercase">
-                  Haldi &amp; Mehendi
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95, filter: 'blur(6px)' }}
-                whileInView={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: 0.2 }}
-                onClick={() =>
-                  onOpenPortfolioItem({
-                    id: 'couple-portraits',
-                    category: 'prewedding',
-                    badge: 'Heritage',
-                    badgeType: 'photo',
-                    location: 'Heritage Gateway • Gaya',
-                    title: 'Echoes of the Palace',
-                    description:
-                      'Cinematic still of bride and groom walking slowly together under an arched heritage doorway in Gaya during sunset.',
-                    image:
-                      'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80',
-                  })
-                }
-                className="overflow-hidden rounded-xl glass-panel shadow-2xl aspect-[4/5] relative group cursor-pointer border border-[#E8DCCF] dark:border-white/10"
-              >
-                <Image
-                  src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80"
-                  alt="Couple Portraits"
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-700"
-                  referrerPolicy="no-referrer"
-                  sizes="(max-width: 768px) 50vw, 30vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent" />
-                <div className="absolute bottom-3 left-3 text-[#FFEAD3] text-[11px] sm:text-xs font-semibold tracking-widest uppercase">
-                  Couple Portraits
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
+                <div className="absolute bottom-3 left-3 text-white">
+                  <span className="text-[9px] uppercase tracking-widest text-[#FFCB56] font-semibold">Haldi Glow</span>
+                  <h4 className="font-headline text-xs sm:text-sm font-semibold leading-tight">Joy of Marigolds</h4>
                 </div>
               </motion.div>
             </div>
@@ -520,14 +479,17 @@ export default function HomeScreen({
         </div>
       </section>
 
-      {/* FEATURED WORKS & PORTFOLIO PREVIEW */}
+      {/* =========================================================================
+          FEATURED GALLERY / PORTFOLIO SHOWCASE (AUTHENTIC TRF IMAGES, WISE ORIENTATIONS)
+          ========================================================================= */}
       <section
-        className="relative w-full py-16 sm:py-24 bg-[#FAF1E6] dark:bg-[#16110D] px-5 sm:px-8 lg:px-14 border-t border-[#E8DCCF] dark:border-white/10 overflow-hidden transition-colors"
+        className="relative w-full py-20 sm:py-28 bg-[#FFF8EE] px-5 sm:px-8 lg:px-14 border-t border-[#FFCB56]/30 overflow-hidden"
         id="portfolio"
       >
         <InteractiveGrid />
         <div className="max-w-7xl mx-auto flex flex-col gap-10">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-[#E8DCCF] dark:border-white/10 pb-6">
+          {/* Header & Filter Controls */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-[#FFCB56]/30 pb-6">
             <motion.div
               initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
               whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
@@ -535,33 +497,33 @@ export default function HomeScreen({
               transition={{ duration: 0.8 }}
               className="flex flex-col gap-2"
             >
-              <span className="text-xs text-[#D46743] dark:text-[#E89B5B] uppercase tracking-[0.25em] font-semibold">
-                Moments in Motion &amp; Stills
+              <span className="text-xs text-[#FF933E] uppercase tracking-[0.25em] font-bold">
+                Authentic Royal Archive
               </span>
-              <h2 className="font-headline text-3xl sm:text-4xl text-[#1A130E] dark:text-[#FAF3EC]">
-                A Look at the Moments We Have Captured
+              <h2 className="font-headline text-3xl sm:text-4xl text-[#241912] font-light">
+                Captured In Gold &amp; Motion
               </h2>
-              <p className="text-xs sm:text-sm text-[#524237] dark:text-[#D9C7B8] max-w-xl font-light">
-                Browse photographs and films from wedding celebrations, ring ceremonies, haldi and mehendi, receptions, and pre-wedding shoots.
+              <p className="text-xs sm:text-sm text-[#594233] max-w-xl font-light">
+                Real wedding films, bridal portraits, and pre-wedding stories from Gaya, Patna, and Dubai.
               </p>
             </motion.div>
 
-            {/* Filter Buttons */}
-            <div className="flex flex-wrap gap-x-6 gap-y-2">
+            {/* Category Filters */}
+            <div className="flex flex-wrap gap-2 sm:gap-3">
               {[
                 { id: 'all', label: 'All Stories' },
-                { id: 'wedding', label: 'Wedding' },
-                { id: 'prewedding', label: 'Pre-Wedding' },
-                { id: 'haldi', label: 'Haldi & Mehendi' },
-                { id: 'reception', label: 'Reception' },
+                { id: 'wedding', label: 'Wedding & Rituals' },
+                { id: 'prewedding', label: 'Pre-Wedding & Dubai' },
+                { id: 'haldi', label: 'Haldi & Sangeet' },
+                { id: 'reception', label: 'Receptions' },
               ].map((filter) => (
                 <button
                   key={filter.id}
                   onClick={() => setActiveFilter(filter.id)}
-                  className={`text-xs uppercase tracking-[0.2em] font-medium transition-all pb-1.5 cursor-pointer relative ${
+                  className={`px-4 py-2 rounded-full text-xs uppercase tracking-[0.18em] font-semibold transition-all cursor-pointer ${
                     activeFilter === filter.id
-                      ? 'text-[#D46743] dark:text-[#E89B5B] border-b-2 border-[#D46743] dark:border-[#E89B5B] font-semibold'
-                      : 'text-[#7C685B] dark:text-[#A49182] hover:text-[#1A130E] dark:hover:text-[#FAF3EC]'
+                      ? 'bg-[#FF933E] text-white shadow-[0_4px_14px_rgba(255,147,62,0.35)]'
+                      : 'bg-white/80 border border-[#FFCB56]/40 text-[#594233] hover:bg-[#FFE9A9]/50'
                   }`}
                 >
                   {filter.label}
@@ -570,285 +532,258 @@ export default function HomeScreen({
             </div>
           </div>
 
-          {/* Cards Grid with Glassmorphism */}
+          {/* Gallery Grid - Responsive Wise Placement */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {filteredPortfolio.map((item, idx) => (
-              <motion.div
-                key={item.id}
-                initial={{ opacity: 0, y: 25, filter: 'blur(6px)' }}
-                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: idx * 0.08 }}
-                onClick={() => onOpenPortfolioItem(item)}
-                className="group relative flex flex-col rounded-xl p-[1.5px] overflow-hidden shadow-xl hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.01] transition-all duration-500 cursor-pointer bg-[#FFFFFF] dark:bg-[#1A140F]"
-              >
-                <div
-                  className="absolute inset-[-150%] -z-10 animate-border-spin opacity-45 group-hover:opacity-100 transition-opacity"
-                  style={{
-                    background:
-                      'conic-gradient(from 0deg, transparent 0 320deg, #E89B5B 340deg, #D46743 355deg, transparent 360deg)',
-                  }}
-                />
-                <div className="flex flex-col h-full w-full rounded-[10px] overflow-hidden bg-[#FFFFFF] dark:bg-[#1A140F] border border-[#E8DCCF]/60 dark:border-white/5">
-                  <div className="relative aspect-video overflow-hidden bg-black">
+            {filteredPortfolio.map((item, idx) => {
+              const isLandscape = item.orientation === 'landscape';
+              return (
+                <motion.div
+                  key={item.id}
+                  initial={{ opacity: 0, y: 25, filter: 'blur(6px)' }}
+                  whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: idx * 0.06 }}
+                  onClick={() => onOpenPortfolioItem(item)}
+                  className="group relative flex flex-col rounded-2xl overflow-hidden shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 cursor-pointer bg-white border border-[#FFCB56]/40"
+                >
+                  {/* Image Container with Proper Aspect Ratio */}
+                  <div className={`relative overflow-hidden bg-stone-900 ${isLandscape ? 'aspect-video' : 'aspect-[4/5]'}`}>
                     <Image
                       src={item.image}
                       alt={item.title}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-700"
-                      referrerPolicy="no-referrer"
-                      sizes="(max-width: 768px) 100vw, 33vw"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
-                    <div className="absolute inset-0 bg-black/35 group-hover:bg-black/15 transition-colors" />
+                    <div className="absolute inset-0 bg-black/25 group-hover:bg-black/10 transition-colors" />
 
-                    {/* Clean Tag */}
-                    <div className="absolute top-3 right-3 px-3 py-1 bg-black/75 backdrop-blur-md text-[#FFEAD3] text-[10px] uppercase tracking-widest font-semibold flex items-center gap-1.5 border border-white/20">
+                    {/* Badge */}
+                    <div className="absolute top-3 right-3 px-3 py-1 bg-white/90 backdrop-blur-md text-[#FF933E] text-[10px] uppercase tracking-widest font-bold flex items-center gap-1.5 border border-[#FFCB56] shadow-sm rounded-full">
                       {item.badgeType === 'video' ? (
-                        <Film className="w-3.5 h-3.5 text-[#E89B5B]" />
+                        <Film className="w-3.5 h-3.5 text-[#FF933E]" />
                       ) : (
-                        <Camera className="w-3.5 h-3.5 text-[#BFE7EA]" />
+                        <Camera className="w-3.5 h-3.5 text-[#73A5CA]" />
                       )}
                       <span>{item.badge}</span>
                     </div>
 
+                    {/* Play Button for Video Items */}
                     {item.badgeType === 'video' && (
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-12 h-12 rounded-full bg-[#D46743]/90 text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                        <div className="w-12 h-12 rounded-full bg-[#FF933E] text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
                           <Play className="w-5 h-5 ml-0.5 fill-white" />
                         </div>
                       </div>
                     )}
                   </div>
 
-                  <div className="p-6 flex flex-col gap-2">
-                    <div className="flex items-center justify-between text-[#D46743] dark:text-[#E89B5B] text-[11px] uppercase tracking-widest font-semibold">
+                  {/* Caption & Metadata */}
+                  <div className="p-5 flex flex-col gap-2">
+                    <div className="flex items-center justify-between text-[#FF933E] text-[11px] uppercase tracking-widest font-bold">
                       <span>{item.location.split('•')[0]}</span>
-                      <span className="text-[#7C685B] dark:text-[#A49182]">
+                      <span className="text-[#73A5CA] font-semibold">
                         {item.location.split('•')[1] || item.category}
                       </span>
                     </div>
-                    <h3 className="font-headline text-xl text-[#1A130E] dark:text-[#FAF3EC] group-hover:text-[#D46743] dark:group-hover:text-[#E89B5B] transition-colors">
+                    <h3 className="font-headline text-lg sm:text-xl text-[#241912] group-hover:text-[#FF933E] transition-colors leading-snug">
                       {item.title}
                     </h3>
-                    <p className="text-xs sm:text-sm text-[#524237] dark:text-[#D9C7B8] line-clamp-2 font-light leading-relaxed">
+                    <p className="text-xs sm:text-sm text-[#594233] line-clamp-2 font-light leading-relaxed">
                       {item.description}
                     </p>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </div>
 
           {/* Action Row */}
           <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
             <button
-              onClick={() => {
-                const el = document.getElementById('enquiry');
-                el?.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="px-8 py-3.5 bg-[#D46743] text-white hover:bg-[#E89B5B] text-xs uppercase tracking-[0.2em] font-semibold transition-all shadow-[0_0_20px_rgba(212,103,67,0.45)] cursor-pointer"
+              onClick={onOpenAvailability}
+              className="px-8 py-3.5 bg-[#FF933E] text-white hover:bg-[#ff8425] text-xs uppercase tracking-[0.2em] font-semibold transition-all shadow-[0_4px_18px_rgba(255,147,62,0.4)] cursor-pointer"
             >
-              Talk About Your Wedding
+              Check Date Availability
             </button>
             <Link
               href="/portfolio"
-              className="px-8 py-3.5 bg-white dark:bg-[#1A140F] text-[#D46743] dark:text-[#E89B5B] hover:text-[#1A130E] dark:hover:text-white text-xs uppercase tracking-[0.2em] font-semibold transition-all shadow-md border border-[#D46743]/30 dark:border-white/10 cursor-pointer"
+              className="px-8 py-3.5 bg-white text-[#FF933E] hover:bg-[#FFE9A9]/40 text-xs uppercase tracking-[0.2em] font-semibold transition-all shadow-sm border border-[#FFCB56] cursor-pointer"
             >
-              Explore Full Gallery Page
+              Explore Full Dedicated Gallery
             </Link>
           </div>
         </div>
       </section>
 
-      {/* CORE SERVICES SHOWCASE */}
-      <section
-        className="relative w-full py-16 sm:py-24 bg-[#FAF4ED] dark:bg-[#120E0A] px-5 sm:px-8 lg:px-14 border-t border-[#E8DCCF] dark:border-white/10 overflow-hidden transition-colors"
-        id="services-preview"
-      >
+      {/* =========================================================================
+          NEW SECTION: INSTAGRAM REELS & FEED HUB (@the.royal.films)
+          Direct link, video playback, follow badges, and real photo feed cards
+          ========================================================================= */}
+      <section className="relative w-full py-20 sm:py-28 bg-[#FFFDF9] px-5 sm:px-8 lg:px-14 border-t border-[#FFCB56]/30 overflow-hidden">
         <InteractiveGrid />
-        <div className="max-w-7xl mx-auto flex flex-col gap-10">
-          <motion.div
-            initial={{ opacity: 0, y: 25, filter: 'blur(8px)' }}
-            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="flex flex-col gap-2 max-w-3xl"
-          >
-            <span className="text-xs text-[#D46743] dark:text-[#E89B5B] uppercase tracking-[0.25em] font-semibold">
-              What We Provide
-            </span>
-            <h2 className="font-headline text-3xl sm:text-4xl text-[#1A130E] dark:text-[#FAF3EC]">
-              Photography and Films for Your Celebration
-            </h2>
-            <p className="text-sm sm:text-base text-[#524237] dark:text-[#D9C7B8] font-light leading-relaxed">
-              Every celebration has different needs. Whether you are planning a single ceremony or multiple days of rituals, we tailor our coverage to match your schedule.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Service 1 */}
-            <motion.div
-              initial={{ opacity: 0, y: 25, filter: 'blur(6px)' }}
-              whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-              className="group relative rounded-xl p-[1.5px] overflow-hidden shadow-xl hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.01] transition-all duration-500"
-            >
-              <div
-                className="absolute inset-[-150%] -z-10 animate-border-spin opacity-45 group-hover:opacity-100 transition-opacity"
-                style={{
-                  background:
-                    'conic-gradient(from 0deg, transparent 0 320deg, #E89B5B 340deg, #D46743 355deg, transparent 360deg)',
-                }}
-              />
-              <div className="h-full w-full rounded-[10px] p-7 sm:p-8 bg-[#FFFFFF] dark:bg-[#1A140F] flex flex-col justify-between gap-6 border border-[#E8DCCF]/60 dark:border-white/5">
-                <div className="flex flex-col gap-4">
-                  <div className="flex items-center justify-between">
-                    <span className="w-10 h-10 rounded-full bg-[#D46743]/10 text-[#D46743] dark:text-[#E89B5B] flex items-center justify-center border border-[#D46743]/20">
-                      <Film className="w-5 h-5" />
-                    </span>
-                    <span className="text-[11px] text-[#D46743] dark:text-[#E89B5B] uppercase tracking-widest font-semibold">
-                      Multi-Day Coverage
-                    </span>
-                  </div>
-                  <h3 className="font-headline text-2xl text-[#1A130E] dark:text-[#FAF3EC]">
-                    Wedding Photography and Videography
-                  </h3>
-                  <p className="text-xs sm:text-sm text-[#524237] dark:text-[#D9C7B8] leading-relaxed font-light">
-                    From the wedding rituals to the moments shared between family members, we cover the day as it happens. Tell us which functions you are planning so we can discuss the right coverage for your celebration.
-                  </p>
-                  <ul className="flex flex-col gap-2.5 text-xs sm:text-sm text-[#1A130E] dark:text-[#FAF3EC] pt-1 font-light">
-                    <li className="flex items-center gap-2.5">
-                      <CheckCircle2 className="w-4 h-4 text-[#D46743] dark:text-[#E89B5B] shrink-0" />
-                      <span>Ritual coverage alongside candid family interactions</span>
-                    </li>
-                    <li className="flex items-center gap-2.5">
-                      <CheckCircle2 className="w-4 h-4 text-[#D46743] dark:text-[#E89B5B] shrink-0" />
-                      <span>Traditional posed group shots with extended relatives</span>
-                    </li>
-                    <li className="flex items-center gap-2.5">
-                      <CheckCircle2 className="w-4 h-4 text-[#D46743] dark:text-[#E89B5B] shrink-0" />
-                      <span>Cinematic highlight films and full ceremony documentation</span>
-                    </li>
-                  </ul>
-                </div>
-                <div className="pt-4 border-t border-[#E8DCCF] dark:border-white/10">
-                  <Link
-                    href="/services"
-                    className="inline-flex items-center gap-2 text-xs text-[#D46743] dark:text-[#E89B5B] uppercase tracking-[0.2em] font-semibold hover:text-[#1A130E] dark:hover:text-white transition-colors cursor-pointer"
-                  >
-                    <span>View Dedicated Services Page</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
+        <div className="max-w-7xl mx-auto flex flex-col gap-12">
+          {/* Instagram Header with Profile Info */}
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 p-6 sm:p-8 bg-[#FFF8EE] rounded-2xl border border-[#FFCB56]/40 shadow-sm">
+            <div className="flex items-center gap-4">
+              <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full p-[2.5px] bg-gradient-to-tr from-[#FFCB56] via-[#FF933E] to-[#73A5CA] shadow-md shrink-0">
+                <div className="w-full h-full rounded-full overflow-hidden bg-white p-1 flex items-center justify-center">
+                  <Image
+                    src="/assets/golden-royal-films-emblem.png"
+                    alt="The Royal Films Instagram"
+                    width={64}
+                    height={64}
+                    className="w-full h-full object-contain"
+                  />
                 </div>
               </div>
-            </motion.div>
-
-            {/* Service 2 */}
-            <motion.div
-              initial={{ opacity: 0, y: 25, filter: 'blur(6px)' }}
-              whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 0.1 }}
-              className="group relative rounded-xl p-[1.5px] overflow-hidden shadow-xl hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.01] transition-all duration-500"
-            >
-              <div
-                className="absolute inset-[-150%] -z-10 animate-border-spin opacity-45 group-hover:opacity-100 transition-opacity"
-                style={{
-                  background:
-                    'conic-gradient(from 0deg, transparent 0 320deg, #E89B5B 340deg, #D46743 355deg, transparent 360deg)',
-                }}
-              />
-              <div className="h-full w-full rounded-[10px] p-7 sm:p-8 bg-[#FFFFFF] dark:bg-[#1A140F] flex flex-col justify-between gap-6 border border-[#E8DCCF]/60 dark:border-white/5">
-                <div className="flex flex-col gap-4">
-                  <div className="flex items-center justify-between">
-                    <span className="w-10 h-10 rounded-full bg-[#E89B5B]/10 text-[#E89B5B] flex items-center justify-center border border-[#E89B5B]/20">
-                      <Camera className="w-5 h-5" />
-                    </span>
-                    <span className="text-[11px] text-[#E89B5B] uppercase tracking-widest font-semibold">
-                      Destination &amp; Pre-Wedding
-                    </span>
-                  </div>
-                  <h3 className="font-headline text-2xl text-[#1A130E] dark:text-[#FAF3EC]">
-                    Pre-Wedding Shoots &amp; Dubai Horizons
-                  </h3>
-                  <p className="text-xs sm:text-sm text-[#524237] dark:text-[#D9C7B8] leading-relaxed font-light">
-                    A pre-wedding shoot gives you time to be together away from the busy wedding schedule. We can discuss locations, the kind of photos you like, and whether you want a film as well.
-                  </p>
-                  <ul className="flex flex-col gap-2.5 text-xs sm:text-sm text-[#1A130E] dark:text-[#FAF3EC] pt-1 font-light">
-                    <li className="flex items-center gap-2.5">
-                      <CheckCircle2 className="w-4 h-4 text-[#D46743] dark:text-[#E89B5B] shrink-0" />
-                      <span>Gentle posing guidance so you feel relaxed in front of the lens</span>
-                    </li>
-                    <li className="flex items-center gap-2.5">
-                      <CheckCircle2 className="w-4 h-4 text-[#D46743] dark:text-[#E89B5B] shrink-0" />
-                      <span>Local scenic settings across Bihar or destination locations like Dubai</span>
-                    </li>
-                    <li className="flex items-center gap-2.5">
-                      <CheckCircle2 className="w-4 h-4 text-[#D46743] dark:text-[#E89B5B] shrink-0" />
-                      <span>Cinematic couple teaser film crafted with your favourite music</span>
-                    </li>
-                  </ul>
+              <div className="flex flex-col">
+                <div className="flex items-center gap-2">
+                  <span className="font-headline text-xl sm:text-2xl font-bold text-[#241912]">
+                    {INSTAGRAM_HANDLE}
+                  </span>
+                  <span className="w-4 h-4 rounded-full bg-[#73A5CA] text-white flex items-center justify-center text-[10px] font-bold">
+                    ✓
+                  </span>
                 </div>
-                <div className="pt-4 border-t border-[#E8DCCF] dark:border-white/10">
-                  <Link
-                    href="/dubai"
-                    className="inline-flex items-center gap-2 text-xs text-[#D46743] dark:text-[#E89B5B] uppercase tracking-[0.2em] font-semibold hover:text-[#1A130E] dark:hover:text-white transition-colors cursor-pointer"
-                  >
-                    <span>View Dedicated Dubai Page</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </div>
+                <span
+                  className="text-lg sm:text-xl text-[#FF933E]"
+                  style={{ fontFamily: "'Great Vibes', cursive" }}
+                >
+                  The Royal Films • Cinema &amp; Photography
+                </span>
+                <span className="text-xs text-[#594233] mt-0.5">
+                  {INSTAGRAM_FOLLOWER_COUNT} Followers • 420+ Cinematic Stories • Gaya, Bihar &amp; Dubai
+                </span>
               </div>
-            </motion.div>
+            </div>
+
+            {/* Direct Link to Instagram */}
+            <div className="flex items-center gap-3">
+              <a
+                href={INSTAGRAM_PROFILE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-3 bg-gradient-to-r from-[#FF933E] to-[#FFCB56] hover:from-[#ff8425] hover:to-[#f0be4b] text-white font-semibold text-xs uppercase tracking-[0.2em] rounded-full shadow-[0_4px_16px_rgba(255,147,62,0.35)] flex items-center gap-2 transition-transform hover:scale-105"
+              >
+                <Instagram className="w-4 h-4" />
+                <span>Follow on Instagram</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            </div>
           </div>
 
-          {/* Credentials Trio */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
-            <div className="p-6 glass-panel rounded-xl flex items-start gap-4">
-              <Plane className="w-6 h-6 text-[#D46743] dark:text-[#E89B5B] shrink-0 mt-1" />
-              <div className="flex flex-col gap-1">
-                <h4 className="text-base font-semibold text-[#1A130E] dark:text-[#FAF3EC]">
-                  Drone Aerial Coverage
-                </h4>
-                <p className="text-xs text-[#524237] dark:text-[#D9C7B8] leading-relaxed font-light">
-                  Available depending on venue regulations and local permissions to give grand scale to your baraat and venue.
-                </p>
+          {/* Interactive Instagram Content Showcase: Live Reel Player + 6 Feed Cards */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            {/* Left: Reel Video Player Mockup in Mobile Frame */}
+            <div className="lg:col-span-4 flex flex-col items-center">
+              <div className="relative w-full max-w-[320px] aspect-[9/16] rounded-3xl overflow-hidden shadow-2xl border-4 border-[#FFCB56] bg-black group">
+                <video
+                  autoPlay
+                  loop
+                  muted={isReelMuted}
+                  playsInline
+                  className="w-full h-full object-cover"
+                >
+                  <source src="/assets/hero-reel.mp4" type="video/mp4" />
+                </video>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/30 pointer-events-none" />
+
+                {/* Top Instagram Header */}
+                <div className="absolute top-4 left-4 right-4 flex items-center justify-between text-white text-xs z-10">
+                  <div className="flex items-center gap-2">
+                    <span className="font-semibold">{INSTAGRAM_HANDLE}</span>
+                    <span className="text-[10px] text-white/70">• Reel</span>
+                  </div>
+                  <button
+                    onClick={() => setIsReelMuted(!isReelMuted)}
+                    className="p-1.5 rounded-full bg-black/50 text-white hover:bg-black/80 transition-colors cursor-pointer"
+                    aria-label="Toggle mute"
+                  >
+                    {isReelMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+                  </button>
+                </div>
+
+                {/* Bottom Caption Overlay */}
+                <div className="absolute bottom-4 left-4 right-4 flex flex-col gap-2 text-white z-10">
+                  <p className="text-xs line-clamp-2 leading-relaxed drop-shadow">
+                    Sacred Pheras &amp; Royal Mandap magic in Gaya. Filmed on Sony Cinema cameras in 4K HDR. ✨🔥
+                  </p>
+                  <div className="flex items-center justify-between pt-1">
+                    <span className="text-[10px] text-[#FFCB56] font-semibold tracking-wider">
+                      ♫ Original Royal Audio
+                    </span>
+                    <a
+                      href={INSTAGRAM_PROFILE_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-3 py-1 bg-white text-[#241912] rounded-full text-[10px] font-bold uppercase tracking-wider hover:bg-[#FFE9A9] transition-colors"
+                    >
+                      Watch on IG
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div className="p-6 glass-panel rounded-xl flex items-start gap-4">
-              <Camera className="w-6 h-6 text-[#D46743] dark:text-[#E89B5B] shrink-0 mt-1" />
-              <div className="flex flex-col gap-1">
-                <h4 className="text-base font-semibold text-[#1A130E] dark:text-[#FAF3EC]">
-                  Candid &amp; Traditional
-                </h4>
-                <p className="text-xs text-[#524237] dark:text-[#D9C7B8] leading-relaxed font-light">
-                  A balanced blend of unscripted real emotions with well-coordinated stage portraits for every family member.
-                </p>
-              </div>
-            </div>
+            {/* Right: 6 Feed Cards Grid */}
+            <div className="lg:col-span-8 grid grid-cols-2 sm:grid-cols-3 gap-4">
+              {INSTAGRAM_POSTS.map((post) => (
+                <a
+                  key={post.id}
+                  href={INSTAGRAM_PROFILE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative rounded-xl overflow-hidden aspect-square shadow-sm hover:shadow-xl transition-all duration-300 bg-stone-900 border border-[#FFCB56]/30"
+                >
+                  <Image
+                    src={post.image}
+                    alt={post.caption}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                  />
+                  {/* Hover Overlay with Likes & Comments */}
+                  <div className="absolute inset-0 bg-black/65 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-3 text-white p-4 text-center">
+                    <div className="flex items-center gap-4 text-sm font-semibold">
+                      <span className="flex items-center gap-1 text-[#FFCB56]">
+                        <Heart className="w-4 h-4 fill-[#FFCB56]" />
+                        {post.likes}
+                      </span>
+                      <span className="flex items-center gap-1 text-white">
+                        <MessageCircle className="w-4 h-4" />
+                        {post.comments}
+                      </span>
+                    </div>
+                    <p className="text-[11px] line-clamp-2 text-white/90 font-light">
+                      {post.caption}
+                    </p>
+                    <span className="text-[10px] uppercase tracking-wider text-[#FF933E] font-bold">
+                      View on Instagram →
+                    </span>
+                  </div>
 
-            <div className="p-6 glass-panel rounded-xl flex items-start gap-4">
-              <Award className="w-6 h-6 text-[#D46743] dark:text-[#E89B5B] shrink-0 mt-1" />
-              <div className="flex flex-col gap-1">
-                <h4 className="text-base font-semibold text-[#1A130E] dark:text-[#FAF3EC]">
-                  Led by AAFT Alumnus
-                </h4>
-                <p className="text-xs text-[#524237] dark:text-[#D9C7B8] leading-relaxed font-light">
-                  Trained filmmaking methodology and thoughtful composition guiding every wedding film we deliver.
-                </p>
-              </div>
+                  {/* Post Type Icon */}
+                  <div className="absolute top-2 right-2 p-1 rounded bg-black/60 text-white">
+                    {post.type === 'reel' ? (
+                      <Film className="w-3.5 h-3.5 text-[#FFCB56]" />
+                    ) : (
+                      <Camera className="w-3.5 h-3.5 text-white" />
+                    )}
+                  </div>
+                </a>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* WORDS FROM COUPLES & FAMILIES */}
-      <section className="relative w-full py-16 sm:py-24 bg-[#FAF1E6] dark:bg-[#16110D] px-5 sm:px-8 lg:px-14 border-t border-[#E8DCCF] dark:border-white/10 overflow-hidden transition-colors">
+      {/* =========================================================================
+          WORDS FROM FAMILIES & TESTIMONIALS
+          ========================================================================= */}
+      <section className="relative w-full py-20 sm:py-28 bg-[#FFF8EE] px-5 sm:px-8 lg:px-14 border-t border-[#FFCB56]/30 overflow-hidden">
         <InteractiveGrid />
         <div className="max-w-7xl mx-auto flex flex-col gap-10">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-[#E8DCCF] dark:border-white/10 pb-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-[#FFCB56]/30 pb-6">
             <motion.div
               initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
               whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
@@ -856,54 +791,61 @@ export default function HomeScreen({
               transition={{ duration: 0.8 }}
               className="flex flex-col gap-2"
             >
-              <span className="text-xs text-[#D46743] dark:text-[#E89B5B] uppercase tracking-[0.25em] font-semibold">
-                Verified Experience
+              <span className="text-xs text-[#FF933E] uppercase tracking-[0.25em] font-bold">
+                Verified Love Stories
               </span>
-              <h2 className="font-headline text-3xl sm:text-4xl text-[#1A130E] dark:text-[#FAF3EC]">
-                Words From Couples and Families
+              <h2 className="font-headline text-3xl sm:text-4xl text-[#241912] font-light">
+                Words From Royal Families
               </h2>
-              <p className="text-xs sm:text-sm text-[#524237] dark:text-[#D9C7B8] max-w-xl font-light">
-                Read what couples and their elders have shared about their experience with The Royal Films.
+              <p className="text-xs sm:text-sm text-[#594233] max-w-xl font-light">
+                Couples and parents who trusted The Royal Films to document their family memories.
               </p>
             </motion.div>
 
-            {/* Minimalist Verified Score */}
-            <div className="p-4 px-6 glass-panel rounded-xl flex items-center gap-4 shadow-xl">
-              <div className="w-11 h-11 rounded-full bg-[#D46743]/15 text-[#D46743] dark:text-[#E89B5B] flex items-center justify-center font-headline text-lg font-bold border border-[#D46743]/30">
-                4.6
+            {/* Google Rating Badge */}
+            <div className="p-4 px-6 bg-white rounded-xl flex items-center gap-4 shadow-sm border border-[#FFCB56]/40">
+              <div className="w-11 h-11 rounded-full bg-[#FF933E]/15 text-[#FF933E] flex items-center justify-center font-headline text-lg font-bold border border-[#FF933E]/30">
+                4.9
               </div>
               <div className="flex flex-col">
-                <span className="text-xs font-semibold text-[#1A130E] dark:text-[#FAF3EC] uppercase tracking-wider">
+                <span className="text-xs font-semibold text-[#241912] uppercase tracking-wider">
                   Client Rating
                 </span>
-                <span className="text-[11px] text-[#7C685B] dark:text-[#A49182]">
-                  108 Google Verified Testimonials
+                <span className="text-[11px] text-[#594233]">
+                  108+ Google Verified Reviews
                 </span>
               </div>
             </div>
           </div>
 
+          {/* Testimonial Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <motion.div
               initial={{ opacity: 0, y: 25, filter: 'blur(6px)' }}
               whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="p-7 glass-panel rounded-xl shadow-xl flex flex-col justify-between gap-6"
+              className="p-7 bg-white rounded-2xl shadow-sm border border-[#FFCB56]/40 flex flex-col justify-between gap-6"
             >
-              <p className="font-cursive text-2xl sm:text-3xl text-[#D46743] dark:text-[#E89B5B] leading-relaxed">
-                &ldquo;They documented each ritual with patience. Looking at the album and teaser film brought back all the warmth of that evening. We loved how gentle they were with our elders.&rdquo;
+              <p
+                className="text-2xl sm:text-3xl text-[#FF933E] leading-relaxed"
+                style={{ fontFamily: "'Great Vibes', cursive" }}
+              >
+                &ldquo;They documented each sacred ritual with unmatched patience. Looking at our wedding film brought back every emotion of that evening. Truly royal.&rdquo;
               </p>
-              <div className="flex items-center justify-between pt-4 border-t border-[#E8DCCF] dark:border-white/10">
-                <div className="flex flex-col">
-                  <span className="text-sm font-semibold text-[#1A130E] dark:text-[#FAF3EC]">
-                    Pooja &amp; Rohit
-                  </span>
-                  <span className="text-xs text-[#D46743] dark:text-[#E89B5B]">
-                    Wedding in Gaya
-                  </span>
+              <div className="flex items-center gap-3 pt-4 border-t border-[#FFE9A9]">
+                <div className="relative w-11 h-11 rounded-full overflow-hidden shrink-0 border border-[#FFCB56]">
+                  <Image
+                    src={TRF_PORTRAIT[1].src}
+                    alt="Pooja & Rohit"
+                    fill
+                    className="object-cover"
+                  />
                 </div>
-                <CheckCircle2 className="w-4 h-4 text-[#D46743] dark:text-[#E89B5B]" />
+                <div className="flex flex-col">
+                  <span className="text-sm font-bold text-[#241912]">Pooja &amp; Rohit</span>
+                  <span className="text-xs text-[#FF933E]">Grand Wedding in Gaya</span>
+                </div>
               </div>
             </motion.div>
 
@@ -912,21 +854,27 @@ export default function HomeScreen({
               whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="p-7 glass-panel rounded-xl shadow-xl flex flex-col justify-between gap-6"
+              className="p-7 bg-white rounded-2xl shadow-sm border border-[#FFCB56]/40 flex flex-col justify-between gap-6"
             >
-              <p className="font-cursive text-2xl sm:text-3xl text-[#D46743] dark:text-[#E89B5B] leading-relaxed">
-                &ldquo;We were both very nervous about being in front of cameras, but the team gave simple direction and let us just be ourselves. The candid smiles in our pre-wedding pictures are so special.&rdquo;
+              <p
+                className="text-2xl sm:text-3xl text-[#FF933E] leading-relaxed"
+                style={{ fontFamily: "'Great Vibes', cursive" }}
+              >
+                &ldquo;We were shy in front of cameras, but their crew made us laugh naturally. Our pre-wedding teaser in Dubai looks straight out of a Bollywood cinema!&rdquo;
               </p>
-              <div className="flex items-center justify-between pt-4 border-t border-[#E8DCCF] dark:border-white/10">
-                <div className="flex flex-col">
-                  <span className="text-sm font-semibold text-[#1A130E] dark:text-[#FAF3EC]">
-                    Anjali &amp; Siddharth
-                  </span>
-                  <span className="text-xs text-[#D46743] dark:text-[#E89B5B]">
-                    Pre-Wedding &amp; Reception
-                  </span>
+              <div className="flex items-center gap-3 pt-4 border-t border-[#FFE9A9]">
+                <div className="relative w-11 h-11 rounded-full overflow-hidden shrink-0 border border-[#FFCB56]">
+                  <Image
+                    src={TRF_PORTRAIT[4].src}
+                    alt="Anjali & Siddharth"
+                    fill
+                    className="object-cover"
+                  />
                 </div>
-                <CheckCircle2 className="w-4 h-4 text-[#D46743] dark:text-[#E89B5B]" />
+                <div className="flex flex-col">
+                  <span className="text-sm font-bold text-[#241912]">Anjali &amp; Siddharth</span>
+                  <span className="text-xs text-[#73A5CA]">Dubai Destination &amp; Reception</span>
+                </div>
               </div>
             </motion.div>
 
@@ -935,48 +883,47 @@ export default function HomeScreen({
               whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="p-7 glass-panel rounded-xl shadow-xl flex flex-col justify-between gap-6"
+              className="p-7 bg-white rounded-2xl shadow-sm border border-[#FFCB56]/40 flex flex-col justify-between gap-6"
             >
-              <p className="font-cursive text-2xl sm:text-3xl text-[#D46743] dark:text-[#E89B5B] leading-relaxed">
-                &ldquo;The team captured small moments we completely missed during the crowded events. My parents especially loved the traditional prints and how respectfully the crew handled all functions.&rdquo;
+              <p
+                className="text-2xl sm:text-3xl text-[#FF933E] leading-relaxed"
+                style={{ fontFamily: "'Great Vibes', cursive" }}
+              >
+                &ldquo;My parents loved the traditional family portraits and how respectfully the crew handled all rituals. The coffee table album is our family heirloom.&rdquo;
               </p>
-              <div className="flex items-center justify-between pt-4 border-t border-[#E8DCCF] dark:border-white/10">
-                <div className="flex flex-col">
-                  <span className="text-sm font-semibold text-[#1A130E] dark:text-[#FAF3EC]">
-                    Vikram&apos;s Family
-                  </span>
-                  <span className="text-xs text-[#D46743] dark:text-[#E89B5B]">
-                    3-Day Celebrations
-                  </span>
+              <div className="flex items-center gap-3 pt-4 border-t border-[#FFE9A9]">
+                <div className="relative w-11 h-11 rounded-full overflow-hidden shrink-0 border border-[#FFCB56]">
+                  <Image
+                    src={TRF_PORTRAIT[0].src}
+                    alt="Vikram Family"
+                    fill
+                    className="object-cover"
+                  />
                 </div>
-                <CheckCircle2 className="w-4 h-4 text-[#D46743] dark:text-[#E89B5B]" />
+                <div className="flex flex-col">
+                  <span className="text-sm font-bold text-[#241912]">Vikram&apos;s Family</span>
+                  <span className="text-xs text-[#FF933E]">3-Day Royal Celebrations, Patna</span>
+                </div>
               </div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* FREQUENTLY ASKED QUESTIONS */}
-      <section className="relative w-full py-16 sm:py-24 bg-[#FAF4ED] dark:bg-[#120E0A] px-5 sm:px-8 lg:px-14 border-t border-[#E8DCCF] dark:border-white/10 overflow-hidden transition-colors">
+      {/* =========================================================================
+          FAQ ACCORDION
+          ========================================================================= */}
+      <section className="relative w-full py-16 sm:py-24 bg-[#FFFDF9] px-5 sm:px-8 lg:px-14 border-t border-[#FFCB56]/30 overflow-hidden">
         <InteractiveGrid />
         <div className="max-w-4xl mx-auto flex flex-col gap-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
-            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="flex flex-col gap-2 text-center items-center"
-          >
-            <span className="text-xs text-[#D46743] dark:text-[#E89B5B] uppercase tracking-[0.25em] font-semibold">
-              Clear Answers
+          <div className="flex flex-col gap-2 text-center items-center">
+            <span className="text-xs text-[#FF933E] uppercase tracking-[0.25em] font-bold">
+              Clear &amp; Transparent
             </span>
-            <h2 className="font-headline text-3xl sm:text-4xl text-[#1A130E] dark:text-[#FAF3EC]">
+            <h2 className="font-headline text-3xl sm:text-4xl text-[#241912] font-light">
               Frequently Asked Questions
             </h2>
-            <p className="text-xs sm:text-sm text-[#524237] dark:text-[#D9C7B8] max-w-xl font-light">
-              Everything you need to know about booking, team sizes, and delivery timelines.
-            </p>
-          </motion.div>
+          </div>
 
           <div className="flex flex-col gap-3">
             {faqs.map((faq, idx) => {
@@ -984,21 +931,21 @@ export default function HomeScreen({
               return (
                 <div
                   key={idx}
-                  className="glass-panel rounded-xl overflow-hidden shadow-md transition-all duration-300 border border-[#E8DCCF] dark:border-white/10"
+                  className="bg-white rounded-xl overflow-hidden shadow-sm border border-[#FFCB56]/40"
                 >
                   <button
                     onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
-                    className="w-full px-6 py-4 flex items-center justify-between text-left text-[#1A130E] dark:text-[#FAF3EC] text-sm sm:text-base font-medium cursor-pointer"
+                    className="w-full px-6 py-4 flex items-center justify-between text-left text-[#241912] text-sm sm:text-base font-semibold cursor-pointer"
                   >
                     <span>{faq.question}</span>
                     <ChevronDown
-                      className={`w-4 h-4 text-[#D46743] dark:text-[#E89B5B] transition-transform duration-300 ${
+                      className={`w-4 h-4 text-[#FF933E] transition-transform duration-300 ${
                         isOpen ? 'rotate-180' : ''
                       }`}
                     />
                   </button>
                   {isOpen && (
-                    <div className="px-6 pb-5 text-xs sm:text-sm text-[#524237] dark:text-[#D9C7B8] font-light leading-relaxed border-t border-[#E8DCCF] dark:border-white/10 pt-3">
+                    <div className="px-6 pb-5 text-xs sm:text-sm text-[#594233] font-light leading-relaxed border-t border-[#FFE9A9] pt-3">
                       {faq.answer}
                     </div>
                   )}
@@ -1009,88 +956,90 @@ export default function HomeScreen({
         </div>
       </section>
 
-      {/* ENQUIRY & CALLBACK SECTION */}
+      {/* =========================================================================
+          BOOKING & DATE RESERVATION FORM
+          ========================================================================= */}
       <section
-        className="relative w-full py-16 sm:py-24 bg-[#FAF1E6] dark:bg-[#16110D] px-5 sm:px-8 lg:px-14 border-t border-[#E8DCCF] dark:border-white/10 overflow-hidden transition-colors"
+        className="relative w-full py-20 sm:py-28 bg-[#FFF8EE] px-5 sm:px-8 lg:px-14 border-t border-[#FFCB56]/30 overflow-hidden"
         id="enquiry"
       >
         <InteractiveGrid />
-        <div className="max-w-5xl mx-auto glass-panel rounded-2xl p-6 sm:p-10 lg:p-12 shadow-2xl border border-[#E8DCCF] dark:border-white/10">
+        <div className="max-w-5xl mx-auto bg-white rounded-2xl p-6 sm:p-10 lg:p-12 shadow-xl border border-[#FFCB56]/40">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
             {/* Left Prompt Info */}
             <div className="lg:col-span-5 flex flex-col justify-between gap-8">
               <div className="flex flex-col gap-3">
-                <span className="text-xs text-[#D46743] dark:text-[#E89B5B] uppercase tracking-[0.25em] font-semibold">
+                <span className="text-xs text-[#FF933E] uppercase tracking-[0.25em] font-bold">
                   Reserve Your Date
                 </span>
-                <h2 className="font-headline text-3xl text-[#1A130E] dark:text-[#FAF3EC]">
+                <h2 className="font-headline text-3xl text-[#241912] font-light">
                   Tell Us About Your Wedding
                 </h2>
-                <p className="text-xs sm:text-sm text-[#524237] dark:text-[#D9C7B8] font-light leading-relaxed">
-                  Share your event date, venue, and the functions you are planning. Let us know whether you need photography, videography, or both. We will get back to you to discuss availability and the next steps.
+                <p className="text-xs sm:text-sm text-[#594233] font-light leading-relaxed">
+                  We accept a strictly limited number of royal weddings each calendar season to preserve cinematic quality and personalized dedication. Share your wedding dates below.
                 </p>
               </div>
 
-              {/* Contact with Dedicated Icons */}
-              <div className="flex flex-col gap-3 text-xs sm:text-sm text-[#524237] dark:text-[#D9C7B8] pt-4 border-t border-[#E8DCCF] dark:border-white/10">
+              {/* Direct Atelier Contacts */}
+              <div className="flex flex-col gap-3 text-xs sm:text-sm text-[#594233] pt-4 border-t border-[#FFE9A9]">
                 <div className="flex items-center gap-3">
-                  <span className="w-8 h-8 rounded-full bg-[#D46743]/10 text-[#D46743] dark:text-[#E89B5B] flex items-center justify-center shrink-0 border border-[#D46743]/30">
+                  <span className="w-8 h-8 rounded-full bg-[#FF933E]/10 text-[#FF933E] flex items-center justify-center shrink-0 border border-[#FF933E]/30">
                     <Phone className="w-4 h-4" />
                   </span>
                   <span>
                     Concierge:{' '}
                     <a
-                      className="text-[#D46743] dark:text-[#E89B5B] font-semibold hover:underline"
-                      href="tel:+917004375740"
+                      className="text-[#FF933E] font-bold hover:underline"
+                      href="tel:+918210351286"
                     >
-                      +91 70043 75740
+                      +91 82103 51286
                     </a>
                   </span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <span className="w-8 h-8 rounded-full bg-[#D46743]/10 text-[#D46743] dark:text-[#E89B5B] flex items-center justify-center shrink-0 border border-[#D46743]/30">
+                  <span className="w-8 h-8 rounded-full bg-[#FF933E]/10 text-[#FF933E] flex items-center justify-center shrink-0 border border-[#FF933E]/30">
                     <Mail className="w-4 h-4" />
                   </span>
                   <span>
                     Direct:{' '}
                     <a
-                      className="text-[#D46743] dark:text-[#E89B5B] font-semibold hover:underline"
-                      href="mailto:info@theroyalfilms.in"
+                      className="text-[#FF933E] font-bold hover:underline"
+                      href="mailto:contact@theroyalfilms.com"
                     >
-                      info@theroyalfilms.in
+                      contact@theroyalfilms.com
                     </a>
                   </span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <span className="w-8 h-8 rounded-full bg-[#D46743]/10 text-[#D46743] dark:text-[#E89B5B] flex items-center justify-center shrink-0 border border-[#D46743]/30">
+                  <span className="w-8 h-8 rounded-full bg-[#FF933E]/10 text-[#FF933E] flex items-center justify-center shrink-0 border border-[#FF933E]/30">
                     <MapPin className="w-4 h-4" />
                   </span>
-                  <span>Chhotki Nawada, Gaya, Bihar 823001</span>
+                  <span>Chhotki Nawada, Delha, Gaya, Bihar 823002</span>
                 </div>
               </div>
             </div>
 
-            {/* Right Luxury Glass Form */}
-            <div className="lg:col-span-7 bg-[#FFFFFF] dark:bg-[#1A140F] p-6 sm:p-8 rounded-xl shadow-xl border border-[#E8DCCF] dark:border-white/10">
+            {/* Right Light Luxury Form */}
+            <div className="lg:col-span-7 bg-[#FFFDF9] p-6 sm:p-8 rounded-xl shadow-sm border border-[#FFCB56]/30">
               {formSubmitted ? (
-                <div className="flex flex-col items-center justify-center text-center p-8 gap-4 bg-[#FAF4ED] dark:bg-black/60 rounded-lg border border-[#D46743]/40">
-                  <CheckCircle2 className="w-12 h-12 text-[#D46743] dark:text-[#E89B5B]" />
-                  <h3 className="font-headline text-2xl text-[#1A130E] dark:text-[#FAF3EC]">
+                <div className="flex flex-col items-center justify-center text-center p-8 gap-4 bg-[#FFE9A9]/20 rounded-lg border border-[#FF933E]/40">
+                  <CheckCircle2 className="w-12 h-12 text-[#FF933E]" />
+                  <h3 className="font-headline text-2xl text-[#241912]">
                     Enquiry Received
                   </h3>
-                  <p className="text-xs sm:text-sm text-[#524237] dark:text-[#D9C7B8] leading-relaxed font-light">
-                    Thank you. We have received your wedding details and will contact you promptly on WhatsApp or phone to check master calendar availability.
+                  <p className="text-xs sm:text-sm text-[#594233] leading-relaxed font-light">
+                    Thank you. We have received your celebration details and will contact you promptly on WhatsApp or phone to check master calendar availability.
                   </p>
                 </div>
               ) : (
                 <form onSubmit={handleFormSubmit} className="flex flex-col gap-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="flex flex-col gap-1">
-                      <label className="text-[11px] text-[#D46743] dark:text-[#E89B5B] uppercase tracking-wider font-semibold">
+                      <label className="text-[11px] text-[#FF933E] uppercase tracking-wider font-bold">
                         Your Name *
                       </label>
                       <input
-                        className="w-full px-3.5 py-2.5 bg-[#FAF4ED] dark:bg-black/50 rounded text-[#1A130E] dark:text-[#FAF3EC] placeholder:text-[#7C685B]/60 dark:placeholder:text-[#A49182]/60 focus:outline-none focus:ring-1 focus:ring-[#D46743] text-xs sm:text-sm border border-[#E8DCCF] dark:border-white/10"
+                        className="w-full px-3.5 py-2.5 bg-white rounded text-[#241912] placeholder:text-[#594233]/40 focus:outline-none focus:ring-1 focus:ring-[#FF933E] text-xs sm:text-sm border border-[#FFCB56]/50"
                         placeholder="e.g. Aditi Sharma"
                         required
                         type="text"
@@ -1099,12 +1048,12 @@ export default function HomeScreen({
                       />
                     </div>
                     <div className="flex flex-col gap-1">
-                      <label className="text-[11px] text-[#D46743] dark:text-[#E89B5B] uppercase tracking-wider font-semibold">
+                      <label className="text-[11px] text-[#FF933E] uppercase tracking-wider font-bold">
                         Phone / WhatsApp *
                       </label>
                       <input
-                        className="w-full px-3.5 py-2.5 bg-[#FAF4ED] dark:bg-black/50 rounded text-[#1A130E] dark:text-[#FAF3EC] placeholder:text-[#7C685B]/60 dark:placeholder:text-[#A49182]/60 focus:outline-none focus:ring-1 focus:ring-[#D46743] text-xs sm:text-sm border border-[#E8DCCF] dark:border-white/10"
-                        placeholder="+91 98765 43210"
+                        className="w-full px-3.5 py-2.5 bg-white rounded text-[#241912] placeholder:text-[#594233]/40 focus:outline-none focus:ring-1 focus:ring-[#FF933E] text-xs sm:text-sm border border-[#FFCB56]/50"
+                        placeholder="+91 82103 51286"
                         required
                         type="tel"
                         value={formData.phone}
@@ -1115,11 +1064,11 @@ export default function HomeScreen({
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="flex flex-col gap-1">
-                      <label className="text-[11px] text-[#D46743] dark:text-[#E89B5B] uppercase tracking-wider font-semibold">
+                      <label className="text-[11px] text-[#FF933E] uppercase tracking-wider font-bold">
                         Event Date *
                       </label>
                       <input
-                        className="w-full px-3.5 py-2.5 bg-[#FAF4ED] dark:bg-black/50 rounded text-[#1A130E] dark:text-[#FAF3EC] focus:outline-none focus:ring-1 focus:ring-[#D46743] text-xs sm:text-sm border border-[#E8DCCF] dark:border-white/10"
+                        className="w-full px-3.5 py-2.5 bg-white rounded text-[#241912] focus:outline-none focus:ring-1 focus:ring-[#FF933E] text-xs sm:text-sm border border-[#FFCB56]/50"
                         required
                         type="date"
                         value={formData.date}
@@ -1127,12 +1076,12 @@ export default function HomeScreen({
                       />
                     </div>
                     <div className="flex flex-col gap-1">
-                      <label className="text-[11px] text-[#D46743] dark:text-[#E89B5B] uppercase tracking-wider font-semibold">
+                      <label className="text-[11px] text-[#FF933E] uppercase tracking-wider font-bold">
                         Venue / City *
                       </label>
                       <input
-                        className="w-full px-3.5 py-2.5 bg-[#FAF4ED] dark:bg-black/50 rounded text-[#1A130E] dark:text-[#FAF3EC] placeholder:text-[#7C685B]/60 dark:placeholder:text-[#A49182]/60 focus:outline-none focus:ring-1 focus:ring-[#D46743] text-xs sm:text-sm border border-[#E8DCCF] dark:border-white/10"
-                        placeholder="e.g. Gaya, Patna, Bodh Gaya"
+                        className="w-full px-3.5 py-2.5 bg-white rounded text-[#241912] placeholder:text-[#594233]/40 focus:outline-none focus:ring-1 focus:ring-[#FF933E] text-xs sm:text-sm border border-[#FFCB56]/50"
+                        placeholder="e.g. Gaya, Patna, Bodh Gaya, Dubai"
                         required
                         type="text"
                         value={formData.venue}
@@ -1142,15 +1091,15 @@ export default function HomeScreen({
                   </div>
 
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-[11px] text-[#D46743] dark:text-[#E89B5B] uppercase tracking-wider font-semibold">
+                    <label className="text-[11px] text-[#FF933E] uppercase tracking-wider font-bold">
                       Services Needed *
                     </label>
                     <div className="grid grid-cols-3 gap-2">
                       <label
                         className={`flex items-center gap-2 p-2.5 rounded cursor-pointer text-xs transition-colors border ${
                           formData.service === 'both'
-                            ? 'bg-[#FFEAD3] dark:bg-black/80 border-[#D46743] text-[#1A130E] dark:text-[#FAF3EC] font-semibold'
-                            : 'bg-[#FAF4ED] dark:bg-black/30 border-[#E8DCCF] dark:border-white/10 hover:bg-[#FFEAD3]/50'
+                            ? 'bg-[#FFE9A9] border-[#FF933E] text-[#241912] font-bold'
+                            : 'bg-white border-[#FFCB56]/40 hover:bg-[#FFE9A9]/40'
                         }`}
                       >
                         <input
@@ -1159,7 +1108,7 @@ export default function HomeScreen({
                           value="both"
                           checked={formData.service === 'both'}
                           onChange={() => setFormData({ ...formData, service: 'both' })}
-                          className="accent-[#D46743]"
+                          className="accent-[#FF933E]"
                         />
                         <span>Photo &amp; Film</span>
                       </label>
@@ -1167,8 +1116,8 @@ export default function HomeScreen({
                       <label
                         className={`flex items-center gap-2 p-2.5 rounded cursor-pointer text-xs transition-colors border ${
                           formData.service === 'photo'
-                            ? 'bg-[#FFEAD3] dark:bg-black/80 border-[#D46743] text-[#1A130E] dark:text-[#FAF3EC] font-semibold'
-                            : 'bg-[#FAF4ED] dark:bg-black/30 border-[#E8DCCF] dark:border-white/10 hover:bg-[#FFEAD3]/50'
+                            ? 'bg-[#FFE9A9] border-[#FF933E] text-[#241912] font-bold'
+                            : 'bg-white border-[#FFCB56]/40 hover:bg-[#FFE9A9]/40'
                         }`}
                       >
                         <input
@@ -1177,7 +1126,7 @@ export default function HomeScreen({
                           value="photo"
                           checked={formData.service === 'photo'}
                           onChange={() => setFormData({ ...formData, service: 'photo' })}
-                          className="accent-[#D46743]"
+                          className="accent-[#FF933E]"
                         />
                         <span>Photo Only</span>
                       </label>
@@ -1185,8 +1134,8 @@ export default function HomeScreen({
                       <label
                         className={`flex items-center gap-2 p-2.5 rounded cursor-pointer text-xs transition-colors border ${
                           formData.service === 'film'
-                            ? 'bg-[#FFEAD3] dark:bg-black/80 border-[#D46743] text-[#1A130E] dark:text-[#FAF3EC] font-semibold'
-                            : 'bg-[#FAF4ED] dark:bg-black/30 border-[#E8DCCF] dark:border-white/10 hover:bg-[#FFEAD3]/50'
+                            ? 'bg-[#FFE9A9] border-[#FF933E] text-[#241912] font-bold'
+                            : 'bg-white border-[#FFCB56]/40 hover:bg-[#FFE9A9]/40'
                         }`}
                       >
                         <input
@@ -1195,7 +1144,7 @@ export default function HomeScreen({
                           value="film"
                           checked={formData.service === 'film'}
                           onChange={() => setFormData({ ...formData, service: 'film' })}
-                          className="accent-[#D46743]"
+                          className="accent-[#FF933E]"
                         />
                         <span>Film Only</span>
                       </label>
@@ -1203,12 +1152,12 @@ export default function HomeScreen({
                   </div>
 
                   <div className="flex flex-col gap-1">
-                    <label className="text-[11px] text-[#D46743] dark:text-[#E89B5B] uppercase tracking-wider font-semibold">
+                    <label className="text-[11px] text-[#FF933E] uppercase tracking-wider font-bold">
                       Functions &amp; Details
                     </label>
                     <textarea
-                      className="w-full px-3.5 py-2.5 bg-[#FAF4ED] dark:bg-black/50 rounded text-[#1A130E] dark:text-[#FAF3EC] placeholder:text-[#7C685B]/60 dark:placeholder:text-[#A49182]/60 focus:outline-none focus:ring-1 focus:ring-[#D46743] text-xs sm:text-sm border border-[#E8DCCF] dark:border-white/10"
-                      placeholder="Tell us about the planned functions (Haldi, Mehendi, Wedding, Reception) and your thoughts..."
+                      className="w-full px-3.5 py-2.5 bg-white rounded text-[#241912] placeholder:text-[#594233]/40 focus:outline-none focus:ring-1 focus:ring-[#FF933E] text-xs sm:text-sm border border-[#FFCB56]/50"
+                      placeholder="Tell us about the planned celebrations (Haldi, Mehendi, Sangeet, Wedding, Reception) and your thoughts..."
                       rows={3}
                       value={formData.details}
                       onChange={(e) => setFormData({ ...formData, details: e.target.value })}
@@ -1216,14 +1165,14 @@ export default function HomeScreen({
                   </div>
 
                   <button
-                    className="w-full py-3.5 bg-[#D46743] text-white hover:bg-[#E89B5B] text-xs uppercase tracking-[0.2em] font-semibold transition-all shadow-[0_0_20px_rgba(212,103,67,0.5)] mt-1 cursor-pointer"
+                    className="w-full py-3.5 bg-[#FF933E] text-white hover:bg-[#ff8425] text-xs uppercase tracking-[0.2em] font-semibold transition-all shadow-[0_4px_18px_rgba(255,147,62,0.4)] mt-1 cursor-pointer"
                     type="submit"
                   >
-                    Get a Call Back
+                    Check Master Availability
                   </button>
 
-                  <p className="text-[11px] text-[#7C685B] dark:text-[#A49182] text-center font-light">
-                    We respond promptly to check calendar availability.
+                  <p className="text-[11px] text-[#594233] text-center font-light">
+                    We respond within hours on WhatsApp or direct phone.
                   </p>
                 </form>
               )}

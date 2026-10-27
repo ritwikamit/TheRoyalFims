@@ -55,15 +55,15 @@ export default function LegalModal({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 15 }}
           transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-          className="relative w-full max-w-4xl max-h-[88vh] bg-[#FAF4ED] dark:bg-[#16110D] text-[#1A130E] dark:text-[#FAF3EC] border border-[#E8DCCF] dark:border-[#E89B5B]/30 shadow-2xl rounded-2xl flex flex-col z-10 overflow-hidden"
+          className="relative w-full max-w-4xl max-h-[88vh] bg-[#FAF4ED] dark:bg-[#16110D] text-[#241912] border border-[#E8DCCF] dark:border-[#FFCB56]/30 shadow-2xl rounded-2xl flex flex-col z-10 overflow-hidden"
         >
           {/* Header */}
-          <div className="px-5 sm:px-8 py-5 border-b border-[#E8DCCF] dark:border-white/10 flex items-center justify-between bg-white dark:bg-[#1A140F]">
+          <div className="px-5 sm:px-8 py-5 border-b border-[#FFCB56]/30 flex items-center justify-between bg-white">
             <div>
-              <span className="text-[10px] uppercase tracking-[0.25em] text-[#D46743] dark:text-[#E89B5B] font-semibold">
+              <span className="text-[10px] uppercase tracking-[0.25em] text-[#FF933E] dark:text-[#FFCB56] font-semibold">
                 The Royal Films • Legal &amp; Governance
               </span>
-              <h2 className="text-xl sm:text-2xl font-headline text-[#1A130E] dark:text-[#FAF3EC] mt-0.5">
+              <h2 className="text-xl sm:text-2xl font-headline text-[#241912] mt-0.5">
                 {activeTab === 'privacy' && 'Privacy & Media Policy'}
                 {activeTab === 'terms' && 'Terms of Commission'}
                 {activeTab === 'cookies' && 'Cookie Policy'}
@@ -72,7 +72,7 @@ export default function LegalModal({
 
             <button
               onClick={handleClose}
-              className="p-2 text-[#524237] dark:text-[#D9C7B8] hover:text-[#1A130E] dark:hover:text-white rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors cursor-pointer"
+              className="p-2 text-[#594233] hover:text-[#1A130E] dark:hover:text-white rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors cursor-pointer"
               aria-label="Close modal"
             >
               <X className="w-5 h-5" />
@@ -80,12 +80,12 @@ export default function LegalModal({
           </div>
 
           {/* Tab Selector */}
-          <div className="flex border-b border-[#E8DCCF] dark:border-white/10 bg-[#FAF1E6] dark:bg-[#120E0A] px-4 sm:px-8 overflow-x-auto">
+          <div className="flex border-b border-[#FFCB56]/30 bg-[#FAF1E6] dark:bg-[#120E0A] px-4 sm:px-8 overflow-x-auto">
             <button
               onClick={() => setSelectedTab('privacy')}
               className={`flex items-center gap-2 py-3 px-4 text-xs uppercase tracking-wider font-semibold border-b-2 transition-colors cursor-pointer whitespace-nowrap ${
                 activeTab === 'privacy'
-                  ? 'border-[#D46743] text-[#D46743] dark:text-[#E89B5B] dark:border-[#E89B5B]'
+                  ? 'border-[#FF933E] text-[#FF933E] dark:text-[#FFCB56] dark:border-[#FFCB56]'
                   : 'border-transparent text-[#7C685B] dark:text-[#A49182] hover:text-[#1A130E]'
               }`}
             >
@@ -97,7 +97,7 @@ export default function LegalModal({
               onClick={() => setSelectedTab('terms')}
               className={`flex items-center gap-2 py-3 px-4 text-xs uppercase tracking-wider font-semibold border-b-2 transition-colors cursor-pointer whitespace-nowrap ${
                 activeTab === 'terms'
-                  ? 'border-[#D46743] text-[#D46743] dark:text-[#E89B5B] dark:border-[#E89B5B]'
+                  ? 'border-[#FF933E] text-[#FF933E] dark:text-[#FFCB56] dark:border-[#FFCB56]'
                   : 'border-transparent text-[#7C685B] dark:text-[#A49182] hover:text-[#1A130E]'
               }`}
             >
@@ -109,7 +109,7 @@ export default function LegalModal({
               onClick={() => setSelectedTab('cookies')}
               className={`flex items-center gap-2 py-3 px-4 text-xs uppercase tracking-wider font-semibold border-b-2 transition-colors cursor-pointer whitespace-nowrap ${
                 activeTab === 'cookies'
-                  ? 'border-[#D46743] text-[#D46743] dark:text-[#E89B5B] dark:border-[#E89B5B]'
+                  ? 'border-[#FF933E] text-[#FF933E] dark:text-[#FFCB56] dark:border-[#FFCB56]'
                   : 'border-transparent text-[#7C685B] dark:text-[#A49182] hover:text-[#1A130E]'
               }`}
             >
@@ -119,10 +119,10 @@ export default function LegalModal({
           </div>
 
           {/* Content Body */}
-          <div className="px-5 sm:px-8 py-6 overflow-y-auto space-y-6 text-xs sm:text-sm text-[#524237] dark:text-[#D9C7B8] leading-relaxed font-light">
+          <div className="px-5 sm:px-8 py-6 overflow-y-auto space-y-6 text-xs sm:text-sm text-[#594233] leading-relaxed font-light">
             {activeTab === 'privacy' && (
               <div className="space-y-4">
-                <h3 className="font-headline text-lg font-semibold text-[#1A130E] dark:text-[#FAF3EC]">
+                <h3 className="font-headline text-lg font-semibold text-[#241912]">
                   1. Client Media &amp; Image Privacy
                 </h3>
                 <p>
@@ -132,7 +132,7 @@ export default function LegalModal({
                   No private family ceremony footage is published online without explicit client written permission. We respect bridal modesty and cultural protocols across all events in Gaya, Bihar, and international locations.
                 </p>
 
-                <h3 className="font-headline text-lg font-semibold text-[#1A130E] dark:text-[#FAF3EC] pt-2">
+                <h3 className="font-headline text-lg font-semibold text-[#241912] pt-2">
                   2. Personal Information Collected
                 </h3>
                 <p>
@@ -143,14 +143,14 @@ export default function LegalModal({
 
             {activeTab === 'terms' && (
               <div className="space-y-4">
-                <h3 className="font-headline text-lg font-semibold text-[#1A130E] dark:text-[#FAF3EC]">
+                <h3 className="font-headline text-lg font-semibold text-[#241912]">
                   1. Booking Retainers &amp; Calendar Locking
                 </h3>
                 <p>
                   Dates are locked on our master atelier calendar strictly upon execution of the written commissioning agreement and receipt of the initial retainer deposit.
                 </p>
 
-                <h3 className="font-headline text-lg font-semibold text-[#1A130E] dark:text-[#FAF3EC] pt-2">
+                <h3 className="font-headline text-lg font-semibold text-[#241912] pt-2">
                   2. Delivery Commitments &amp; Quality Control
                 </h3>
                 <p>
@@ -161,7 +161,7 @@ export default function LegalModal({
 
             {activeTab === 'cookies' && (
               <div className="space-y-4">
-                <h3 className="font-headline text-lg font-semibold text-[#1A130E] dark:text-[#FAF3EC]">
+                <h3 className="font-headline text-lg font-semibold text-[#241912]">
                   1. Essential Functional Storage
                 </h3>
                 <p>
@@ -172,13 +172,13 @@ export default function LegalModal({
           </div>
 
           {/* Footer Actions */}
-          <div className="px-5 sm:px-8 py-4 border-t border-[#E8DCCF] dark:border-white/10 bg-white dark:bg-[#1A140F] flex items-center justify-between">
+          <div className="px-5 sm:px-8 py-4 border-t border-[#FFCB56]/30 bg-white flex items-center justify-between">
             <span className="text-[11px] text-[#7C685B] dark:text-[#A49182]">
               Effective Date: 2025–2026 Commission Season
             </span>
             <button
               onClick={handleClose}
-              className="px-6 py-2.5 bg-[#D46743] hover:bg-[#E89B5B] text-white text-xs uppercase tracking-wider font-semibold rounded transition-colors shadow-md cursor-pointer"
+              className="px-6 py-2.5 bg-[#FF933E] hover:bg-[#FFCB56] text-white text-xs uppercase tracking-wider font-semibold rounded transition-colors shadow-md cursor-pointer"
             >
               I Understand
             </button>

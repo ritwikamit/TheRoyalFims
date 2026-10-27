@@ -90,13 +90,11 @@ export default function ContactPage() {
   };
 
   return (
-    <div className={`min-h-screen flex flex-col font-sans transition-colors duration-300 selection:bg-[#FFEAD3] selection:text-[#D46743] ${
+    <div className={`min-h-screen flex flex-col font-sans transition-colors duration-300 selection:bg-[#FFE9A9] selection:text-[#FF933E] ${
       theme === 'dark' ? 'bg-[#120E0A] text-[#FAF3EC]' : 'bg-[#FAF4ED] text-[#1A130E]'
     }`}>
       <Navbar 
         currentTab="contact"
-        theme={theme}
-        onToggleTheme={toggleTheme}
         onSelectTab={handleTabChange}
         onOpenAvailability={() => setIsAvailabilityOpen(true)}
       />
@@ -106,65 +104,65 @@ export default function ContactPage() {
         <div className="max-w-6xl mx-auto flex flex-col gap-12">
           {/* Header */}
           <div className="flex flex-col gap-3 text-center items-center max-w-3xl mx-auto">
-            <span className="text-xs text-[#D46743] dark:text-[#E89B5B] uppercase tracking-[0.25em] font-semibold">
+            <span className="text-xs text-[#FF933E] dark:text-[#FFCB56] uppercase tracking-[0.25em] font-semibold">
               Live Atelier Concierge
             </span>
-            <h1 className="font-headline text-3xl sm:text-5xl text-[#1A130E] dark:text-[#FAF3EC]">
+            <h1 className="font-headline text-3xl sm:text-5xl text-[#241912]">
               Inquire Your Wedding Date
             </h1>
-            <p className="font-cursive text-2xl sm:text-4xl text-[#D46743] dark:text-[#E89B5B] -mt-1">
+            <p className="font-cursive text-2xl sm:text-4xl text-[#FF933E] dark:text-[#FFCB56] -mt-1">
               &ldquo;We would be honored to preserve your family legacy.&rdquo;
             </p>
-            <p className="text-xs sm:text-sm text-[#524237] dark:text-[#D9C7B8] font-light leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#594233] font-light leading-relaxed">
               We accept a limited number of commissions per calendar season to dedicate unhurried attention, master optics, and bespoke color-grading to every film.
             </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             {/* Left Contact Card */}
-            <div className="lg:col-span-5 flex flex-col gap-6 bg-white dark:bg-[#1A140F] border border-[#E8DCCF] dark:border-white/10 p-6 sm:p-8 rounded-2xl shadow-xl">
+            <div className="lg:col-span-5 flex flex-col gap-6 bg-white border border-[#FFCB56]/30 p-6 sm:p-8 rounded-2xl shadow-xl">
               <div className="flex flex-col gap-2">
-                <span className="text-xs uppercase tracking-widest text-[#D46743] dark:text-[#E89B5B] font-semibold">
+                <span className="text-xs uppercase tracking-widest text-[#FF933E] dark:text-[#FFCB56] font-semibold">
                   Studio Atelier Direct
                 </span>
-                <h3 className="font-headline text-2xl text-[#1A130E] dark:text-[#FAF3EC]">
+                <h3 className="font-headline text-2xl text-[#241912]">
                   The Royal Films
                 </h3>
-                <p className="text-xs text-[#524237] dark:text-[#D9C7B8] font-light leading-relaxed">
+                <p className="text-xs text-[#594233] font-light leading-relaxed">
                   Headquartered in Gaya, Bihar, traveling for weddings across India and destination hubs including Dubai.
                 </p>
               </div>
 
-              <div className="flex flex-col gap-4 text-xs sm:text-sm text-[#524237] dark:text-[#D9C7B8] pt-2 border-t border-[#E8DCCF] dark:border-white/10">
+              <div className="flex flex-col gap-4 text-xs sm:text-sm text-[#594233] pt-2 border-t border-[#FFCB56]/30">
                 <div className="flex items-start gap-3">
-                  <span className="w-8 h-8 rounded-full bg-[#D46743]/10 text-[#D46743] dark:text-[#E89B5B] flex items-center justify-center shrink-0">
+                  <span className="w-8 h-8 rounded-full bg-[#FF933E]/10 text-[#FF933E] dark:text-[#FFCB56] flex items-center justify-center shrink-0">
                     <MapPin className="w-4 h-4" />
                   </span>
                   <div>
-                    <span className="font-semibold block text-[#1A130E] dark:text-[#FAF3EC]">Studio Address</span>
+                    <span className="font-semibold block text-[#241912]">Studio Address</span>
                     <span>Chhotki Nawada, Gaya, Bihar 823001, India</span>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <span className="w-8 h-8 rounded-full bg-[#D46743]/10 text-[#D46743] dark:text-[#E89B5B] flex items-center justify-center shrink-0">
+                  <span className="w-8 h-8 rounded-full bg-[#FF933E]/10 text-[#FF933E] dark:text-[#FFCB56] flex items-center justify-center shrink-0">
                     <Phone className="w-4 h-4" />
                   </span>
                   <div>
-                    <span className="font-semibold block text-[#1A130E] dark:text-[#FAF3EC]">Concierge Telephone</span>
-                    <a href="tel:+917004375740" className="hover:text-[#D46743] font-semibold">
+                    <span className="font-semibold block text-[#241912]">Concierge Telephone</span>
+                    <a href="tel:+917004375740" className="hover:text-[#FF933E] font-semibold">
                       +91 70043 75740
                     </a>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <span className="w-8 h-8 rounded-full bg-[#D46743]/10 text-[#D46743] dark:text-[#E89B5B] flex items-center justify-center shrink-0">
+                  <span className="w-8 h-8 rounded-full bg-[#FF933E]/10 text-[#FF933E] dark:text-[#FFCB56] flex items-center justify-center shrink-0">
                     <Mail className="w-4 h-4" />
                   </span>
                   <div>
-                    <span className="font-semibold block text-[#1A130E] dark:text-[#FAF3EC]">Direct Email</span>
-                    <a href="mailto:info@theroyalfilms.in" className="hover:text-[#D46743] font-semibold">
+                    <span className="font-semibold block text-[#241912]">Direct Email</span>
+                    <a href="mailto:info@theroyalfilms.in" className="hover:text-[#FF933E] font-semibold">
                       info@theroyalfilms.in
                     </a>
                   </div>
@@ -176,7 +174,7 @@ export default function ContactPage() {
                 href="https://wa.me/917004375740"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-3.5 bg-[#D46743] hover:bg-[#E89B5B] text-white text-xs uppercase tracking-wider font-semibold rounded flex items-center justify-center gap-2 transition-colors shadow-md mt-2"
+                className="w-full py-3.5 bg-[#FF933E] hover:bg-[#FFCB56] text-white text-xs uppercase tracking-wider font-semibold rounded flex items-center justify-center gap-2 transition-colors shadow-md mt-2"
               >
                 <MessageSquare className="w-4 h-4" />
                 <span>Chat on WhatsApp Directly</span>
@@ -184,14 +182,14 @@ export default function ContactPage() {
             </div>
 
             {/* Right Form */}
-            <div className="lg:col-span-7 bg-white dark:bg-[#1A140F] border border-[#E8DCCF] dark:border-white/10 p-6 sm:p-10 rounded-2xl shadow-xl">
+            <div className="lg:col-span-7 bg-white border border-[#FFCB56]/30 p-6 sm:p-10 rounded-2xl shadow-xl">
               {formSubmitted ? (
-                <div className="p-8 text-center bg-[#FAF4ED] dark:bg-black/40 rounded-xl border border-[#D46743]/30 flex flex-col items-center gap-3">
-                  <CheckCircle2 className="w-12 h-12 text-[#D46743]" />
-                  <h3 className="font-headline text-2xl text-[#1A130E] dark:text-[#FAF3EC]">
+                <div className="p-8 text-center bg-[#FAF4ED]  rounded-xl border border-[#FF933E]/30 flex flex-col items-center gap-3">
+                  <CheckCircle2 className="w-12 h-12 text-[#FF933E]" />
+                  <h3 className="font-headline text-2xl text-[#241912]">
                     Commission Request Received
                   </h3>
-                  <p className="text-xs text-[#524237] dark:text-[#D9C7B8] max-w-md">
+                  <p className="text-xs text-[#594233] max-w-md">
                     Thank you. We will verify our production calendar and connect with you on WhatsApp/Phone.
                   </p>
                 </div>
@@ -199,7 +197,7 @@ export default function ContactPage() {
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="flex flex-col gap-1">
-                      <label className="text-[11px] uppercase tracking-wider text-[#D46743] dark:text-[#E89B5B] font-semibold">
+                      <label className="text-[11px] uppercase tracking-wider text-[#FF933E] dark:text-[#FFCB56] font-semibold">
                         Your Name *
                       </label>
                       <input
@@ -208,12 +206,12 @@ export default function ContactPage() {
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         placeholder="e.g. Aditi Sharma"
-                        className="w-full px-3.5 py-2.5 bg-[#FAF4ED] dark:bg-black/50 text-[#1A130E] dark:text-[#FAF3EC] text-xs sm:text-sm border border-[#E8DCCF] dark:border-white/10 rounded focus:outline-none focus:ring-1 focus:ring-[#D46743]"
+                        className="w-full px-3.5 py-2.5 bg-[#FAF4ED]  text-[#241912] text-xs sm:text-sm border border-[#FFCB56]/30 rounded focus:outline-none focus:ring-1 focus:ring-[#FF933E]"
                       />
                     </div>
 
                     <div className="flex flex-col gap-1">
-                      <label className="text-[11px] uppercase tracking-wider text-[#D46743] dark:text-[#E89B5B] font-semibold">
+                      <label className="text-[11px] uppercase tracking-wider text-[#FF933E] dark:text-[#FFCB56] font-semibold">
                         Phone / WhatsApp *
                       </label>
                       <input
@@ -222,14 +220,14 @@ export default function ContactPage() {
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         placeholder="+91 98765 43210"
-                        className="w-full px-3.5 py-2.5 bg-[#FAF4ED] dark:bg-black/50 text-[#1A130E] dark:text-[#FAF3EC] text-xs sm:text-sm border border-[#E8DCCF] dark:border-white/10 rounded focus:outline-none focus:ring-1 focus:ring-[#D46743]"
+                        className="w-full px-3.5 py-2.5 bg-[#FAF4ED]  text-[#241912] text-xs sm:text-sm border border-[#FFCB56]/30 rounded focus:outline-none focus:ring-1 focus:ring-[#FF933E]"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="flex flex-col gap-1">
-                      <label className="text-[11px] uppercase tracking-wider text-[#D46743] dark:text-[#E89B5B] font-semibold">
+                      <label className="text-[11px] uppercase tracking-wider text-[#FF933E] dark:text-[#FFCB56] font-semibold">
                         Event Date *
                       </label>
                       <input
@@ -237,12 +235,12 @@ export default function ContactPage() {
                         required
                         value={formData.date}
                         onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                        className="w-full px-3.5 py-2.5 bg-[#FAF4ED] dark:bg-black/50 text-[#1A130E] dark:text-[#FAF3EC] text-xs sm:text-sm border border-[#E8DCCF] dark:border-white/10 rounded focus:outline-none focus:ring-1 focus:ring-[#D46743]"
+                        className="w-full px-3.5 py-2.5 bg-[#FAF4ED]  text-[#241912] text-xs sm:text-sm border border-[#FFCB56]/30 rounded focus:outline-none focus:ring-1 focus:ring-[#FF933E]"
                       />
                     </div>
 
                     <div className="flex flex-col gap-1">
-                      <label className="text-[11px] uppercase tracking-wider text-[#D46743] dark:text-[#E89B5B] font-semibold">
+                      <label className="text-[11px] uppercase tracking-wider text-[#FF933E] dark:text-[#FFCB56] font-semibold">
                         City / Venue *
                       </label>
                       <input
@@ -251,13 +249,13 @@ export default function ContactPage() {
                         value={formData.venue}
                         onChange={(e) => setFormData({ ...formData, venue: e.target.value })}
                         placeholder="e.g. Gaya, Patna, Dubai"
-                        className="w-full px-3.5 py-2.5 bg-[#FAF4ED] dark:bg-black/50 text-[#1A130E] dark:text-[#FAF3EC] text-xs sm:text-sm border border-[#E8DCCF] dark:border-white/10 rounded focus:outline-none focus:ring-1 focus:ring-[#D46743]"
+                        className="w-full px-3.5 py-2.5 bg-[#FAF4ED]  text-[#241912] text-xs sm:text-sm border border-[#FFCB56]/30 rounded focus:outline-none focus:ring-1 focus:ring-[#FF933E]"
                       />
                     </div>
                   </div>
 
                   <div className="flex flex-col gap-1">
-                    <label className="text-[11px] uppercase tracking-wider text-[#D46743] dark:text-[#E89B5B] font-semibold">
+                    <label className="text-[11px] uppercase tracking-wider text-[#FF933E] dark:text-[#FFCB56] font-semibold">
                       Functions &amp; Details
                     </label>
                     <textarea
@@ -265,13 +263,13 @@ export default function ContactPage() {
                       value={formData.details}
                       onChange={(e) => setFormData({ ...formData, details: e.target.value })}
                       placeholder="Share your planned ceremonies (Haldi, Sangeet, Wedding, Reception) and any specific expectations..."
-                      className="w-full px-3.5 py-2.5 bg-[#FAF4ED] dark:bg-black/50 text-[#1A130E] dark:text-[#FAF3EC] text-xs sm:text-sm border border-[#E8DCCF] dark:border-white/10 rounded focus:outline-none focus:ring-1 focus:ring-[#D46743]"
+                      className="w-full px-3.5 py-2.5 bg-[#FAF4ED]  text-[#241912] text-xs sm:text-sm border border-[#FFCB56]/30 rounded focus:outline-none focus:ring-1 focus:ring-[#FF933E]"
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full py-3.5 bg-[#D46743] hover:bg-[#E89B5B] text-white text-xs uppercase tracking-[0.2em] font-semibold transition-all shadow-md cursor-pointer mt-1"
+                    className="w-full py-3.5 bg-[#FF933E] hover:bg-[#FFCB56] text-white text-xs uppercase tracking-[0.2em] font-semibold transition-all shadow-md cursor-pointer mt-1"
                   >
                     Send Commission Inquiry
                   </button>

@@ -54,7 +54,7 @@ export default function ScrollToTop() {
           transition={{ duration: 0.3 }}
           onClick={scrollToTop}
           aria-label="Scroll to top"
-          className="fixed bottom-20 right-4 md:bottom-8 md:right-8 z-30 w-12 h-12 rounded-full flex items-center justify-center bg-white/95 dark:bg-[#1A140F]/90 backdrop-blur-xl shadow-[0_8px_30px_rgba(82,55,30,0.12)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.85)] hover:scale-105 active:scale-95 transition-transform group cursor-pointer border border-[#E8DCCF] dark:border-white/10"
+          className="fixed bottom-20 right-4 md:bottom-8 md:right-8 z-30 w-12 h-12 rounded-full flex items-center justify-center bg-white/95 dark:bg-[#1A140F]/90 backdrop-blur-xl shadow-[0_8px_30px_rgba(82,55,30,0.12)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.85)] hover:scale-105 active:scale-95 transition-transform group cursor-pointer border border-[#FFCB56]/30"
         >
           {/* SVG Progress Ring */}
           <svg className="absolute inset-0 w-full h-full -rotate-90 pointer-events-none" viewBox={`0 0 ${size} ${size}`}>
@@ -72,7 +72,7 @@ export default function ScrollToTop() {
               cx={size / 2}
               cy={size / 2}
               r={radius}
-              stroke="#D46743"
+              stroke="#FF933E"
               strokeWidth={strokeWidth}
               fill="none"
               strokeDasharray={circumference}
@@ -83,7 +83,7 @@ export default function ScrollToTop() {
           </svg>
 
           {/* Minimalist Arrow Icon */}
-          <ArrowUp className="w-4 h-4 text-[#D46743] dark:text-[#E89B5B] group-hover:scale-110 transition-transform" />
+          <ArrowUp className="w-4 h-4 text-[#FF933E] dark:text-[#FFCB56] group-hover:scale-110 transition-transform" />
         </motion.button>
       )}
     </AnimatePresence>

@@ -24,7 +24,7 @@ export default function MobileBottomNav({
   return (
     <nav 
       aria-label="Mobile Quick Navigation"
-      className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#FAF4ED]/95 dark:bg-[#120E0A]/95 backdrop-blur-xl border-t border-[#E8DCCF] dark:border-white/10 px-2 py-2 safe-bottom shadow-[0_-8px_30px_rgba(82,55,30,0.08)] dark:shadow-[0_-8px_30px_rgba(0,0,0,0.6)]"
+      className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#FFFDF9]/95 backdrop-blur-xl border-t border-[#FFCB56]/30 px-2 py-2 safe-bottom shadow-[0_-8px_30px_rgba(90,60,20,0.06)]"
     >
       <div className="flex items-center justify-around max-w-md mx-auto">
         {navItems.map((item) => {
@@ -36,11 +36,11 @@ export default function MobileBottomNav({
               onClick={() => onSelectTab(item.id)}
               className={`flex flex-col items-center justify-center py-1 px-3 rounded-lg transition-all cursor-pointer ${
                 isActive
-                  ? 'text-[#D46743] dark:text-[#E89B5B] font-bold'
-                  : 'text-[#524237] dark:text-[#D9C7B8] hover:text-[#1A130E] dark:hover:text-white'
+                  ? 'text-[#FF933E] font-bold'
+                  : 'text-[#594233] hover:text-[#241912]'
               }`}
             >
-              <div className={`p-1 rounded-full transition-colors ${isActive ? 'bg-[#D46743]/15 dark:bg-[#E89B5B]/15' : ''}`}>
+              <div className={`p-1 rounded-full transition-colors ${isActive ? 'bg-[#FF933E]/15' : ''}`}>
                 <Icon className="w-4 h-4" />
               </div>
               <span className="text-[10px] uppercase tracking-wider font-semibold mt-0.5">
@@ -53,12 +53,12 @@ export default function MobileBottomNav({
         {/* Highlighted 'Check Dates' Quick Action */}
         <button
           onClick={onOpenAvailability}
-          className="flex flex-col items-center justify-center py-1 px-3 text-[#D46743] transition-all cursor-pointer group"
+          className="flex flex-col items-center justify-center py-1 px-3 text-[#FF933E] transition-all cursor-pointer group"
         >
-          <div className="p-1 rounded-full bg-[#D46743] text-white shadow-[0_0_12px_rgba(212,103,67,0.5)] group-hover:bg-[#E89B5B] transition-colors">
+          <div className="p-1 rounded-full bg-[#FF933E] text-white shadow-[0_0_12px_rgba(255,147,62,0.4)] group-hover:bg-[#ff8425] transition-colors">
             <Calendar className="w-4 h-4" />
           </div>
-          <span className="text-[10px] uppercase tracking-wider font-bold text-[#D46743] dark:text-[#E89B5B] mt-0.5">
+          <span className="text-[10px] uppercase tracking-wider font-bold text-[#FF933E] mt-0.5">
             Dates
           </span>
         </button>

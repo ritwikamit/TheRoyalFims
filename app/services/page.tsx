@@ -14,37 +14,15 @@ import MobileBottomNav from '@/components/MobileBottomNav';
 export default function ServicesPage() {
   const [isAvailabilityOpen, setIsAvailabilityOpen] = useState(false);
   const [isPortalOpen, setIsPortalOpen] = useState(false);
-  const [theme, setTheme] = useState<'dark' | 'light'>('light');
   const [legalModal, setLegalModal] = useState<{ isOpen: boolean; tab: LegalTabType }>({
     isOpen: false,
     tab: 'privacy',
   });
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('trf_theme') as 'dark' | 'light' | null;
-    const active = savedTheme || 'light';
-    setTheme(active);
-    if (active === 'dark') {
-      document.documentElement.classList.remove('light');
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      document.documentElement.classList.add('light');
-    }
+    document.documentElement.classList.remove('dark');
+    document.documentElement.classList.add('light');
   }, []);
-
-  const toggleTheme = () => {
-    const newTheme = theme === 'dark' ? 'light' : 'dark';
-    setTheme(newTheme);
-    localStorage.setItem('trf_theme', newTheme);
-    if (newTheme === 'dark') {
-      document.documentElement.classList.remove('light');
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      document.documentElement.classList.add('light');
-    }
-  };
 
   const handleTabChange = (tab: string) => {
     if (tab === 'contact') {
@@ -67,13 +45,9 @@ export default function ServicesPage() {
   };
 
   return (
-    <div className={`min-h-screen flex flex-col font-sans transition-colors duration-300 selection:bg-[#FFEAD3] selection:text-[#D46743] ${
-      theme === 'dark' ? 'bg-[#120E0A] text-[#FAF3EC]' : 'bg-[#FAF4ED] text-[#1A130E]'
-    }`}>
+    <div className="min-h-screen flex flex-col font-sans bg-[#FFFDF9] text-[#241912] selection:bg-[#FFE9A9] selection:text-[#FF933E]">
       <Navbar 
         currentTab="services"
-        theme={theme}
-        onToggleTheme={toggleTheme}
         onSelectTab={handleTabChange}
         onOpenAvailability={() => setIsAvailabilityOpen(true)}
       />

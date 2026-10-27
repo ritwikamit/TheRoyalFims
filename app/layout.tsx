@@ -7,8 +7,9 @@ export const metadata: Metadata = {
   description:
     'Luxury cinematic wedding films and editorial photography across Gaya, Bihar, and international destinations including Dubai.',
   icons: {
-    icon: '/icon.svg',
-    apple: '/icon.svg',
+    icon: '/icon.png',
+    apple: '/icon.png',
+    shortcut: '/favicon.ico',
   },
   openGraph: {
     title: 'The Royal Films - Bespoke Wedding Cinematography & Editorial Stills',
@@ -26,9 +27,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="light" suppressHydrationWarning>
+    <html lang="en" className="light" style={{ colorScheme: 'light' }} suppressHydrationWarning>
       <body
-        className="bg-background text-on-surface antialiased font-manrope selection:bg-[#FFEAD3] selection:text-[#D46743] min-h-screen"
+        className="bg-[#FFFDF9] text-[#241912] antialiased font-manrope selection:bg-[#FFE9A9] selection:text-[#FF933E] min-h-screen"
         suppressHydrationWarning
       >
         {children}

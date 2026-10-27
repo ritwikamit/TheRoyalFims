@@ -2,22 +2,18 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Menu, X, Calendar, Sun, Moon } from 'lucide-react';
+import { Menu, X, Calendar } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import RoyalLogo from '@/components/RoyalLogo';
 
 interface NavbarProps {
   currentTab: string;
-  theme: 'dark' | 'light';
-  onToggleTheme: () => void;
   onSelectTab: (tab: string) => void;
   onOpenAvailability: () => void;
 }
 
 export default function Navbar({
   currentTab,
-  theme,
-  onToggleTheme,
   onSelectTab,
   onOpenAvailability,
 }: NavbarProps) {
@@ -28,6 +24,7 @@ export default function Navbar({
     { id: 'portfolio', label: 'Portfolio', href: '/portfolio' },
     { id: 'services', label: 'Services', href: '/services' },
     { id: 'dubai-destination', label: 'Dubai', href: '/dubai' },
+    { id: 'contact', label: 'Inquiries', href: '/contact' },
   ];
 
   const handleNavClick = (id: string, href: string) => {
@@ -36,9 +33,9 @@ export default function Navbar({
   };
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-[#FAF4ED]/92 dark:bg-[#120E0A]/92 backdrop-blur-2xl border-b border-[#E8DCCF] dark:border-white/10 shadow-[0_4px_25px_rgba(82,55,30,0.06)] dark:shadow-[0_4px_30px_rgba(0,0,0,0.85)] transition-colors duration-300">
+    <header className="fixed top-0 left-0 w-full z-50 bg-[#FFFDF9]/95 backdrop-blur-2xl border-b border-[#FFCB56]/30 shadow-[0_4px_25px_rgba(90,60,20,0.06)] transition-all duration-300">
       <div className="h-20 w-full px-4 sm:px-6 lg:px-12 flex items-center justify-between">
-        {/* Brand Zone - Sleek Minimalist Logo */}
+        {/* Brand Zone - Golden Emblem Logo */}
         <Link
           href="/"
           onClick={() => handleNavClick('home', '/')}
@@ -58,15 +55,15 @@ export default function Navbar({
                 onClick={() => handleNavClick(link.id, link.href)}
                 className={`text-xs uppercase tracking-[0.22em] font-medium transition-all duration-300 cursor-pointer relative py-1 ${
                   isActive
-                    ? 'text-[#D46743] dark:text-[#E89B5B] font-semibold'
-                    : 'text-[#524237] dark:text-[#D9C7B8] hover:text-[#1A130E] dark:hover:text-white'
+                    ? 'text-[#FF933E] font-bold'
+                    : 'text-[#594233] hover:text-[#241912]'
                 }`}
               >
                 {link.label}
                 {isActive && (
                   <motion.div
                     layoutId="navbar-indicator"
-                    className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#D46743] dark:bg-[#E89B5B]"
+                    className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#FF933E]"
                     transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                   />
                 )}
@@ -75,37 +72,22 @@ export default function Navbar({
           })}
         </nav>
 
-        {/* Action Zone: Theme Toggle & "Check Dates" CTA */}
-        <div className="flex items-center gap-2 sm:gap-3">
-          {/* Light / Dark Theme Toggle Button */}
-          <button
-            onClick={onToggleTheme}
-            className="p-2 sm:p-2.5 rounded-full bg-white dark:bg-white/10 hover:bg-[#FFEAD3] dark:hover:bg-white/15 text-[#D46743] dark:text-[#E89B5B] border border-[#E8DCCF] dark:border-white/10 transition-colors cursor-pointer shadow-sm"
-            aria-label={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} Mode`}
-            title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} Mode`}
-          >
-            {theme === 'dark' ? (
-              <Sun className="w-4 h-4 text-[#E89B5B]" />
-            ) : (
-              <Moon className="w-4 h-4 text-[#1A130E]" />
-            )}
-          </button>
-
-          {/* Shortened "Check Dates" CTA */}
+        {/* CTA Zone - Pure Light Mode, Theme toggle completely removed */}
+        <div className="hidden md:flex items-center gap-4">
           <button
             onClick={onOpenAvailability}
-            aria-label="Check Dates Availability"
-            title="Check Dates Availability"
-            className="inline-flex items-center justify-center gap-1.5 sm:gap-2 w-9 h-9 sm:w-auto sm:h-auto rounded-full sm:rounded-none p-0 sm:px-4 sm:py-2.5 bg-[#D46743] text-white hover:bg-[#E89B5B] text-[11px] sm:text-xs uppercase tracking-[0.16em] font-semibold transition-all duration-300 shadow-[0_0_18px_rgba(212,103,67,0.45)] cursor-pointer shrink-0"
+            className="flex items-center gap-2 px-5 py-2.5 bg-[#FF933E] hover:bg-[#ff8425] text-white rounded-none border border-[#FFCB56] text-xs uppercase tracking-[0.2em] font-semibold shadow-[0_4px_16px_rgba(255,147,62,0.35)] transition-all duration-300 cursor-pointer active:scale-95 group"
           >
-            <Calendar className="w-4 h-4 sm:w-3.5 sm:h-3.5 shrink-0" />
-            <span className="hidden sm:inline">Check Dates</span>
+            <Calendar className="w-3.5 h-3.5 text-[#FFE9A9] group-hover:scale-110 transition-transform" />
+            <span>Check Dates</span>
           </button>
+        </div>
 
-          {/* Mobile Menu Toggle */}
+        {/* Mobile Hamburger Button */}
+        <div className="flex md:hidden items-center gap-2">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-[#1A130E] dark:text-[#FAF3EC] hover:text-[#D46743] focus:outline-none cursor-pointer"
+            className="p-2 text-[#241912] hover:text-[#FF933E] transition-colors cursor-pointer"
             aria-label="Toggle navigation menu"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -113,34 +95,41 @@ export default function Navbar({
         </div>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Drawer Menu */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25 }}
-            className="md:hidden bg-[#FAF4ED]/98 dark:bg-[#120E0A]/98 backdrop-blur-2xl border-b border-[#E8DCCF] dark:border-white/10 px-6 py-5 flex flex-col gap-4 overflow-hidden"
+            className="md:hidden bg-[#FFFDF9]/98 border-b border-[#FFCB56]/30 px-6 py-6 flex flex-col gap-5 shadow-2xl backdrop-blur-2xl"
           >
-            <div className="flex flex-col gap-2">
-              {navLinks.map((link) => {
-                const isActive = currentTab === link.id;
-                return (
-                  <button
-                    key={link.id}
-                    onClick={() => handleNavClick(link.id, link.href)}
-                    className={`text-left py-2.5 text-sm uppercase tracking-[0.2em] font-medium transition-colors ${
-                      isActive
-                        ? 'text-[#D46743] dark:text-[#E89B5B] font-semibold'
-                        : 'text-[#524237] dark:text-[#D9C7B8] hover:text-[#1A130E] dark:hover:text-white'
-                    }`}
-                  >
-                    {link.label}
-                  </button>
-                );
-              })}
-            </div>
+            {navLinks.map((link) => (
+              <button
+                key={link.id}
+                onClick={() => handleNavClick(link.id, link.href)}
+                className={`text-left text-sm uppercase tracking-[0.2em] py-2 border-b border-[#FFE9A9]/60 cursor-pointer flex items-center justify-between ${
+                  currentTab === link.id
+                    ? 'text-[#FF933E] font-bold'
+                    : 'text-[#594233]'
+                }`}
+              >
+                <span>{link.label}</span>
+                {currentTab === link.id && (
+                  <span className="w-2 h-2 rounded-full bg-[#FF933E]" />
+                )}
+              </button>
+            ))}
+
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onOpenAvailability();
+              }}
+              className="mt-2 w-full py-3.5 bg-[#FF933E] text-white font-semibold text-xs uppercase tracking-[0.2em] text-center border border-[#FFCB56] shadow-[0_4px_16px_rgba(255,147,62,0.3)] cursor-pointer"
+            >
+              Check Date Availability
+            </button>
           </motion.div>
         )}
       </AnimatePresence>
